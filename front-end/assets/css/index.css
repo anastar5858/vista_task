@@ -1,0 +1,36 @@
+html {
+    margin: 0;
+}
+body {
+    margin: 0;
+}
+/* colors  */
+.primary{
+    padding: 1rem;
+    background-color: #DCDCDC;
+}
+.primary-container{
+    padding: 0.2rem;
+    background-color: #C0C0C0;
+}
+/* general rules */
+a:hover, button:hover {
+    cursor: pointer;
+} 
+ul {
+    list-style-type: none;
+}
+a:hover {
+    position: relative;
+}
+.underline{
+    height: 0.1rem;
+    border-radius: 1rem;
+    background: linear-gradient(yellow, gold);
+    position: absolute;
+}
+.flex-row {
+    justify-content: space-between;
+    gap: 1rem;
+    display: flex;
+}
