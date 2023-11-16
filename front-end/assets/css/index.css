@@ -17,10 +17,10 @@ body {
     position: relative;
     margin-top: 1rem;
     background: gray;
-    background-image: url(../../images/formsback.avif), url(../../images/formsback2.avif);
+    background-image: url(../../assets/images/formsback.avif), url(../../assets/images/formsback2.avif);
     background-repeat: no-repeat, no-repeat;
-    background-position: 100% 100%, 0% 0%;
-    background-size: 50%, 0%;  
+    background-position: 100% 0%, 0% 0%;
+    background-size: 50% 100%, 0%;  
     /* transform: scaleX(-1); */
 }
 .surface::before {
@@ -31,7 +31,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url(../../images/formsback2.avif);
+    background-image: url(../../assets/images/formsback2.avif);
     background-repeat: no-repeat;
     background-position: 100% 100%;
     background-size: 50% 100%;
@@ -90,3 +90,26 @@ input {
     display: flex;
 }
 /* id selectors rules */
+/* animations section */
+button:hover {
+    background: linear-gradient(90deg, white, gold);
+    background-size: 200% 100%; /* Make sure the background is twice as wide as the button */
+    animation: buttonSmoothFill 1s infinite alternate !important;
+}
+@keyframes buttonSmoothFill {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+@keyframes btnTransition { 
+    0% {
+        transform: translateX(110vw);
+    }
+    100% {
+        transform: translateX(0);
+    } 
+}

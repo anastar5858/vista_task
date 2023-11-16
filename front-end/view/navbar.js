@@ -1,10 +1,10 @@
-const Navbar = (props) => {
+const Navbar = () => {
     // todo: check the user session by calling the controller to check the sign in state using the api /verify route
     const registered = false;
     return (
       <div className='flex-row primary'>
         <picture>
-         <img width='50px' height='20px' src='images/RMSLogo.svg'/>
+         <img width='50px' height='20px' src='assets/images/RMSLogo.svg'/>
          <figcaption><i>Request Management System Challenge</i></figcaption>
         </picture>
         <ul className='flex-row'>
