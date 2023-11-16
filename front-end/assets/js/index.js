@@ -1,7 +1,7 @@
   const element = <Navbar/>;
   ReactDOM.render(element, document.getElementById('navabar'));
 
-  // events for navbar links
+  // events for navbar links underlines
   const links = document.querySelectorAll('a');
   links.forEach((link) => link.addEventListener('click', (e) => displayUnderline(e)));
   const displayUnderline = (e) => {
