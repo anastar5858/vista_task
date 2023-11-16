@@ -11,10 +11,35 @@ body {
 }
 .primary-container{
     padding: 0.2rem;
-    background-color: #C0C0C0;
+    background-color: #C0C0D0;
 }
+.surface {
+    position: relative;
+    margin-top: 1rem;
+    background: gray;
+    background-image: url(../../images/formsback.avif), url(../../images/formsback2.avif);
+    background-repeat: no-repeat, no-repeat;
+    background-position: 100% 100%, 0% 0%;
+    background-size: 50%, 0%;  
+    /* transform: scaleX(-1); */
+}
+.surface::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url(../../images/formsback2.avif);
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: 50% 100%;
+    transform: scaleX(-1);
+  }
 /* general rules */
 a:hover, button:hover {
+    transform: scale(1.1);
     cursor: pointer;
 } 
 ul {
@@ -22,6 +47,30 @@ ul {
 }
 a:hover {
     position: relative;
+}
+button {
+    border-radius: 20%;
+}
+picture {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+input {
+    border-radius: 1rem;
+    text-align: center;
+    background: linear-gradient(rgb(255,250,250)
+    , rgb(211,211,211));
+}
+/* class selectors rules  */
+.front {
+    z-index: 2;
+}
+.w-30 {
+    width: 30%;
+}
+.middle {
+    margin: 1rem auto 1rem auto;
 }
 .underline{
     height: 0.1rem;
@@ -34,3 +83,10 @@ a:hover {
     gap: 1rem;
     display: flex;
 }
+.flex-column {
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
+    display: flex;
+}
+/* id selectors rules */

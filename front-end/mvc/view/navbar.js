@@ -1,9 +1,12 @@
 const Navbar = (props) => {
     // todo: check the user session by calling the controller to check the sign in state using the api /verify route
-    const registered = true;
+    const registered = false;
     return (
       <div className='flex-row primary'>
-        <img src='images/RMSLogo.png'/>
+        <picture>
+         <img width='50px' height='20px' src='images/RMSLogo.svg'/>
+         <figcaption><i>Request Management System Challenge</i></figcaption>
+        </picture>
         <ul className='flex-row'>
           {registered && (
             <> 

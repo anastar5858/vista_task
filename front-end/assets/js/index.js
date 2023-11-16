@@ -1,6 +1,7 @@
-  const element = <Navbar/>;
-  ReactDOM.render(element, document.getElementById('navabar'));
-
+  const navbar = <Navbar/>;
+  const home = <Home />;
+  ReactDOM.render(navbar, document.getElementById('navabar'));
+  ReactDOM.render(home, document.getElementById('mainhome'));
   // events for navbar links underlines
   const links = document.querySelectorAll('a');
   links.forEach((link) => link.addEventListener('click', (e) => displayUnderline(e)));
@@ -12,5 +13,4 @@
     underline.classList.add('underline')    
     // console.log(e.currentTarget.appendChild, clone)
     e.currentTarget.appendChild(underline);
-    console.log('wow')
   }
