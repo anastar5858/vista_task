@@ -73,11 +73,24 @@ const validatePassword = (passwordInput, setPasswordValidator) => {
         }) 
     }
 }
+const btnErrorHandler = (message, type) => {
+    const registerBtn = document.getElementById('regsiter-btn');
+    const currentText = registerBtn.textContent;
+    registerBtn.disabled = true;
+    registerBtn.textContent = message;
+    registerBtn.style.color = type === 'error' ? 'red' : 'green';
+    setTimeout(() => {
+        registerBtn.disabled = false;
+        registerBtn.textContent = currentText;
+        registerBtn.style.color = 'black';
+    }, 2000);
+}
 // controller communication (mvc)
 const sendToServerController = async (emailInput, password) => {
     const payload = {email: emailInput.current.value, password};
     const controllerRequest = await fetch('http://localhost:8080/api/register', {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'content-type': 'application/json',
         },
@@ -87,7 +100,11 @@ const sendToServerController = async (emailInput, password) => {
     if (controllerRequest.ok) {
         const controllerResponse = await controllerRequest.json();
         if (controllerResponse === 'Invalid Email') return uiEmailErrorHandler('Invalid Email', emailInput);
-        if (!controllerResponse.state) return passwordAnimationHandler(controllerResponse.id);
+        if (controllerResponse.state === false) return passwordAnimationHandler(controllerResponse.id);
+        // handle error and success case
+        if (controllerResponse === 'Invalid') return btnErrorHandler('Already registered?!', 'error');
+        // success here
+        btnErrorHandler('Registration complete. Welcome!', 'success');
     } else {
         // todo: handle server error
     }

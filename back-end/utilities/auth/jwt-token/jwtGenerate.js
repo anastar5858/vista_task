@@ -6,7 +6,6 @@ const options = {
 }
 const generateToken = async (payload) => {
     try {
-        console.log(payload, options)
         const token = await jwt.sign(payload, process.env.JWT_SECRET, options);
         return token;
     } catch (e) {

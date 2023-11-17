@@ -1,5 +1,6 @@
-  const navbar = <Navbar/>;
-  const home = <Home />;
+  let navbarStatus = {status: null};
+  const navbar = <Navbar navbarStatus={navbarStatus}/>;
+  const home = <Home navbarStatus={navbarStatus}/>;
   ReactDOM.render(navbar, document.getElementById('navabar'));
   ReactDOM.render(home, document.getElementById('mainhome'));
   // events for navbar links underlines

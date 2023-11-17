@@ -1,6 +1,6 @@
-const Navbar = () => {
+const Navbar = (props) => {
     // todo: check the user session by calling the controller to check the sign in state using the api /verify route
-    const registered = false;
+    const [registered, setregistered] = React.useState(false);
     return (
       <div className='flex-row primary'>
         <picture>

@@ -9,7 +9,7 @@ const Home = (props) => {
     }, [register]);
     return (
         <>
-            {register && <Register animationIndicator={animationIndicator} />}
+            {register && <Register animationIndicator={animationIndicator}/>}
             {!register && <Login animationIndicator={animationIndicator} />}
         </>
     )
