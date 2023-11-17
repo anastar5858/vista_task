@@ -63,7 +63,14 @@ input {
     background: linear-gradient(rgb(255,250,250)
     , rgb(211,211,211));
 }
+ul > * {
+    padding: 1rem;
+}
 /* class selectors rules  */
+.bullet {
+    background-color: yellow;
+   list-style-type: armenian; 
+}
 .front {
     z-index: 2;
 }
@@ -91,6 +98,10 @@ input {
     display: flex;
 }
 /* id selectors rules */
+#pass-val-sten, #pass-val-long, #pass-val-limit  {
+    display: block;
+    animation: none;
+}
 /* animations section */
 button:hover {
     background: linear-gradient(90deg, white, gold);
@@ -113,4 +124,16 @@ button:hover {
     100% {
         transform: translateX(0);
     } 
+}
+
+@keyframes validationY {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-0.5rem);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }

@@ -5,20 +5,32 @@ const Navbar = () => {
       <div className='flex-row primary'>
         <picture>
          <img width='50px' height='20px' src='assets/images/RMSLogo.svg'/>
-         <figcaption><i>Request Management System Challenge</i></figcaption>
+         <figcaption>
+          <i>Request Management System Challenge</i>
+         </figcaption>
         </picture>
         <ul className='flex-row'>
           {registered && (
             <> 
-            <li><button className='primary-container'>Logout</button></li>
-            <li><a>New Request</a></li>
-            <li><a>Manage Requests</a></li>
+            <li>
+              <button className='primary-container'>Logout</button>
+            </li>
+            <li>
+              <a>New Request</a>
+            </li>
+            <li>
+              <a>Manage Requests</a>
+            </li>
             </>
           )}
           {!registered && (
             <> 
-            <li><a>Register</a></li>
-            <li><a>Log in</a></li>
+            <li>
+              <a>Register</a>
+            </li>
+            <li>
+              <a>Log in</a>
+            </li>
             </>
           )}
         </ul>
