@@ -6,8 +6,6 @@ const Register = (props) => {
     // live validation of password here
     React.useEffect(() => {
         validatePassword(password, setPasswordValidator);
-        console.log('password changed')
-
     }, [password]);
     return  (
     <form className='flex-column surface'>

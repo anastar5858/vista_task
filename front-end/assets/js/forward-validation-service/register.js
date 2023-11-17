@@ -1,25 +1,28 @@
 // email section
 const validateEmail = (emailInput, passwordInput, passwordValidator) => {
     const email = emailInput.current.value.trim().toLowerCase();
-    // no empty emails
-    if (email === '') return uiEmailErrorHandler('Empty Email', emailInput);
-    // against regular expression
-    const re =
-    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!email.match(re)) return uiEmailErrorHandler('Invalid Email', emailInput);
-    // make sure password is complying to the rules of the system before sending a request to the backend app
-    // if any do not add the animation
-    if (!passwordValidator.long) passwordAnimationHandler('pass-val-long');
-    if (!passwordValidator.startEndNo) passwordAnimationHandler('pass-val-sten');
-    if (!passwordValidator.chacractersLimit) passwordAnimationHandler('pass-val-limit');
-    if (!passwordValidator.long || !passwordValidator.startEndNo || !passwordValidator.chacractersLimit) return
+    // // no empty emails
+    // if (email === '') return uiEmailErrorHandler('Empty Email', emailInput);
+    // // against regular expression
+    // const re =
+    // /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    // if (!email.match(re)) return uiEmailErrorHandler('Invalid Email', emailInput);
+    // // make sure password is complying to the rules of the system before sending a request to the backend app
+    // // if any do not add the animation
+    // if (!passwordValidator.long) passwordAnimationHandler('pass-val-long');
+    // if (!passwordValidator.startEndNo) passwordAnimationHandler('pass-val-sten');
+    // if (!passwordValidator.chacractersLimit) passwordAnimationHandler('pass-val-limit');
+    // if (!passwordValidator.long || !passwordValidator.startEndNo || !passwordValidator.chacractersLimit) return
     // forward to server controller (api router)
-    console.log(passwordInput.current.value, passwordValidator);
+    const password = passwordInput.current.value;
+    sendToServerController(emailInput, password);
 }
 const passwordAnimationHandler = (id) => {
     const markElement = document.getElementById(id);
     markElement.style.animation = `validationY 2s 1`;
-    setTimeout(() => markElement.style.animation = `none`, 1500);
+    markElement.addEventListener('animationend', () => {
+        markElement.style.animation = 'none';
+    }, { once: true });
 }
 const uiEmailErrorHandler = (message, emailInput) => {
     if (message === 'Empty Email') {
@@ -69,5 +72,23 @@ const validatePassword = (passwordInput, setPasswordValidator) => {
             return {...prev, chacractersLimit: false};
         }) 
     }
-    console.log(passwordInput);
+}
+// controller communication (mvc)
+const sendToServerController = async (emailInput, password) => {
+    const payload = {email: emailInput.current.value, password};
+    const controllerRequest = await fetch('http://localhost:8080/api/register', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+    })
+    // check server for validation errors as well
+    if (controllerRequest.ok) {
+        const controllerResponse = await controllerRequest.json();
+        if (controllerResponse === 'Invalid Email') return uiEmailErrorHandler('Invalid Email', emailInput);
+        if (!controllerResponse.state) return passwordAnimationHandler(controllerResponse.id);
+    } else {
+        // todo: handle server error
+    }
 }
