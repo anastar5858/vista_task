@@ -1,19 +1,33 @@
+let sharedRegister;
 const Navbar = (props) => {
     // todo: check the user session by calling the controller to check the sign in state using the api /verify route
-    const [registered, setregistered] = React.useState(false);
+    const [registered, setregistered] = React.useState(props.loggedIn ? true : false);
+    const [verify, setVerify] = React.useState(props.loggedIn ? true : false);
+    React.useEffect(() => sharedRegister = setregistered, []);
+    React.useEffect(() => {
+      if (registered && !props.loggedIn) {
+        verifyToken(setVerify);
+        window.location.replace("http://localhost:5500/assets/html/protected.html");
+      } else if (props.loggedIn) {
+        console.log('verifying again');
+        verifyToken(setVerify);
+      }
+    }, [registered]);
     return (
       <div className='flex-row primary'>
         <picture>
-         <img width='50px' height='20px' src='assets/images/RMSLogo.svg'/>
+         <img width='50px' height='20px' src={props.loggedIn ? '../images/RMSLogo.svg' : 'assets/images/RMSLogo.svg'}/>
          <figcaption>
           <i>Request Management System Challenge</i>
          </figcaption>
         </picture>
         <ul className='flex-row'>
-          {registered && (
+          {verify && (
             <> 
             <li>
-              <button className='primary-container'>Logout</button>
+              <button onClick={() => {
+                logOut(setVerify);
+              }} className='primary-container'>Logout</button>
             </li>
             <li>
               <a>New Request</a>
@@ -23,7 +37,7 @@ const Navbar = (props) => {
             </li>
             </>
           )}
-          {!registered && (
+          {!verify && (
             <> 
             <li>
               <a>Register</a>

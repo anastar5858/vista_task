@@ -70,6 +70,10 @@ mark {
     background-color: rgba(255, 232, 232, 0.356);  
 }
 /* class selectors rules  */
+.w-center {
+    width: fit-content;
+    margin: auto;
+}
 .bullet {
    background-color: rgba(255, 252, 252, 0.356);
    list-style-type: armenian; 

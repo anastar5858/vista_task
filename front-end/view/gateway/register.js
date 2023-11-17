@@ -26,14 +26,14 @@ const Register = (props) => {
                 <input type='checkbox' disabled checked={passwordValidator.startEndNo ? true : false}></input>
             </li>
         </ul>
-        <button id='regsiter-btn' onClick={(e) => registerRequestForwarder(emailRef, passwordRef, e, passwordValidator, navbarStatus)}
+        <button id='regsiter-btn' onClick={(e) => registerRequestForwarder(emailRef, passwordRef, e, passwordValidator)}
         onMouseEnter={(e) => e.currentTarget.style.animation = 'none'} 
         className='w-10 middle front primary-container' 
         style={{animation: `${props.animationIndicator === false ? 'btnTransition 3s 1 forwards' : 'default'}`}}>Register</button>
     </form>
     )
 }
-const registerRequestForwarder = (emailRef, passwordRef, event, passwordValidator, navbarStatus) => {
+const registerRequestForwarder = (emailRef, passwordRef, event, passwordValidator) => {
     event.preventDefault();
     // forward to client-side controller
     validateEmail(emailRef, passwordRef, passwordValidator);

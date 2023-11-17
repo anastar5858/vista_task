@@ -105,6 +105,7 @@ const sendToServerController = async (emailInput, password) => {
         if (controllerResponse === 'Invalid') return btnErrorHandler('Already registered?!', 'error');
         // success here
         btnErrorHandler('Registration complete. Welcome!', 'success');
+        sharedRegister(true);
     } else {
         // todo: handle server error
     }
