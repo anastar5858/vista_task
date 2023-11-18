@@ -13,11 +13,7 @@ body {
     border: 0.2rem solid black;
     border-radius: 100%;
     position: relative;
-    background-color: rgba(255, 0, 0, 0.3);; 
-    /* clip-path: polygon(50% 60%, 100% 100%, 0 100%, 0 50%); */
-      /* margin-top: 10vh; Adjust the margin as needed */
-    /* transform: skewY(-10deg); */
-      /* margin-top: 10vh;  */
+    background-color: rgba(255, 0, 0, 0.3);
 }
 #ellipse::before,
 #ellipse::after {
@@ -35,17 +31,20 @@ body {
 }
 
 #ellipse::before {
+    visibility: hidden;
     animation: wingPosition2 2s 1 forwards, 
     wingSwiftLeft 2s infinite forwards 1s;    
     left: -5vw;
   }
 
   #ellipse::after {
+    visibility: hidden;
     animation: wingPosition 2s 1 forwards, 
     wingSwiftRight 2s infinite forwards 1s;
     right: -20.5vw;
   }
 
+  /* fly animation 
   /* first wing */
   @keyframes wingPosition {
     0% {
@@ -122,3 +121,52 @@ body {
         transform: translateX(-5vw) rotate(-110deg);
     }
   }
+
+  @keyframes translateY {
+    100% {
+        transform: translateY(150vh);
+    }
+  }
+
+
+/* rocket shape animation trial */
+/* #ellipse { 
+    margin: auto;
+    width: 20vw;
+    height: 90vh;
+    border: 0.2rem solid black;
+    border-radius: 100%;
+    position: relative;
+    background-color: rgba(255, 0, 0, 0.3);; 
+    clip-path: polygon(50% 60%, 100% 100%, 0 100%, 0 50%);
+    margin-top: 10vh;
+    transform: skewY(-10deg);
+    margin-top: 10vh; 
+ }  */
+/* #ellipse::before,
+#ellipse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 7vw;
+  height: 30vh;
+  border: 0.2rem solid black;
+  transform: skewY(-60deg) rotate(500deg);
+  border-radius: 100%;
+  background-color: red; 
+}
+
+#ellipse::before {
+    animation: wingPosition2 2s 1 forwards, 
+    wingSwiftLeft 2s infinite forwards 1s;    
+    left: -5vw;
+  }
+
+  #ellipse::after {
+    animation: wingPosition 2s 1 forwards, 
+    wingSwiftRight 2s infinite forwards 1s;
+    right: -20.5vw;
+  } */
