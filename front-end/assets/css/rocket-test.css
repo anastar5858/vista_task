@@ -5,7 +5,7 @@ html {
 body {
     width: 100vw;
 }
-
+/* 
 #ellipse {
     margin: auto;
     width: 20vw;
@@ -42,11 +42,11 @@ body {
     animation: wingPosition 2s 1 forwards, 
     wingSwiftRight 2s infinite forwards 1s;
     right: -20.5vw;
-  }
+  } */
 
   /* fly animation 
   /* first wing */
-  @keyframes wingPosition {
+  /* @keyframes wingPosition {
     0% {
         transform: translateX(100vw);
     }
@@ -84,7 +84,7 @@ body {
     }
   }
   /* second wing */
-  @keyframes wingPosition2 {
+  /* @keyframes wingPosition2 {
     0% {
         transform: translateX(-100vw);
     }
@@ -120,17 +120,17 @@ body {
     100% {
         transform: translateX(-5vw) rotate(-110deg);
     }
-  }
+  } */
 
   @keyframes translateY {
     100% {
         transform: translateY(150vh);
     }
-  }
+  } 
 
 
 /* rocket shape animation trial */
-/* #ellipse { 
+#ellipse { 
     margin: auto;
     width: 20vw;
     height: 90vh;
@@ -138,35 +138,61 @@ body {
     border-radius: 100%;
     position: relative;
     background-color: rgba(255, 0, 0, 0.3);; 
-    clip-path: polygon(50% 60%, 100% 100%, 0 100%, 0 50%);
-    margin-top: 10vh;
-    transform: skewY(-10deg);
-    margin-top: 10vh; 
- }  */
-/* #ellipse::before,
+    clip-path: polygon(50% 18%, 100% 15%, 100% 100%, 0 100%, 0 15%);
+ } 
+#ellipse::before,
 #ellipse::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: 20%;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 7vw;
+  width: 20vw;
   height: 30vh;
-  border: 0.2rem solid black;
-  transform: skewY(-60deg) rotate(500deg);
+  border-left: 0.2rem solid black;
+  transform: rotate(138deg);
   border-radius: 100%;
-  background-color: red; 
+  /* background-color: red;  */
 }
 
 #ellipse::before {
-    animation: wingPosition2 2s 1 forwards, 
-    wingSwiftLeft 2s infinite forwards 1s;    
-    left: -5vw;
-  }
+    left: calc(100% - 26vw);
+
+ }
 
   #ellipse::after {
-    animation: wingPosition 2s 1 forwards, 
-    wingSwiftRight 2s infinite forwards 1s;
-    right: -20.5vw;
-  } */
+    /* clip-path: polygon(50% 0%, 100% 0%, 50% 50%, 0 100%); */
+    left: calc(100% - 20vw);
+  }
+
+#rocketCount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}  
+#cardContainer {
+    position: relative;
+}
+
+  .line-container {
+    position: absolute;
+    top: 12vh;
+    left: 50%;
+    width: 8vw;
+    height: 0.2rem;
+    background-color: #000;
+    transform-origin: 0% 0%;
+    /* transform: rotate(-10deg); */
+  }
+
+  .fireCloud {
+    position: absolute;
+    top: -8vh;
+    left: calc(50% - 10vw);
+    width: 20vw;
+    height: 5rem;
+    background-color: orangered;
+    transform-origin: 0% 0%;
+    border-radius: 100%;
+  }
