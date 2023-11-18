@@ -1,7 +1,7 @@
 const { users } = require('../schemas/user');
 const { connect } = require('../../utilities/mogodb/connect');
 
-const initiateNewUserSave = async (email, hashedPassword, token) => {
+const initiateNewUserSave = async (email, hashedPassword, token, myEncode) => {
     return new Promise( async (resolve) => {
         try {
             // prevent duplications
@@ -17,6 +17,7 @@ const initiateNewUserSave = async (email, hashedPassword, token) => {
                 email: email,
                 password: hashedPassword,
                 token: token,
+                encyptedPass: myEncode,
             }, {
                 upsert: true,
             })

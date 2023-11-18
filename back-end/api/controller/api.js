@@ -14,8 +14,9 @@ const { encode } = require('../../utilities/auth/encryption/encode');
 const { decode } = require('../../utilities/auth/encryption/decode');
 // model (mvc) gateway - object-relational mapping
 const { initiateNewUserSave } = require('../../database/model/register');
-const { fetchEmailRecord, updateToken } = require('../../database/model/login');
-
+const { fetchEmailRecord, updateToken, fetchPassword } = require('../../database/model/login');
+const { initiateNewRequestSave } = require('../../database/model/create');
+const { fetchAllRecordsFromDB } = require('../../database/model/allRecords');
 // POST for registration
 api.post('/register', bodyParser.json(), async (req, res) => {
  const email = req.body.email;
@@ -32,7 +33,7 @@ const myEncode = encode(password);
 req.session.decode = myEncode;
 console.log(myEncode, 'ummm');
 const hashedPassword = await bcrypt.hashSync(myEncode, saltRounds);
-const modelProcess = await initiateNewUserSave(email, hashedPassword, token);
+const modelProcess = await initiateNewUserSave(email, hashedPassword, token, myEncode);
 // save the token in the session
 if (modelProcess) {
     req.session.token = token;
@@ -63,7 +64,12 @@ api.patch('/login', bodyParser.json(), async (req, res) => {
     // then compare the passwords
     const recordObj = record[0];
     const storedPass = recordObj.password;
-    const myEncode = req.session.decode;
+    let myEncode = req.session.decode;
+    if (!myEncode) {
+        const record = await fetchPassword(email);
+        myEncode = record;
+        console.log(myEncode, 'ummmm', record)
+    }
     const compareVariable = await bcrypt.compareSync(myEncode, storedPass, saltRounds);
     const decoded = decode(myEncode);
     if (password !== decoded || !compareVariable) return res.json('invalid');
@@ -75,6 +81,32 @@ api.patch('/login', bodyParser.json(), async (req, res) => {
     updateIndicator ? res.json('success') : res.json('invalid');
 });
 // protected routes start here (manipulation of request data)
+// Post route for adding a new request
+api.post('/create-request', bodyParser.json(), async (req, res) => {
+    const { title, desc, status } = req.body;
+    const date = new Date();
+    const tokenIsValid = await verifyToken(req.session.token);
+    const {email: creator} = tokenIsValid
+    // validate 
+    if (title === '' || desc === '' || status === '' || !tokenIsValid) return res.json('invalid')
+    const databasePayload = {
+        title,
+        desc,
+        status,
+        date,
+        creator,
+    }
+    const modelProcess = await initiateNewRequestSave(databasePayload);
+    modelProcess ? res.json('success') : res.json('invalid');
+});
+// Get route for getting all requests
+api.get('/all-requests', async (req, res) => {
+    // verify token
+    const tokenIsValid = await verifyToken(req.session.token);
+    if (!tokenIsValid) return res.json(false);
+    const allRecords = await fetchAllRecordsFromDB();
+    res.json(allRecords);
+})
 module.exports = {
     api,
 }

@@ -1,6 +1,5 @@
 const { users } = require('../schemas/user');
 const { connect } = require('../../utilities/mogodb/connect');
-
 const fetchEmailRecord = async (email) => {
     return new Promise( async (resolve, revoke) => {
         try {
@@ -32,7 +31,20 @@ const updateToken = async (token, email) => {
         }
     })
 }
+const fetchPassword = async (email) => {
+    return new Promise(async (resolve, revoke) => {
+        try {
+            const record = await users.find({
+                email: email,
+            });
+            resolve(record[0].encyptedPass);
+        } catch (e) {
+            resolve(false);
+        }
+    })
+}
 module.exports = {
     fetchEmailRecord,
     updateToken,
+    fetchPassword
 }

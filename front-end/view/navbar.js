@@ -1,15 +1,17 @@
 let sharedRegister;
+let dashboardView;
 const Navbar = (props) => {
     // todo: check the user session by calling the controller to check the sign in state using the api /verify route
     const [registered, setregistered] = React.useState(props.loggedIn ? true : false);
     const [verify, setVerify] = React.useState(props.loggedIn ? true : false);
-    React.useEffect(() => sharedRegister = setregistered, []);
+    React.useEffect(() => {
+      sharedRegister = setregistered;
+    } , []);
     React.useEffect(() => {
       if (registered && !props.loggedIn) {
         verifyToken(setVerify);
         window.location.replace("http://localhost:5500/assets/html/protected.html");
       } else if (props.loggedIn) {
-        console.log('verifying again');
         verifyToken(setVerify);
       }
     }, [registered]);
@@ -30,10 +32,10 @@ const Navbar = (props) => {
               }} className='primary-container'>Logout</button>
             </li>
             <li>
-              <a>New Request</a>
+              <a onClick={() => sharedRouter('create')}>New Request</a>
             </li>
             <li>
-              <a>Manage Requests</a>
+              <a onClick={() => sharedRouter('manage')}>Manage Requests</a>
             </li>
             </>
           )}

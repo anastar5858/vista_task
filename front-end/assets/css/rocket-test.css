@@ -5,7 +5,7 @@ html {
 body {
     width: 100vw;
 }
-/* 
+
 #ellipse {
     margin: auto;
     width: 20vw;
@@ -42,11 +42,11 @@ body {
     animation: wingPosition 2s 1 forwards, 
     wingSwiftRight 2s infinite forwards 1s;
     right: -20.5vw;
-  } */
+  }
 
   /* fly animation 
   /* first wing */
-  /* @keyframes wingPosition {
+   @keyframes wingPosition {
     0% {
         transform: translateX(100vw);
     }
@@ -84,7 +84,7 @@ body {
     }
   }
   /* second wing */
-  /* @keyframes wingPosition2 {
+  @keyframes wingPosition2 {
     0% {
         transform: translateX(-100vw);
     }
@@ -120,7 +120,7 @@ body {
     100% {
         transform: translateX(-5vw) rotate(-110deg);
     }
-  } */
+  }
 
   @keyframes translateY {
     100% {
@@ -130,7 +130,7 @@ body {
 
 
 /* rocket shape animation trial */
-#ellipse { 
+/* #ellipse { 
     margin: auto;
     width: 20vw;
     height: 90vh;
@@ -153,7 +153,6 @@ body {
   border-left: 0.2rem solid black;
   transform: rotate(138deg);
   border-radius: 100%;
-  /* background-color: red;  */
 }
 
 #ellipse::before {
@@ -162,7 +161,6 @@ body {
  }
 
   #ellipse::after {
-    /* clip-path: polygon(50% 0%, 100% 0%, 50% 50%, 0 100%); */
     left: calc(100% - 20vw);
   }
 
@@ -183,7 +181,6 @@ body {
     height: 0.2rem;
     background-color: #000;
     transform-origin: 0% 0%;
-    /* transform: rotate(-10deg); */
   }
 
   .fireCloud {
@@ -195,4 +192,4 @@ body {
     background-color: orangered;
     transform-origin: 0% 0%;
     border-radius: 100%;
-  }
+  } */

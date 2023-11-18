@@ -5,12 +5,12 @@ const verifyToken = async (setVerify) => {
     });
     if (verifyRequest.ok) {
         const verifyResponse = await verifyRequest.json();
-        console.log(verifyResponse);
-        if (verifyResponse === 'log in') setVerify(true);
-        else {
-            setVerify(false);
+        if (verifyResponse === 'log in') {
+            setVerify(true);
+        } else {
+            setVerify(false)
             window.location.replace("http://localhost:5500/index.html");
-        }  
+        }
     } else {
         // todo: handle server error
     }

@@ -8,6 +8,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    encyptedPass: {
+        type: String,
+        required: true,
+    },
     token: {
         type: String,
     }
