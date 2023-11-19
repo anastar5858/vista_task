@@ -37,6 +37,7 @@ input[type="radio"] {
     transform: translateY(-50%);
     left: 0;
     transition: background-color 0.3s ease;
+    margin-left: 0.5rem;
   }
  #pending:checked + .radio-dot {
     background-color: #db6c34;
@@ -47,7 +48,221 @@ input[type="radio"] {
 #completed:checked + .radio-dot {
     background-color: #34db82; 
 }
+#pending:disabled + .radio-dot {
+    background-color: #db6c34;
+}
+#in-progress:disabled + .radio-dot {
+    background-color: #badb34;
+}
+#completed:disabled + .radio-dot {
+    background-color: #34db82; 
+}
 .plain-surface {
     box-shadow: inset -1rem -1rem 1rem 2rem rgb(245, 241, 241);
     background-color: rgb(255, 253, 253);
 }
+/* manage requests page css */
+#fly:checked + .radio-dot {
+    background-color: gold;
+}
+#rocket:checked + .radio-dot {
+    background-color: gold;
+}
+#default:checked + .radio-dot {
+    background-color: gold; 
+}
+#prev:checked + .radio-dot {
+    background-color: blanchedalmond; 
+}
+#next:checked + .radio-dot {
+    background-color: blanchedalmond; 
+}
+.label {
+    margin-top: 1rem;
+}
+/* no animation rules */
+#ellipse-plain, #ellipse, #ellipse-rocket {
+    margin: 1rem auto 0 auto;
+    width: 20vw;
+    height: 90vh;
+    border: 0.2rem solid rgb(245, 241, 241);
+    border-radius: 100%;
+    position: relative;
+    box-shadow: inset -1rem -1rem 1rem rgb(245, 241, 241);
+    background-color: rgb(219, 211, 211);
+}
+#request-title {
+    max-width: 50%;
+    word-break: break-all;
+    margin: 5rem auto 1rem auto;
+    text-decoration:double;
+    background-color: rgb(208, 199, 199);
+}
+#request-desc {
+    max-width: 80%;
+    max-height: 20%;
+    overflow-y: scroll;
+    word-break: break-all;
+    margin: 3rem auto 1rem auto;
+    background-color: rgb(202, 201, 201);   
+}
+#request-status {
+    width: fit-content;
+    display: block;
+    margin: 3rem auto 1rem auto;
+    background-color: rgb(181, 179, 179);   
+}
+small {
+    margin: 3rem auto 1rem auto;
+    width: fit-content;
+    display: block;
+}
+#creator-sign {
+    background-color: rgb(157, 154, 154);   
+    margin-left: 1rem;
+    float: left;
+}
+#date-sign {
+    margin-top: 5rem;
+    margin-right: 1rem;
+    background-color: rgb(137, 135, 135);   
+    float: right;
+}
+/* request card animation section */
+@keyframes translateY {
+    100% {
+        transform: translateY(150vh);
+    }
+} 
+
+/* rocket animation */
+#rocketCount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}  
+.line-container {
+    position: absolute;
+    top: 12vh;
+    left: 50%;
+    width: 8vw;
+    height: 0.2rem;
+    background-color: #000;
+    transform-origin: 0% 0%;
+}
+.fireCloud {
+    position: absolute;
+    top: -8vh;
+    left: calc(50% - 10vw);
+    width: 20vw;
+    height: 5rem;
+    background-color: orangered;
+    transform-origin: 0% 0%;
+    border-radius: 100%;
+}
+
+/* fly animation  */
+#ellipse::before,
+#ellipse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 5vw;
+  height: 60vh;
+  border: 0.2rem solid black;
+  border-radius: 100%;
+  background-color: red; 
+}
+
+#ellipse::before {
+    visibility: hidden;
+    animation: wingPosition2 2s 1 forwards, 
+    wingSwiftLeft 2s infinite forwards 1s;    
+    left: -5vw;
+  }
+
+  #ellipse::after {
+    visibility: hidden;
+    animation: wingPosition 2s 1 forwards, 
+    wingSwiftRight 2s infinite forwards 1s;
+    right: -20.5vw;
+  }
+  /* first wing */
+  @keyframes wingPosition {
+    0% {
+        transform: translateX(100vw);
+    }
+    50% {
+        transform: translateX(25vw) rotate(90deg);
+    }
+    100% {
+        transform: translateX(25vw) rotate(90deg);
+    }
+  }
+  @keyframes wingSwiftRight {
+    0% {
+        transform: translateX(25vw) rotate(90deg);
+    }
+    14.29% {
+        transform: translateX(25vw) rotate(70deg);
+    }
+    28.6% {
+        transform: translateX(25vw) rotate(90deg);
+    }
+    42.9% {
+        transform: translateX(25vw) rotate(110deg);
+    }
+    57.14% {
+        transform: translateX(25vw) rotate(90deg);
+    }
+    71.42% {
+        transform: translateX(25vw) rotate(70deg);
+    }
+    86% {
+        transform: translateX(25vw) rotate(90deg);
+    }
+    100% {
+        transform: translateX(25vw) rotate(110deg);
+    }
+  }
+  /* second wing */
+  @keyframes wingPosition2 {
+    0% {
+        transform: translateX(-100vw);
+    }
+    50% {
+        transform: translateX(-5vw) rotate(-90deg);
+    }
+    100% {
+        transform: translateX(-5vw) rotate(-90deg);
+    }
+  }
+  @keyframes wingSwiftLeft {
+    0% {
+        transform: translateX(-5vw) rotate(-90deg);
+    }
+    14.29% {
+        transform: translateX(-5vw) rotate(-70deg);
+    }
+    28.6% {
+        transform: translateX(-5vw) rotate(-90deg);
+    }
+    42.9% {
+        transform: translateX(-5vw) rotate(-110deg);
+    }
+    57.14% {
+        transform: translateX(-5vw) rotate(-90deg);
+    }
+    71.42% {
+        transform: translateX(-5vw) rotate(-70deg);
+    }
+    86% {
+        transform: translateX(-5vw) rotate(-90deg);
+    }
+    100% {
+        transform: translateX(-5vw) rotate(-110deg);
+    }
+  }
