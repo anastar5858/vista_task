@@ -77,7 +77,25 @@ input[type="radio"] {
 #next:checked + .radio-dot {
     background-color: blanchedalmond; 
 }
+#all:checked + .radio-dot {
+    background-color: aquamarine; 
+}
+#mine:checked + .radio-dot {
+    background-color: aquamarine; 
+}
 .label {
+    margin-top: 1rem;
+}
+
+details > summary {
+    padding: 0.2px;
+    width: fit-content;
+    background-color: #eeeeee;
+    border: none;
+    box-shadow: 0.2rem 0.2rem 0.2rem #bbbbbb;
+    cursor: pointer;
+}
+details > label {
     margin-top: 1rem;
 }
 /* no animation rules */

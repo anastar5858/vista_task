@@ -105,6 +105,9 @@ mark {
     gap: 1rem;
     display: flex;
 }
+.p-1 {
+    padding: 0.2rem;
+}
 /* id selectors rules */
 #pass-val-sten, #pass-val-long, #pass-val-limit  {
     display: block;

@@ -17,6 +17,8 @@ const { initiateNewUserSave } = require('../../database/model/register');
 const { fetchEmailRecord, updateToken, fetchPassword } = require('../../database/model/login');
 const { initiateNewRequestSave } = require('../../database/model/create');
 const { fetchAllRecordsFromDB } = require('../../database/model/allRecords');
+const { fetchUserRecordsFromDB } = require('../../database/model/userRecords');
+const { fetchStatusRecordsFromDB } = require('../../database/model/statusRecord');
 // POST for registration
 api.post('/register', bodyParser.json(), async (req, res) => {
  const email = req.body.email;
@@ -31,7 +33,6 @@ api.post('/register', bodyParser.json(), async (req, res) => {
 // now contact the model component for database communication (crete a record if not exists)
 const myEncode = encode(password);
 req.session.decode = myEncode;
-console.log(myEncode, 'ummm');
 const hashedPassword = await bcrypt.hashSync(myEncode, saltRounds);
 const modelProcess = await initiateNewUserSave(email, hashedPassword, token, myEncode);
 // save the token in the session
@@ -46,7 +47,6 @@ modelProcess ? res.json('Registered') : res.json('Invalid');
 api.get('/verify', async (req, res) => {
     const token = req.session.token;
     const tokenIsValid = await verifyToken(token);
-    console.log('token is valid', req.session.token)
     tokenIsValid ? res.json('log in') : res.json('failed');
 });
 // Get for loggin out
@@ -68,7 +68,6 @@ api.patch('/login', bodyParser.json(), async (req, res) => {
     if (!myEncode) {
         const record = await fetchPassword(email);
         myEncode = record;
-        console.log(myEncode, 'ummmm', record)
     }
     const compareVariable = await bcrypt.compareSync(myEncode, storedPass, saltRounds);
     const decoded = decode(myEncode);
@@ -106,7 +105,25 @@ api.get('/all-requests', async (req, res) => {
     if (!tokenIsValid) return res.json(false);
     const allRecords = await fetchAllRecordsFromDB();
     res.json(allRecords);
+});
+api.get('/my-requests', async (req, res) => {
+    const tokenIsValid = await verifyToken(req.session.token);
+    if (!tokenIsValid) return res.json(false);
+    const { email } = tokenIsValid;
+    const userRecords = await fetchUserRecordsFromDB(email);
+    res.json(userRecords);
 })
+api.get('/status-requests/:statusArr', async (req, res) => {
+    const tokenIsValid = await verifyToken(req.session.token);
+    if (!tokenIsValid) return res.json(false);
+    const requestArr = JSON.parse(req.params.statusArr);
+    let finalCombinedResults = [];
+    for (const statusRequested of requestArr) {
+        const statusRequestsRecord = await fetchStatusRecordsFromDB(statusRequested);
+        finalCombinedResults.length > 0 ? finalCombinedResults = [...finalCombinedResults, ...statusRequestsRecord] : finalCombinedResults.push(...statusRequestsRecord);
+    }
+    res.json(finalCombinedResults);
+} )
 module.exports = {
     api,
 }
