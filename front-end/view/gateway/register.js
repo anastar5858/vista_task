@@ -9,8 +9,8 @@ const Register = (props) => {
     }, [password]);
     return  (
     <form className='flex-column surface'>
-        <input ref={emailRef} className='w-30 middle front' type='email' placeholder='Email' />
-        <input ref={passwordRef} onInput={(e) => setPassword(e.currentTarget.value)} className='w-30 middle front' type='password' placeholder='Password' />
+        <input ref={emailRef} className='w-30 middle front media-wide' type='email' placeholder='Email' />
+        <input ref={passwordRef} onInput={(e) => setPassword(e.currentTarget.value)} className='w-30 middle front media-wide' type='password' placeholder='Password' />
         <ul className='middle front bullet'>
             <strong>Password Compliance Rules</strong>
             <li>
@@ -26,7 +26,20 @@ const Register = (props) => {
                 <input type='checkbox' disabled checked={passwordValidator.startEndNo ? true : false}></input>
             </li>
         </ul>
-        <button id='regsiter-btn' onClick={(e) => registerRequestForwarder(emailRef, passwordRef, e, passwordValidator)}
+        <button id='regsiter-btn'onAnimationStart={() => {
+            const hamburgerMenu = document.getElementById('menu-toggle2');
+            const hamburgerMenu2 = document.getElementById('menu-toggle');
+            hamburgerMenu.disabled = true;
+            hamburgerMenu2.disabled = true; 
+        }} onAnimationEnd={() => {
+            const hamburgerMenu = document.getElementById('menu-toggle2');
+            const hamburgerMenu2 = document.getElementById('menu-toggle');
+            if (hamburgerMenu && hamburgerMenu2) {
+                hamburgerMenu.disabled = false;
+                hamburgerMenu2.disabled = false; 
+                hamburgerMenu.checked = false
+            } 
+        }} onClick={(e) => registerRequestForwarder(emailRef, passwordRef, e, passwordValidator)}
         onMouseEnter={(e) => e.currentTarget.style.animation = 'none'} 
         className='w-10 middle front primary-container' 
         style={{animation: `${props.animationIndicator === false ? 'btnTransition 3s 1 forwards' : 'default'}`}}>Register</button>
