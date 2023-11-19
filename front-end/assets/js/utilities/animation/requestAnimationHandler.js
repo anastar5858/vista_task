@@ -1,9 +1,19 @@
 const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare, index) => {
+    // no animation should happen in these cases
+    if (lengthToCompare === 0) {
+        if (index - 1 < 0) return
+    }
+    if (lengthToCompare !== 0) {
+        if (index + 1 > lengthToCompare) return
+    }
+    // next and prev radio buttons
+    disableNavigation();
     // only translation is applied
     if (mode === 'default') {
         cardContainer.current.style.animation = 'translateY 3s 1';
         cardContainer.current.addEventListener('animationend', () => {
             cardContainer.current.style.animation = 'none';
+            enableNavigation();
             if (lengthToCompare === 0) {
                 setIndexCounter(index > 0 ? index - 1 : index)
             } else {
@@ -52,6 +62,7 @@ const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare,
                         const clouds = [...document.getElementsByClassName('fireCloud')];
                         clouds.forEach((cloud) => cloud.remove());
                         cardContainer.style.animation = 'none';
+                        enableNavigation();
                         if (lengthToCompare === 0) {
                             setIndexCounter(index > 0 ? index - 1 : index)
                         } else {
@@ -106,6 +117,7 @@ const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare,
               }
             `, styleSheet.cssRules.length);
             unhideElements();
+            enableNavigation();
             if (lengthToCompare === 0) {
                 setIndexCounter(index > 0 ? index - 1 : index)
             } else {
@@ -130,4 +142,14 @@ const unhideElements = () => {
     document.getElementById('request-status').style.visibility = 'visible';
     document.getElementById('creator-sign').style.visibility = 'visible';
     document.getElementById('date-sign').style.visibility = 'visible';
+}
+
+const disableNavigation = () => {
+    document.getElementById('prev').disabled = true;
+    document.getElementById('next').disabled = true;
+}
+
+const enableNavigation = () => {
+    document.getElementById('prev').disabled = false;
+    document.getElementById('next').disabled = false;  
 }

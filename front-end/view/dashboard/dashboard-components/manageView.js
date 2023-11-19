@@ -46,7 +46,7 @@ const ManageView = () => {
     </div>
     {/* animation mode switchers */}
     <label onClick={() => setCardMode('default')} className="radio-container label" htmlFor='default'>
-        <strong>No Animation</strong>
+        <strong>No Complex Animation</strong>
         <input id='default' type='radio' value='default' name='animation'></input>
         <span className="radio-dot"></span>
     </label>

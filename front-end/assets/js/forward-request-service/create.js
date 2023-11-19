@@ -21,7 +21,7 @@ const validateRequestInput = async (titleInput, descriptionTextBox, initialStatu
     if (createRequestRequest.ok) {
         const createRequestResponse = await createRequestRequest.json();
         if (createRequestResponse === 'invalid') return btnErrorHandler('Could not process. Check input ot try re-logging!', 'error', button);
-        console.log(createRequestResponse)
+        else return btnErrorHandler('Request Added', 'success', button);
     } else {
         // todo: handle server error
     }
