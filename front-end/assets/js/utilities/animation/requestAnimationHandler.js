@@ -1,4 +1,5 @@
 const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare, index) => {
+    console.log('should not be here')
     // no animation should happen in these cases
     if (lengthToCompare === 0) {
         if (index - 1 < 0) return
@@ -10,10 +11,12 @@ const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare,
     disableNavigation();
     // only translation is applied
     if (mode === 'default') {
+        hideElements();
         cardContainer.current.style.animation = 'translateY 3s 1';
         cardContainer.current.addEventListener('animationend', () => {
             cardContainer.current.style.animation = 'none';
             enableNavigation();
+            unhideElements();
             if (lengthToCompare === 0) {
                 setIndexCounter(index > 0 ? index - 1 : index)
             } else {
@@ -56,11 +59,12 @@ const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare,
                         const countHeader = document.getElementById('rocketCount');
                         if (countHeader) countHeader.remove();
                         cardContainer.style.position = 'static';
-                        document.getElementById('ellipse-rocket').style.clipPath = 'none';
+                        const rocketElipse = document.getElementById('ellipse-rocket');
+                        if (rocketElipse) rocketElipse.style.clipPath = 'none';
                         const lines = [...document.getElementsByClassName('line-container')];
-                        lines.forEach((line) => line.remove());
+                        if (lines.length > 0) lines.forEach((line) => line.remove());
                         const clouds = [...document.getElementsByClassName('fireCloud')];
-                        clouds.forEach((cloud) => cloud.remove());
+                        if (clouds.length > 0) clouds.forEach((cloud) => cloud.remove());
                         cardContainer.style.animation = 'none';
                         enableNavigation();
                         if (lengthToCompare === 0) {
@@ -134,6 +138,8 @@ const hideElements = () => {
     document.getElementById('request-status').style.visibility = 'hidden';
     document.getElementById('creator-sign').style.visibility = 'hidden';
     document.getElementById('date-sign').style.visibility = 'hidden';
+    document.getElementById('live-edit-status').style.visibility = 'hidden';
+
 }
 
 const unhideElements = () => {
@@ -142,6 +148,7 @@ const unhideElements = () => {
     document.getElementById('request-status').style.visibility = 'visible';
     document.getElementById('creator-sign').style.visibility = 'visible';
     document.getElementById('date-sign').style.visibility = 'visible';
+    document.getElementById('live-edit-status').style.visibility = 'visible';
 }
 
 const disableNavigation = () => {

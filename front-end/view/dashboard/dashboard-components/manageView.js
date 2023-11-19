@@ -9,6 +9,12 @@ const ManageView = () => {
     const userFilterRef = React.useRef(null);
     const [filter, setFilter] = React.useState('all');
     const [statusFilter, setStatusFilter] = React.useState([]);
+    // for updating the status live
+    const [status, setStatus] = React.useState('');
+    // for checking if the current displayed card belongs to the logged in user
+    const [isOwner, setIsOwner] = React.useState(false);
+    // for deleting the current request
+    const [deleteIndicator, setDeleteIndicator] = React.useState(false);
     const disableOtherFilter = () => {
         allFilterRef.current.disabled = true;
         userFilterRef.current.disabled = true;
@@ -17,91 +23,61 @@ const ManageView = () => {
         allFilterRef.current.disabled = false;
         userFilterRef.current.disabled = false;
     }
-    // todo: all = all requests, mine = current logged in user requests status`status` requests based on status
     React.useEffect(() => {
-        const fetchAllRecords = async () => {
-            const allRequestsRequest = await fetch('http://localhost:8080/api/all-requests', {
-                method: 'GET',
-                credentials: 'include',
-            });
-            if (allRequestsRequest.ok) {
-                const allRequestsResponse = await allRequestsRequest.json();
-                setRequests(allRequestsResponse);
-                setCurrentRequest(allRequestsResponse[0]);
-                setIndexCounter(0);
-            } else {
-                // todo: handle server error
-            }
-        }
-        const fetchMyRecords = async () => {
-            const myRequestsRequest = await fetch('http://localhost:8080/api/my-requests', {
-                method: 'GET', 
-                credentials: 'include',
-            });
-            if (myRequestsRequest.ok) {
-                const myRequestsResponse = await myRequestsRequest.json();
-                if (myRequestsResponse?.length > 0) {
-                    setRequests(myRequestsResponse);
-                    setCurrentRequest(myRequestsResponse[0]);
-                    setIndexCounter(0);
-                }
-                console.log(myRequestsResponse);
-            } else {
-                // todo: handle server error
-            }
-        }
-        const fetchStatusRecord = async () => {
-            const statusRequestsRequest = await fetch(`http://localhost:8080/api/status-requests/${JSON.stringify(statusFilter)}`, {
-                method: 'GET', 
-                credentials: 'include',
-            });
-            if (statusRequestsRequest.ok) {
-                const statusRequestsResponse = await statusRequestsRequest.json();
-                if (statusRequestsResponse?.length > 0) {
-                    setRequests(statusRequestsResponse);
-                    setCurrentRequest(statusRequestsResponse[0]);
-                    setIndexCounter(0);
-                }
-                console.log(statusRequestsResponse);
-            } else {
-                // todo: handle server error
-            }
-        }
-        console.log(filter, statusFilter);
-        if (filter === 'all') return fetchAllRecords();
-        if (filter === 'mine') return fetchMyRecords();
-        if (filter === 'status') return fetchStatusRecord();
-    }, [filter, statusFilter])
+        disableStatusCheckboxes()
+        if (filter === 'all') return fetchAllRecords(setRequests, setCurrentRequest, setIndexCounter);
+        if (filter === 'mine') return fetchMyRecords(setRequests, setCurrentRequest, setIndexCounter, setFilter);
+        if (filter === 'status') return fetchStatusRecord(setRequests, setCurrentRequest, setIndexCounter, statusFilter, setFilter);
+    }, [filter, statusFilter, deleteIndicator])
     React.useEffect(() => {
+        disableStatusCheckboxes()
         // setting the current filter
         if (request.length > 0) {
             setCurrentRequest(request[indexCounter]);
         }
-        console.log('what', statusFilter, statusFilter.length > 0);
         if (statusFilter.length > 0) disableOtherFilter();
         if (statusFilter.length === 0) enableOtherFilter()
         // check the status filter
-    }, [indexCounter, statusFilter])
+    }, [indexCounter, statusFilter]);
+    React.useEffect( () => {
+        disableStatusCheckboxes()
+        if (status !== '' && status !== currentRequest.status) {
+            updateRecordStatus(currentRequest, status, setRequests, setCurrentRequest);
+        }
+    }, [status])
     // todo: every time current request changes check if the current user is the creator to add the edit and delete functionality
+    React.useEffect(() => {
+        if (Object.keys(currentRequest).length > 0) {
+            checkOwnership(currentRequest, setIsOwner)
+        }
+    }, [currentRequest])
+    const disableStatusCheckboxes = () => {
+        const pendingOp = document.getElementById('pending-manage');
+        const progressOp =  document.getElementById('progress-manage');
+        const completedOp = document.getElementById('completed-manage');
+        if (pendingOp) pendingOp.checked = false;
+        if (progressOp) progressOp.checked = false;
+        if (completedOp) completedOp.checked = false;
+    }
   return (
     <>
     <div className='flex-row'>
     {/* animation mode switchers */}
     <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
         <strong>Animation Options:</strong>
-        <label onClick={() => setCardMode('default')} className="radio-container label" htmlFor='default'>
+        <label className="radio-container label" htmlFor='default'>
             <strong>No Complex Animation</strong>
-            <input id='default' type='radio' value='default' name='animation'></input>
+            <input  onClick={() => setCardMode('default')}  id='default' type='radio' value='default' name='animation'></input>
             <span className="radio-dot"></span>
         </label>
-        <label onClick={() => setCardMode('fly')} className="radio-container label" htmlFor='fly'>
+        <label className="radio-container label" htmlFor='fly'>
             <strong>Fly Animation</strong>
-            <input id='fly' type='radio' value='fly' name='animation'></input>
+            <input onClick={() => setCardMode('fly')}  id='fly' type='radio' value='fly' name='animation'></input>
             <span className="radio-dot"></span>                 
         </label>
-        <label onClick={() => setCardMode('rocket')} className="radio-container label" htmlFor='rocket'>
+        <label className="radio-container label" htmlFor='rocket'>
             <strong>Rocket Animation</strong>
-            <input id='rocket' type='radio' value='rocket' name='animation'></input>
+            <input onClick={() => setCardMode('rocket')}  id='rocket' type='radio' value='rocket' name='animation'></input>
             <span className="radio-dot"></span> 
         </label>
     </section>
@@ -218,6 +194,27 @@ const ManageView = () => {
                     </em>
                     <small id='creator-sign' className='p-1'>Created By:<br />{currentRequest.creator}</small>
                     <small id='date-sign' className='p-1'>Created On:<br />{new Date(currentRequest.date).toLocaleDateString()}</small>
+                    {/* live edit a request */}
+                    <strong id='live-edit-status'>
+                        <p>Edit the status:</p>
+                        <label className="radio-container" htmlFor='pending-manage'>
+                            <strong>Pending</strong>
+                            <input onClick={() => setStatus('pending')}  id='pending-manage' type='radio' value='pending' name='status'></input>
+                            <span className="radio-dot"></span>
+                        </label>
+                        <label className="radio-container" htmlFor='progress-manage'>
+                            <strong>In-progress</strong>
+                            <input onClick={() => setStatus('in-progress')}  id='progress-manage' type='radio' value='In-progress' name='status'></input>
+                            <span className="radio-dot"></span>                 
+                        </label>
+                        <label className="radio-container" htmlFor='completed-manage'>
+                            <strong>Completed</strong>
+                            <input  onClick={() => setStatus('completed')} id='completed-manage' type='radio' value='Completed' name='status'></input>
+                            <span className="radio-dot"></span> 
+                        </label>
+                    </strong>
+                    {/* rendered only if the currently viewed request card belongs to the signed in user */}
+                    {isOwner && (<button onClick={(e) => deleteRecord(currentRequest, setDeleteIndicator, e.currentTarget)}>Delete</button>)}
                 </>
             )}
         </div>

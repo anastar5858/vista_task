@@ -19,6 +19,8 @@ const { initiateNewRequestSave } = require('../../database/model/create');
 const { fetchAllRecordsFromDB } = require('../../database/model/allRecords');
 const { fetchUserRecordsFromDB } = require('../../database/model/userRecords');
 const { fetchStatusRecordsFromDB } = require('../../database/model/statusRecord');
+const { updateRecordStatus } = require('../../database/model/updateRecords.js');
+const { deleteRecord } = require('../../database/model/deleteRecord');
 // POST for registration
 api.post('/register', bodyParser.json(), async (req, res) => {
  const email = req.body.email;
@@ -124,6 +126,34 @@ api.get('/status-requests/:statusArr', async (req, res) => {
     }
     res.json(finalCombinedResults);
 } )
+api.put('/update-request-status', bodyParser.json(), async (req,res) => {
+    const tokenIsValid = await verifyToken(req.session.token);
+    if (!tokenIsValid) return res.json(false);
+    const responseObj = {}
+    const allRecords = await fetchAllRecordsFromDB();
+    responseObj.allRequests = allRecords;
+    const updatedRecord = await updateRecordStatus(req.body.title, req.body.newStatus);
+    responseObj.updatedRecord = updatedRecord;
+    res.json(responseObj)
+});
+api.get('/check-ownership/:record', async (req, res) => {
+    const tokenIsValid = await verifyToken(req.session.token);
+    if (!tokenIsValid) return res.json(false);
+    const record = JSON.parse(req.params.record);
+    if (record.creator === tokenIsValid.email) return res.json(true);
+    res.json(false);
+})
+api.delete('/delete-record', bodyParser.json(), async (req, res) => {
+    const tokenIsValid = await verifyToken(req.session.token);
+    if (!tokenIsValid) return res.json(false);
+    const record = req.body;
+    if (record.creator === tokenIsValid.email) {
+        const deleted = await deleteRecord(record);
+        deleted ? res.json('deleted') : res.json('failed');
+    } else {
+        return res.json('failed')
+    }
+})
 module.exports = {
     api,
 }

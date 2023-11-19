@@ -39,13 +39,13 @@ input[type="radio"] {
     transition: background-color 0.3s ease;
     margin-left: 0.5rem;
   }
- #pending:checked + .radio-dot {
+#pending:checked + .radio-dot, #pending-manage + .radio-dot {
     background-color: #db6c34;
 }
-#progress:checked + .radio-dot {
+#progress:checked + .radio-dot, #progress-manage + .radio-dot  {
     background-color: #badb34;
 }
-#completed:checked + .radio-dot {
+#completed:checked + .radio-dot, #completed-manage + .radio-dot  {
     background-color: #34db82; 
 }
 #pending:disabled + .radio-dot {
