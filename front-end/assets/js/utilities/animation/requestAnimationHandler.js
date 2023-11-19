@@ -1,5 +1,4 @@
 const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare, index) => {
-    console.log('should not be here')
     // no animation should happen in these cases
     if (lengthToCompare === 0) {
         if (index - 1 < 0) return
@@ -9,21 +8,74 @@ const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare,
     }
     // next and prev radio buttons
     disableNavigation();
+    // event listeners of animation endings
+    // default
+    const defaultEvent = () => {
+        cardContainer.current.style.animation = 'none';
+        enableNavigation();
+        unhideElements();
+        cardContainer.current.removeEventListener('animationend', defaultEvent);
+        if (lengthToCompare === 0) {
+            setIndexCounter(index > 0 ? index - 1 : index)
+        } else {
+            setIndexCounter(index < lengthToCompare ? index + 1 : index)    
+        }
+    }
+    // rocket
+    const rocketEvent = () => {
+        const cardContainer =  document.getElementById('cardContainer')
+        // revert all added configurations
+        unhideElements()
+        const countHeader = document.getElementById('rocketCount');
+        if (countHeader) countHeader.remove();
+        cardContainer.style.position = 'static';
+        const rocketElipse = document.getElementById('ellipse-rocket');
+        if (rocketElipse) rocketElipse.style.clipPath = 'none';
+        const lines = [...document.getElementsByClassName('line-container')];
+        if (lines.length > 0) lines.forEach((line) => line.remove());
+        const clouds = [...document.getElementsByClassName('fireCloud')];
+        if (clouds.length > 0) clouds.forEach((cloud) => cloud.remove());
+        cardContainer.style.animation = 'none';
+        enableNavigation();
+        cardContainer.removeEventListener('animationend', rocketEvent);
+        if (lengthToCompare === 0) {
+            setIndexCounter(index > 0 ? index - 1 : index)
+        } else {
+            setIndexCounter(index < lengthToCompare ? index + 1 : index)    
+        }
+    }
+    // fly
+    const flyEvent = () => {
+        const style = document.createElement('style');
+        document.head.appendChild(style);
+        const styleSheet = style.sheet;
+        const cardContainer =  document.getElementById('cardContainer')
+        cardContainer.style.animation = 'none'; 
+        styleSheet.insertRule(`
+        #ellipse::before {
+            visibility: hidden;
+          }
+        `, styleSheet.cssRules.length);
+        styleSheet.insertRule(`
+          #ellipse::after {
+            visibility: hidden;
+          }
+        `, styleSheet.cssRules.length);
+        unhideElements();
+        enableNavigation();
+        cardContainer.removeEventListener('animationend', flyEvent);
+        if (lengthToCompare === 0) {
+            setIndexCounter(index > 0 ? index - 1 : index)
+        } else {
+            setIndexCounter(index < lengthToCompare ? index + 1 : index)    
+        }
+    }
+
     // only translation is applied
     if (mode === 'default') {
         hideElements();
         cardContainer.current.style.animation = 'translateY 3s 1';
-        cardContainer.current.addEventListener('animationend', () => {
-            cardContainer.current.style.animation = 'none';
-            enableNavigation();
-            unhideElements();
-            if (lengthToCompare === 0) {
-                setIndexCounter(index > 0 ? index - 1 : index)
-            } else {
-                setIndexCounter(index < lengthToCompare ? index + 1 : index)    
-            }
-        });
-        console.log(mode, cardContainer, setIndexCounter, lengthToCompare);
+        cardContainer.current.addEventListener('animationend', defaultEvent);
     }
     // rocket animation
     if (mode === 'rocket') {
@@ -53,26 +105,7 @@ const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare,
                 setTimeout(() => {
                     const cardContainer =  document.getElementById('cardContainer')
                     cardContainer.style.animation = 'translateY 3s 1 forwards';
-                    cardContainer.addEventListener('animationend', () => {
-                        // revert all added configurations
-                        unhideElements()
-                        const countHeader = document.getElementById('rocketCount');
-                        if (countHeader) countHeader.remove();
-                        cardContainer.style.position = 'static';
-                        const rocketElipse = document.getElementById('ellipse-rocket');
-                        if (rocketElipse) rocketElipse.style.clipPath = 'none';
-                        const lines = [...document.getElementsByClassName('line-container')];
-                        if (lines.length > 0) lines.forEach((line) => line.remove());
-                        const clouds = [...document.getElementsByClassName('fireCloud')];
-                        if (clouds.length > 0) clouds.forEach((cloud) => cloud.remove());
-                        cardContainer.style.animation = 'none';
-                        enableNavigation();
-                        if (lengthToCompare === 0) {
-                            setIndexCounter(index > 0 ? index - 1 : index)
-                        } else {
-                            setIndexCounter(index < lengthToCompare ? index + 1 : index)    
-                        }
-                    });
+                    cardContainer.addEventListener('animationend', rocketEvent);
                 }  , 2000)
                 return
             } else {
@@ -104,30 +137,10 @@ const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare,
             visibility: visible;
           }
         `, styleSheet.cssRules.length);
-        
         setTimeout(() => {
         const cardContainer =  document.getElementById('cardContainer')
         cardContainer.style.animation = 'translateY 3s 1'; 
-        cardContainer.addEventListener('animationend', () => {
-            cardContainer.style.animation = 'none'; 
-            styleSheet.insertRule(`
-            #ellipse::before {
-                visibility: hidden;
-              }
-            `, styleSheet.cssRules.length);
-            styleSheet.insertRule(`
-              #ellipse::after {
-                visibility: hidden;
-              }
-            `, styleSheet.cssRules.length);
-            unhideElements();
-            enableNavigation();
-            if (lengthToCompare === 0) {
-                setIndexCounter(index > 0 ? index - 1 : index)
-            } else {
-                setIndexCounter(index < lengthToCompare ? index + 1 : index)    
-            }
-        }); 
+        cardContainer.addEventListener('animationend', flyEvent); 
         }, 2000);  
     }
 }
@@ -139,7 +152,8 @@ const hideElements = () => {
     document.getElementById('creator-sign').style.visibility = 'hidden';
     document.getElementById('date-sign').style.visibility = 'hidden';
     document.getElementById('live-edit-status').style.visibility = 'hidden';
-
+    const deleteBtn = document.getElementById('delete-request-btn');
+    if (deleteBtn) deleteBtn.style.visibility = 'hidden';
 }
 
 const unhideElements = () => {
@@ -149,14 +163,22 @@ const unhideElements = () => {
     document.getElementById('creator-sign').style.visibility = 'visible';
     document.getElementById('date-sign').style.visibility = 'visible';
     document.getElementById('live-edit-status').style.visibility = 'visible';
+    const deleteBtn = document.getElementById('delete-request-btn');
+    if (deleteBtn) deleteBtn.style.visibility = 'visible';
 }
 
 const disableNavigation = () => {
     document.getElementById('prev').disabled = true;
     document.getElementById('next').disabled = true;
+    document.getElementById('default').disabled = true;
+    document.getElementById('fly').disabled = true;
+    document.getElementById('rocket').disabled = true;
 }
 
 const enableNavigation = () => {
     document.getElementById('prev').disabled = false;
-    document.getElementById('next').disabled = false;  
+    document.getElementById('next').disabled = false; 
+    document.getElementById('default').disabled = false;
+    document.getElementById('fly').disabled = false;
+    document.getElementById('rocket').disabled = false; 
 }

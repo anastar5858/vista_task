@@ -31,14 +31,16 @@ const ManageView = () => {
     }, [filter, statusFilter, deleteIndicator])
     React.useEffect(() => {
         disableStatusCheckboxes()
-        // setting the current filter
-        if (request.length > 0) {
-            setCurrentRequest(request[indexCounter]);
-        }
         if (statusFilter.length > 0) disableOtherFilter();
         if (statusFilter.length === 0) enableOtherFilter()
         // check the status filter
     }, [indexCounter, statusFilter]);
+    React.useEffect(() => {
+        // setting the current filter
+        if (request.length > 0) {
+            setCurrentRequest(request[indexCounter]);
+        }
+    } ,[indexCounter])
     React.useEffect( () => {
         disableStatusCheckboxes()
         if (status !== '' && status !== currentRequest.status) {
@@ -86,15 +88,16 @@ const ManageView = () => {
         <strong>Navigation:</strong>
         <label className="radio-container label" htmlFor='prev'>
             <strong>Previous</strong>
-            <input onClick={() => {
+            <input onClick={(e) => {
                 animationHanlder(cardMode, cardContainerRef, setIndexCounter, 0, indexCounter)
             }}  id='prev' type='radio' value='prev' name='navigation'></input>
             <span className="radio-dot"></span>
         </label>
         <label className="radio-container label" htmlFor='next'>
             <strong>Next</strong>
-            <input onClick={() => {
-                animationHanlder(cardMode, cardContainerRef, setIndexCounter, request.length - 1, indexCounter)
+            <input onClick={(e) => {
+                const comparingTo = request.length - 1
+                animationHanlder(cardMode, cardContainerRef, setIndexCounter, comparingTo, indexCounter)
             }}  id='next' type='radio' value='next' name='navigation'></input>
             <span className="radio-dot"></span>                 
         </label>  
@@ -214,7 +217,7 @@ const ManageView = () => {
                         </label>
                     </strong>
                     {/* rendered only if the currently viewed request card belongs to the signed in user */}
-                    {isOwner && (<button onClick={(e) => deleteRecord(currentRequest, setDeleteIndicator, e.currentTarget)}>Delete</button>)}
+                    {isOwner && (<button id='delete-request-btn' onClick={(e) => deleteRecord(currentRequest, setDeleteIndicator, e.currentTarget)}>Delete</button>)}
                 </>
             )}
         </div>
