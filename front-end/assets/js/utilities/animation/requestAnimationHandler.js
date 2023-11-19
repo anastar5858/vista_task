@@ -94,19 +94,18 @@ const animationHanlder = (mode, cardContainer, setIndexCounter, lengthToCompare,
         const cardContainer =  document.getElementById('cardContainer')
         cardContainer.style.animation = 'translateY 3s 1'; 
         cardContainer.addEventListener('animationend', () => {
-            unhideElements();
             cardContainer.style.animation = 'none'; 
             styleSheet.insertRule(`
             #ellipse::before {
                 visibility: hidden;
               }
             `, styleSheet.cssRules.length);
-            
             styleSheet.insertRule(`
               #ellipse::after {
                 visibility: hidden;
               }
             `, styleSheet.cssRules.length);
+            unhideElements();
             if (lengthToCompare === 0) {
                 setIndexCounter(index > 0 ? index - 1 : index)
             } else {
