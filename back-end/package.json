@@ -21,6 +21,7 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.1",
     "nodemon": "^3.0.1",
+    "puppeteer": "^21.5.2",
     "uuid": "^9.0.1"
   }
 }

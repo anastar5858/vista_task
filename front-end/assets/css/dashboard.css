@@ -9,7 +9,7 @@
     flex-wrap: wrap;
     gap: 1rem;
 }
-#pen-check, #prog-check, #comp-check {
+#pen-check, #prog-check, #comp-check, #auto-img, #photo-mode {
     display: block;
 }
 textarea {
@@ -150,11 +150,7 @@ small {
 }
 /* card design ends here */
 /* request card animation section */
-@keyframes translateY {
-    100% {
-        transform: translateY(150vh);
-    }
-} 
+
 
 /* rocket animation */
 #rocketCount {
@@ -211,82 +207,6 @@ small {
     wingSwiftRight 2s infinite forwards 1s;
     right: -20.5vw;
   }
-  /* first wing */
-  @keyframes wingPosition {
-    0% {
-        transform: translateX(100vw);
-    }
-    50% {
-        transform: translateX(25vw) rotate(90deg);
-    }
-    100% {
-        transform: translateX(25vw) rotate(90deg);
-    }
-  }
-  @keyframes wingSwiftRight {
-    0% {
-        transform: translateX(25vw) rotate(90deg);
-    }
-    14.29% {
-        transform: translateX(25vw) rotate(70deg);
-    }
-    28.6% {
-        transform: translateX(25vw) rotate(90deg);
-    }
-    42.9% {
-        transform: translateX(25vw) rotate(110deg);
-    }
-    57.14% {
-        transform: translateX(25vw) rotate(90deg);
-    }
-    71.42% {
-        transform: translateX(25vw) rotate(70deg);
-    }
-    86% {
-        transform: translateX(25vw) rotate(90deg);
-    }
-    100% {
-        transform: translateX(25vw) rotate(110deg);
-    }
-  }
-  /* second wing */
-  @keyframes wingPosition2 {
-    0% {
-        transform: translateX(-100vw);
-    }
-    50% {
-        transform: translateX(-5vw) rotate(-90deg);
-    }
-    100% {
-        transform: translateX(-5vw) rotate(-90deg);
-    }
-  }
-  @keyframes wingSwiftLeft {
-    0% {
-        transform: translateX(-5vw) rotate(-90deg);
-    }
-    14.29% {
-        transform: translateX(-5vw) rotate(-70deg);
-    }
-    28.6% {
-        transform: translateX(-5vw) rotate(-90deg);
-    }
-    42.9% {
-        transform: translateX(-5vw) rotate(-110deg);
-    }
-    57.14% {
-        transform: translateX(-5vw) rotate(-90deg);
-    }
-    71.42% {
-        transform: translateX(-5vw) rotate(-70deg);
-    }
-    86% {
-        transform: translateX(-5vw) rotate(-90deg);
-    }
-    100% {
-        transform: translateX(-5vw) rotate(-110deg);
-    }
-  }
 
 
 /* responsive design rules >>>>>>>>>>>>>>>>>. */
@@ -323,157 +243,3 @@ small {
       }
 }
 
-
-/* animations for each breakpoint */
-@keyframes wingPosition3 {
-    0% {
-        transform: translateX(100vw);
-    }
-    50% {
-        transform: translateX(70vw) rotate(90deg);
-    }
-    100% {
-        transform: translateX(30vw) rotate(90deg);
-    }
-  }
-  @keyframes wingSwiftRight1 {
-    0% {
-        transform: translateX(30vw) rotate(90deg);
-    }
-    14.29% {
-        transform: translateX(30vw) rotate(70deg);
-    }
-    28.6% {
-        transform: translateX(30vw) rotate(90deg);
-    }
-    42.9% {
-        transform: translateX(30vw) rotate(110deg);
-    }
-    57.14% {
-        transform: translateX(30vw) rotate(90deg);
-    }
-    71.42% {
-        transform: translateX(30vw) rotate(70deg);
-    }
-    86% {
-        transform: translateX(30vw) rotate(90deg);
-    }
-    100% {
-        transform: translateX(30vw) rotate(110deg);
-    }
-  }
-  /* second wing */
-  @keyframes wingPosition4 {
-    0% {
-        transform: translateX(-100vw);
-    }
-    50% {
-        transform: translateX(0vw) rotate(-90deg);
-    }
-    100% {
-        transform: translateX(0vw) rotate(-90deg);
-    }
-  }
-  @keyframes wingSwiftLeft1 {
-    0% {
-        transform: rotate(-90deg);
-    }
-    14.29% {
-        transform: rotate(-70deg);
-    }
-    28.6% {
-        transform: rotate(-90deg);
-    }
-    42.9% {
-        transform: rotate(-110deg);
-    }
-    57.14% {
-        transform: rotate(-90deg);
-    }
-    71.42% {
-        transform: rotate(-70deg);
-    }
-    86% {
-        transform: rotate(-90deg);
-    }
-    100% {
-        transform: rotate(-110deg);
-    }
-  }
-
-/* animations for each breakpoint */
-@keyframes wingPosition5 {
-    0% {
-        transform: translateX(100vw);
-    }
-    50% {
-        transform: translateX(30vw) rotate(90deg);
-    }
-    100% {
-        transform: translateX(30vw) rotate(90deg);
-    }
-  }
-  @keyframes wingSwiftRight2 {
-    0% {
-        transform: translateX(70vw) rotate(90deg);
-    }
-    14.29% {
-        transform: translateX(70vw) rotate(70deg);
-    }
-    28.6% {
-        transform: translateX(70vw) rotate(90deg);
-    }
-    42.9% {
-        transform: translateX(70vw) rotate(110deg);
-    }
-    57.14% {
-        transform: translateX(70vw) rotate(90deg);
-    }
-    71.42% {
-        transform: translateX(70vw) rotate(70deg);
-    }
-    86% {
-        transform: translateX(70vw) rotate(90deg);
-    }
-    100% {
-        transform: translateX(70vw) rotate(110deg);
-    }
-  }
-  /* second wing */
-  @keyframes wingPosition6 {
-    0% {
-        transform: translateX(-100vw);
-    }
-    50% {
-        transform: translateX(70vw) rotate(-90deg);
-    }
-    100% {
-        transform: translateX(0vw) rotate(-90deg);
-    }
-  }
-  @keyframes wingSwiftLeft2 {
-    0% {
-        transform: rotate(-90deg);
-    }
-    14.29% {
-        transform: rotate(-70deg);
-    }
-    28.6% {
-        transform: rotate(-90deg);
-    }
-    42.9% {
-        transform: rotate(-110deg);
-    }
-    57.14% {
-        transform: rotate(-90deg);
-    }
-    71.42% {
-        transform: rotate(-70deg);
-    }
-    86% {
-        transform: rotate(-90deg);
-    }
-    100% {
-        transform: rotate(-110deg);
-    }
-  }

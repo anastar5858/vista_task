@@ -119,35 +119,7 @@ button:hover {
     background-size: 200% 100%; /* Make sure the background is twice as wide as the button */
     animation: buttonSmoothFill 1s infinite alternate !important;
 }
-@keyframes buttonSmoothFill {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 100% 0;
-    }
-}
 
-@keyframes btnTransition { 
-    0% {
-        transform: translateX(110vw);
-    }
-    100% {
-        transform: translateX(0);
-    } 
-}
-
-@keyframes validationY {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-0.5rem);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
 /* reponsive media queries */
 input[type="checkbox"] {
     display: none;
@@ -225,22 +197,6 @@ input[type="checkbox"] {
   /* animate the scroll out */
   #menu-toggle:checked ~ .the-menu {
     animation: slideOut 0.5s linear forwards !important;
-  }
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
-  @keyframes slideOut {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(100%);
-    }
   }
 
 @media only screen and (max-width: 630px) {

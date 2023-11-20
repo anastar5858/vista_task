@@ -67,7 +67,10 @@ const updateRecordStatus = async (record, newStatus, setRequests, setCurrentRequ
     }
 }
 const checkOwnership =  async (record, setIsOwner) => {
-    const ownershipRequest = await fetch(`http://localhost:8080/api/check-ownership/${JSON.stringify(record)}`, {
+    const payload = {
+        creator: record.creator,
+    }
+    const ownershipRequest = await fetch(`http://localhost:8080/api/check-ownership/${JSON.stringify(payload)}`, {
         method: 'GET',
         credentials: 'include',
     });

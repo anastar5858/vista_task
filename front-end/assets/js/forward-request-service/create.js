@@ -1,4 +1,4 @@
-const validateRequestInput = async (titleInput, descriptionTextBox, initialStatus, button) => {
+const validateRequestInput = async (titleInput, descriptionTextBox, initialStatus, button, checked) => {
     const title = titleInput.current.value.trim();
     const desc = descriptionTextBox.current.value.trim();
     // client-side validation
@@ -9,6 +9,7 @@ const validateRequestInput = async (titleInput, descriptionTextBox, initialStatu
         title,
         desc,
         status: initialStatus,
+        autoImg: checked,
     }
     const createRequestRequest = await fetch('http://localhost:8080/api/create-request', {
         method: 'POST',

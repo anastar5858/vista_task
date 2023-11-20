@@ -21,6 +21,8 @@ const { fetchUserRecordsFromDB } = require('../../database/model/userRecords');
 const { fetchStatusRecordsFromDB } = require('../../database/model/statusRecord');
 const { updateRecordStatus } = require('../../database/model/updateRecords.js');
 const { deleteRecord } = require('../../database/model/deleteRecord');
+// webcrawling
+const { backgroundFetch } = require('../../utilities/crawler/imgCrawler.js');
 // POST for registration
 api.post('/register', bodyParser.json(), async (req, res) => {
  const email = req.body.email;
@@ -84,7 +86,7 @@ api.patch('/login', bodyParser.json(), async (req, res) => {
 // protected routes start here (manipulation of request data)
 // Post route for adding a new request
 api.post('/create-request', bodyParser.json(), async (req, res) => {
-    const { title, desc, status } = req.body;
+    const { title, desc, status, autoImg } = req.body;
     const date = new Date();
     const tokenIsValid = await verifyToken(req.session.token);
     const {email: creator} = tokenIsValid
@@ -97,6 +99,7 @@ api.post('/create-request', bodyParser.json(), async (req, res) => {
         date,
         creator,
     }
+    if (autoImg) backgroundFetch(title);
     const modelProcess = await initiateNewRequestSave(databasePayload);
     modelProcess ? res.json('success') : res.json('invalid');
 });
@@ -153,7 +156,8 @@ api.delete('/delete-record', bodyParser.json(), async (req, res) => {
     } else {
         return res.json('failed')
     }
-})
+});
+
 module.exports = {
     api,
 }

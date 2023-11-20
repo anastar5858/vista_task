@@ -15,6 +15,9 @@ const ManageView = () => {
     const [isOwner, setIsOwner] = React.useState(false);
     // for deleting the current request
     const [deleteIndicator, setDeleteIndicator] = React.useState(false);
+    // for photo display feature
+    const [displayPhoto, setDisplayPhoto] = React.useState(false);
+    const [currentRequestHasPhoto, setCurrentRequestHasPhoto] = React.useState(false);
     const disableOtherFilter = () => {
         allFilterRef.current.disabled = true;
         userFilterRef.current.disabled = true;
@@ -22,6 +25,37 @@ const ManageView = () => {
     const enableOtherFilter = () => {
         allFilterRef.current.disabled = false;
         userFilterRef.current.disabled = false;
+    }
+    const resetPhotoFeature = () => {
+        if (displayPhoto) {
+            // check box was active
+            const checkBox = document.getElementById('photo-mode');
+            if (checkBox) {
+                if (checkBox.checked) {
+                    checkBox.checked = false;
+                    setDisplayPhoto(false);
+                    setCurrentRequestHasPhoto(false);
+                    defaultCard()
+                } 
+            }
+        } else {
+            setDisplayPhoto(false);
+            setCurrentRequestHasPhoto(false);
+            defaultCard()
+        }
+    }
+    const defaultCard = () => {
+        const container = document.getElementById('cardContainer');
+        if (container) {
+            const ellipse = container.firstChild;
+            if (ellipse) {
+                setCurrentRequestHasPhoto(false);
+                ellipse.style.removeProperty('background');
+                ellipse.style.removeProperty('background-size');
+                ellipse.style.removeProperty('background-repeat');
+                ellipse.style.removeProperty('background-position');
+            }
+        } 
     }
     React.useEffect(() => {
         disableStatusCheckboxes()
@@ -61,6 +95,32 @@ const ManageView = () => {
         if (progressOp) progressOp.checked = false;
         if (completedOp) completedOp.checked = false;
     }
+    React.useEffect(() => {
+        if (Object.keys(currentRequest).length > 0 && displayPhoto) {
+            if (currentRequest.picture) {
+                if (currentRequest.picture !== '') {
+                    setCurrentRequestHasPhoto(true);
+                } else {
+                    setCurrentRequestHasPhoto(false);
+                }
+            }
+        } else if (Object.keys(currentRequest).length > 0 && !displayPhoto) {
+            defaultCard()
+        }
+    }, [displayPhoto]);
+    React.useEffect(() => {
+        if (Object.keys(currentRequest).length > 0 && currentRequestHasPhoto) {
+            const container = document.getElementById('cardContainer');
+            if (container) {
+                const ellipse = container.firstChild;
+                if (ellipse) {
+                    ellipse.style.background = `url(${currentRequest.picture})`;
+                    ellipse.style.backgroundSize = 'cover';
+                    ellipse.style.backgroundRepeat = 'no-repeat';
+                }
+            }
+        }
+    }, [currentRequestHasPhoto])
   return (
     <>
     <div className='flex-row plain-surface' style={{margin: '1rem 0 1rem 0'}}>
@@ -89,6 +149,7 @@ const ManageView = () => {
         <label className="radio-container label" htmlFor='prev'>
             <strong>Previous</strong>
             <input onClick={(e) => {
+                resetPhotoFeature();
                 animationHanlder(cardMode, cardContainerRef, setIndexCounter, 0, indexCounter)
             }}  id='prev' type='radio' value='prev' name='navigation'></input>
             <span className="radio-dot"></span>
@@ -96,6 +157,7 @@ const ManageView = () => {
         <label className="radio-container label" htmlFor='next'>
             <strong>Next</strong>
             <input onClick={(e) => {
+                resetPhotoFeature();
                 const comparingTo = request.length - 1
                 animationHanlder(cardMode, cardContainerRef, setIndexCounter, comparingTo, indexCounter)
             }}  id='next' type='radio' value='next' name='navigation'></input>
@@ -178,6 +240,13 @@ const ManageView = () => {
                 }
             }} type='checkbox' id='comp-check' value='completed'></input>
         </details>
+    </section>
+    {/* background photo mode */}
+    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
+        <strong>Enable Photo Mode?</strong>
+        <label className="radio-container label" htmlFor='photo-mode'>
+            <input  onClick={(e) => e.currentTarget.checked ? setDisplayPhoto(true) : setDisplayPhoto(false)}  id='photo-mode' type='checkbox' name='photo-mode'></input>
+        </label>
     </section>
     {/* end of main div */}
     </div>

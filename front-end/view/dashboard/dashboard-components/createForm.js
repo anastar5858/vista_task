@@ -3,6 +3,7 @@ const CreateForm = () => {
     const titleRef = React.useRef(null);
     const descriptionRef = React.useRef(null);
     const [status, setStatus] = React.useState('');
+    const [checked, setChecked] = React.useState(false);
    return (
     <>
         <form id='request-from' className='plain-surface'>
@@ -27,10 +28,16 @@ const CreateForm = () => {
                     <span className="radio-dot"></span> 
                 </label>
             </section>
+            <section className='sec-flex w-center'>
+                <label htmlFor='auto-img'>
+                        <strong>Auto Background?</strong>
+                        <input onClick={(e) => e.currentTarget.checked ? setChecked(true) : setChecked(false)} id='auto-img' type='checkBox' value='auto-img' name='img'></input>
+                </label>
+            </section>
             <section  id='request-btn' >
                 <button onClick={(e) => {
                     e.preventDefault();
-                    validateRequestInput(titleRef, descriptionRef, status, e.currentTarget);
+                    validateRequestInput(titleRef, descriptionRef, status, e.currentTarget, checked);
                 }} className='middle'>Add</button>
             </section>
         </form>

@@ -16,6 +16,24 @@ const updateRecordStatus = async (title, newStatus) => {
         resolve(updatedRecord);
     });
 }
+
+const updateRecordImage = async (title, imgSrc) => {
+    console.log('from here', title, imgSrc);
+    return new Promise( async (resolve, revoke) => {
+        await connect().then( async () => {
+            await requests.findOneAndUpdate({
+                title: title,
+            }, {
+                picture: imgSrc
+            }, {
+                upsert: true,
+            });
+            return result
+        })
+        resolve(true);
+    });
+}
 module.exports = {
-    updateRecordStatus
+    updateRecordStatus,
+    updateRecordImage,
 }

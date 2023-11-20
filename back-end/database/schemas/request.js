@@ -15,7 +15,6 @@ const requestSchema = mongoose.Schema({
     // for the web scraping propose feature
     picture: {
         type: String,
-        required: true,
     },
     creator: {
         type: String,
