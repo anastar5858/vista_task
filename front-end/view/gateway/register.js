@@ -9,8 +9,8 @@ const Register = (props) => {
     }, [password]);
     return  (
     <form className='flex-column surface'>
-        <input ref={emailRef} className='w-30 middle front media-wide' type='email' placeholder='Email' />
-        <input ref={passwordRef} onInput={(e) => setPassword(e.currentTarget.value)} className='w-30 middle front media-wide' type='password' placeholder='Password' />
+        <input id='register-input' ref={emailRef} className='w-30 middle front media-wide' type='email' placeholder='Email' />
+        <input id='password-input' ref={passwordRef} onInput={(e) => setPassword(e.currentTarget.value)} className='w-30 middle front media-wide' type='password' placeholder='Password' />
         <ul className='middle front bullet'>
             <strong>Password Compliance Rules</strong>
             <li>

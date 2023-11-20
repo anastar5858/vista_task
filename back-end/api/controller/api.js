@@ -19,10 +19,12 @@ const { initiateNewRequestSave } = require('../../database/model/create');
 const { fetchAllRecordsFromDB } = require('../../database/model/allRecords');
 const { fetchUserRecordsFromDB } = require('../../database/model/userRecords');
 const { fetchStatusRecordsFromDB } = require('../../database/model/statusRecord');
-const { updateRecordStatus } = require('../../database/model/updateRecords.js');
+const { updateRecordStatus } = require('../../database/model/updateRecords');
 const { deleteRecord } = require('../../database/model/deleteRecord');
+const { createNewDemo } = require('../../database/model/createDemo');
 // webcrawling
-const { backgroundFetch } = require('../../utilities/crawler/imgCrawler.js');
+const { backgroundFetch } = require('../../utilities/crawler/imgCrawler');
+const { model } = require('mongoose');
 // POST for registration
 api.post('/register', bodyParser.json(), async (req, res) => {
  const email = req.body.email;
@@ -157,6 +159,19 @@ api.delete('/delete-record', bodyParser.json(), async (req, res) => {
         return res.json('failed')
     }
 });
+// demo routes
+api.post('/create-demo', bodyParser.json(), async (req,res) => {
+    const { title, url, demoElements} = req.body;
+    if (title === '' || url === '') res.json('invalid');
+    const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    if (!url.match(urlRegex)) return res.json('invalid url');
+    for (const demoElement of demoElements) {
+        if (demoElement.event !== 'click' && demoElement.event !== 'input') return res.json('invalid event');
+    }
+    // save to database (model part)
+    const modelProcess = await createNewDemo(title, url, demoElements);
+    modelProcess ? res.json('success') : res.json('invalid'); 
+})
 
 module.exports = {
     api,

@@ -9,6 +9,13 @@
     flex-wrap: wrap;
     gap: 1rem;
 }
+.sec-flex-column {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
 #pen-check, #prog-check, #comp-check, #auto-img, #photo-mode {
     display: block;
 }
