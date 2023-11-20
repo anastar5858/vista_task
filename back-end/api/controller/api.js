@@ -22,6 +22,7 @@ const { fetchStatusRecordsFromDB } = require('../../database/model/statusRecord'
 const { updateRecordStatus } = require('../../database/model/updateRecords');
 const { deleteRecord } = require('../../database/model/deleteRecord');
 const { createNewDemo } = require('../../database/model/createDemo');
+const { fetchUrlDemos } = require('../../database/model/fetchDemos');
 // webcrawling
 const { backgroundFetch } = require('../../utilities/crawler/imgCrawler');
 const { model } = require('mongoose');
@@ -172,7 +173,11 @@ api.post('/create-demo', bodyParser.json(), async (req,res) => {
     const modelProcess = await createNewDemo(title, url, demoElements);
     modelProcess ? res.json('success') : res.json('invalid'); 
 })
-
+api.get('/fetch-demos/:url', async (req,res) => {
+    const decodedUrl = decodeURIComponent(req.params.url);
+    const modelProcess = await fetchUrlDemos(decodedUrl);
+    res.json(modelProcess);
+})
 module.exports = {
     api,
 }

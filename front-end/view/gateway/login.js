@@ -4,10 +4,10 @@ const Login = (props) => {
     const statusMark = React.useRef(null);
     return (
         <form className='flex-column surface'>
-        <input ref={emailRef} className='w-30 middle front media-wide' type='email' placeholder='Email' />
-        <input ref={passwordRef} className='w-30 middle front media-wide' type='password' placeholder='Password' />
+        <input id='email-input' ref={emailRef} className='w-30 middle front media-wide' type='email' placeholder='Email' />
+        <input id='password-login' ref={passwordRef} className='w-30 middle front media-wide' type='password' placeholder='Password' />
         <mark ref={statusMark} style={{textAlign: 'center'}} className='front w-center'><strong>IDLE</strong></mark>
-        <button onAnimationStart={() => {
+        <button id='login-btn' onAnimationStart={() => {
             const hamburgerMenu = document.getElementById('menu-toggle2');
             const hamburgerMenu2 = document.getElementById('menu-toggle');
             hamburgerMenu.disabled = true;

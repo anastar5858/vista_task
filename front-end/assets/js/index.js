@@ -1,7 +1,10 @@
   const navbar = <Navbar />;
   const home = <Home />;
+  const footer = <Footer />
   ReactDOM.render(navbar, document.getElementById('navabar'));
   ReactDOM.render(home, document.getElementById('mainhome'));
+  ReactDOM.render(footer, document.getElementById('footer'));
+
   // events for navbar links underlines
   const links = document.querySelectorAll('a');
   links.forEach((link) => link.addEventListener('click', (e) => displayUnderline(e)));

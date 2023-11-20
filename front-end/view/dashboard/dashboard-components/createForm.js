@@ -8,8 +8,8 @@ const CreateForm = () => {
     <>
         <form id='request-from' className='plain-surface'>
             <section className='sec-flex'>
-                <input ref={titleRef} className='w-30 middle media-wide' type='text' placeholder='Title'></input>
-                <textarea ref={descriptionRef} className='middle' placeholder='Description' rows='10' cols={windowWidth < 870 ? '40' : '100'}></textarea>
+                <input id='request-title' ref={titleRef} className='w-30 middle media-wide' type='text' placeholder='Title'></input>
+                <textarea id='request-desc' ref={descriptionRef} className='middle' placeholder='Description' rows='10' cols={windowWidth < 870 ? '40' : '100'}></textarea>
             </section>
             <section className='sec-flex w-center'>
                 <label onClick={() => setStatus('pending')} className="radio-container" htmlFor='pending'>
@@ -29,9 +29,9 @@ const CreateForm = () => {
                 </label>
             </section>
             <section className='sec-flex w-center'>
-                <label htmlFor='auto-img'>
+                <label htmlFor='request-crawler'>
                         <strong>Auto Background?</strong>
-                        <input onClick={(e) => e.currentTarget.checked ? setChecked(true) : setChecked(false)} id='auto-img' type='checkBox' value='auto-img' name='img'></input>
+                        <input id='request-crawler' onClick={(e) => e.currentTarget.checked ? setChecked(true) : setChecked(false)} type='checkBox' value='request-crawler' name='img'></input>
                 </label>
             </section>
             <section  id='request-btn' >

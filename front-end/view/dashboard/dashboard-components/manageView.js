@@ -177,7 +177,7 @@ const ManageView = () => {
             <input ref={userFilterRef} onClick={() => setFilter('mine')}  id='mine' type='radio' value='mine' name='filter'></input>
             <span className="radio-dot"></span>                 
         </label> 
-        <details className='flex-column'>
+        <details id='status-filter' className='flex-column'>
             <summary>Based On State:</summary>
             <label htmlFor='pen-check'>Pending</label>
             <input onClick={(e) => {
