@@ -243,7 +243,7 @@ input[type="checkbox"] {
     }
   }
 
-  @media only screen and (max-width: 630px) {
+@media only screen and (max-width: 630px) {
     .media-wide {
         width: 80vw;
     }

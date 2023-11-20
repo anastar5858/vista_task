@@ -1,4 +1,5 @@
 const CreateForm = () => {
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     const titleRef = React.useRef(null);
     const descriptionRef = React.useRef(null);
     const [status, setStatus] = React.useState('');
@@ -6,8 +7,8 @@ const CreateForm = () => {
     <>
         <form id='request-from' className='plain-surface'>
             <section className='sec-flex'>
-                <input ref={titleRef} className='w-30 middle' type='text' placeholder='Title'></input>
-                <textarea ref={descriptionRef} className='middle' placeholder='Description' rows='10' cols='100'></textarea>
+                <input ref={titleRef} className='w-30 middle media-wide' type='text' placeholder='Title'></input>
+                <textarea ref={descriptionRef} className='middle' placeholder='Description' rows='10' cols={windowWidth < 870 ? '40' : '100'}></textarea>
             </section>
             <section className='sec-flex w-center'>
                 <label onClick={() => setStatus('pending')} className="radio-container" htmlFor='pending'>

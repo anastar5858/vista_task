@@ -9,6 +9,9 @@
     flex-wrap: wrap;
     gap: 1rem;
 }
+#pen-check, #prog-check, #comp-check {
+    display: block;
+}
 textarea {
     border-radius: 1rem;
     text-align: center;
@@ -109,6 +112,7 @@ details > label {
     box-shadow: inset -1rem -1rem 1rem rgb(245, 241, 241);
     background-color: rgb(219, 211, 211);
 }
+/* card design starts here */
 #request-title {
     max-width: 50%;
     word-break: break-all;
@@ -117,7 +121,7 @@ details > label {
     background-color: rgb(208, 199, 199);
 }
 #request-desc {
-    max-width: 80%;
+    max-width: 70%;
     max-height: 20%;
     overflow-y: scroll;
     word-break: break-all;
@@ -136,16 +140,15 @@ small {
     display: block;
 }
 #creator-sign {
-    background-color: rgb(157, 154, 154);   
-    margin-left: 1rem;
-    float: left;
+    background-color: rgb(250, 250, 250);   
+    margin-left: 10%;
 }
 #date-sign {
-    margin-top: 5rem;
-    margin-right: 1rem;
-    background-color: rgb(137, 135, 135);   
-    float: right;
+    margin-top: 3rem;
+    margin-right: 10%;
+    background-color: rgb(255, 255, 255);   
 }
+/* card design ends here */
 /* request card animation section */
 @keyframes translateY {
     100% {
@@ -282,5 +285,195 @@ small {
     }
     100% {
         transform: translateX(-5vw) rotate(-110deg);
+    }
+  }
+
+
+/* responsive design rules >>>>>>>>>>>>>>>>>. */
+@media only screen and (max-width: 1234px) {
+    #ellipse-plain, #ellipse, #ellipse-rocket {
+        width: 30vw;
+    } 
+    /* fly */
+    /* fly animation  */
+    #ellipse::before { 
+        animation: wingPosition3 2s 1 forwards, 
+        wingSwiftLeft1 2s infinite forwards 1s; 
+      }
+    
+      #ellipse::after {
+        animation: wingPosition4 2s 1 forwards, 
+        wingSwiftRight1 2s infinite forwards 1s; 
+      }
+}
+@media only screen and (max-width: 520px) {
+    #ellipse-plain, #ellipse, #ellipse-rocket {
+        width: 70vw;;
+    }
+    /* fly */
+    /* fly animation  */
+    #ellipse::before { 
+        animation: wingPosition5 2s 1 forwards, 
+        wingSwiftLeft2 2s infinite forwards 1s; 
+      }
+    
+      #ellipse::after {
+        animation: wingPosition6 2s 1 forwards, 
+        wingSwiftRight2 2s infinite forwards 1s; 
+      }
+}
+
+
+/* animations for each breakpoint */
+@keyframes wingPosition3 {
+    0% {
+        transform: translateX(100vw);
+    }
+    50% {
+        transform: translateX(70vw) rotate(90deg);
+    }
+    100% {
+        transform: translateX(30vw) rotate(90deg);
+    }
+  }
+  @keyframes wingSwiftRight1 {
+    0% {
+        transform: translateX(30vw) rotate(90deg);
+    }
+    14.29% {
+        transform: translateX(30vw) rotate(70deg);
+    }
+    28.6% {
+        transform: translateX(30vw) rotate(90deg);
+    }
+    42.9% {
+        transform: translateX(30vw) rotate(110deg);
+    }
+    57.14% {
+        transform: translateX(30vw) rotate(90deg);
+    }
+    71.42% {
+        transform: translateX(30vw) rotate(70deg);
+    }
+    86% {
+        transform: translateX(30vw) rotate(90deg);
+    }
+    100% {
+        transform: translateX(30vw) rotate(110deg);
+    }
+  }
+  /* second wing */
+  @keyframes wingPosition4 {
+    0% {
+        transform: translateX(-100vw);
+    }
+    50% {
+        transform: translateX(0vw) rotate(-90deg);
+    }
+    100% {
+        transform: translateX(0vw) rotate(-90deg);
+    }
+  }
+  @keyframes wingSwiftLeft1 {
+    0% {
+        transform: rotate(-90deg);
+    }
+    14.29% {
+        transform: rotate(-70deg);
+    }
+    28.6% {
+        transform: rotate(-90deg);
+    }
+    42.9% {
+        transform: rotate(-110deg);
+    }
+    57.14% {
+        transform: rotate(-90deg);
+    }
+    71.42% {
+        transform: rotate(-70deg);
+    }
+    86% {
+        transform: rotate(-90deg);
+    }
+    100% {
+        transform: rotate(-110deg);
+    }
+  }
+
+/* animations for each breakpoint */
+@keyframes wingPosition5 {
+    0% {
+        transform: translateX(100vw);
+    }
+    50% {
+        transform: translateX(30vw) rotate(90deg);
+    }
+    100% {
+        transform: translateX(30vw) rotate(90deg);
+    }
+  }
+  @keyframes wingSwiftRight2 {
+    0% {
+        transform: translateX(70vw) rotate(90deg);
+    }
+    14.29% {
+        transform: translateX(70vw) rotate(70deg);
+    }
+    28.6% {
+        transform: translateX(70vw) rotate(90deg);
+    }
+    42.9% {
+        transform: translateX(70vw) rotate(110deg);
+    }
+    57.14% {
+        transform: translateX(70vw) rotate(90deg);
+    }
+    71.42% {
+        transform: translateX(70vw) rotate(70deg);
+    }
+    86% {
+        transform: translateX(70vw) rotate(90deg);
+    }
+    100% {
+        transform: translateX(70vw) rotate(110deg);
+    }
+  }
+  /* second wing */
+  @keyframes wingPosition6 {
+    0% {
+        transform: translateX(-100vw);
+    }
+    50% {
+        transform: translateX(70vw) rotate(-90deg);
+    }
+    100% {
+        transform: translateX(0vw) rotate(-90deg);
+    }
+  }
+  @keyframes wingSwiftLeft2 {
+    0% {
+        transform: rotate(-90deg);
+    }
+    14.29% {
+        transform: rotate(-70deg);
+    }
+    28.6% {
+        transform: rotate(-90deg);
+    }
+    42.9% {
+        transform: rotate(-110deg);
+    }
+    57.14% {
+        transform: rotate(-90deg);
+    }
+    71.42% {
+        transform: rotate(-70deg);
+    }
+    86% {
+        transform: rotate(-90deg);
+    }
+    100% {
+        transform: rotate(-110deg);
     }
   }

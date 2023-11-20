@@ -63,7 +63,7 @@ const ManageView = () => {
     }
   return (
     <>
-    <div className='flex-row'>
+    <div className='flex-row plain-surface' style={{margin: '1rem 0 1rem 0'}}>
     {/* animation mode switchers */}
     <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
         <strong>Animation Options:</strong>
@@ -73,7 +73,7 @@ const ManageView = () => {
             <span className="radio-dot"></span>
         </label>
         <label className="radio-container label" htmlFor='fly'>
-            <strong>Fly Animation</strong>
+            <strong>Fly/Rowing Animation</strong>
             <input onClick={() => setCardMode('fly')}  id='fly' type='radio' value='fly' name='animation'></input>
             <span className="radio-dot"></span>                 
         </label>
@@ -138,7 +138,7 @@ const ManageView = () => {
                 }
             }} type='checkbox' id='pen-check' value='pending'></input>
             <label htmlFor='prog-check'>In-progress</label>
-            <input onClick={(e) => {
+            <input className='checkbox' onClick={(e) => {
                 const checkedIndicator = e.currentTarget.checked;
                 const status = e.currentTarget.value;
                 if (checkedIndicator) {
@@ -158,7 +158,7 @@ const ManageView = () => {
                 }
             }} type='checkbox' id='prog-check' value='in-progress'></input>
             <label htmlFor='comp-check'>Completed</label>
-            <input onClick={(e) => {
+            <input className='checkbox' onClick={(e) => {
                 const checkedIndicator = e.currentTarget.checked;
                 const status = e.currentTarget.value;
                 if (checkedIndicator) {
@@ -198,7 +198,7 @@ const ManageView = () => {
                     <small id='creator-sign' className='p-1'>Created By:<br />{currentRequest.creator}</small>
                     <small id='date-sign' className='p-1'>Created On:<br />{new Date(currentRequest.date).toLocaleDateString()}</small>
                     {/* live edit a request */}
-                    <strong id='live-edit-status'>
+                    <strong id='live-edit-status' className='flex-column'>
                         <p>Edit the status:</p>
                         <label className="radio-container" htmlFor='pending-manage'>
                             <strong>Pending</strong>
@@ -215,9 +215,9 @@ const ManageView = () => {
                             <input  onClick={() => setStatus('completed')} id='completed-manage' type='radio' value='Completed' name='status'></input>
                             <span className="radio-dot"></span> 
                         </label>
+                        {isOwner && (<button id='delete-request-btn' onClick={(e) => deleteRecord(currentRequest, setDeleteIndicator, e.currentTarget)}>Delete</button>)}
                     </strong>
                     {/* rendered only if the currently viewed request card belongs to the signed in user */}
-                    {isOwner && (<button id='delete-request-btn' onClick={(e) => deleteRecord(currentRequest, setDeleteIndicator, e.currentTarget)}>Delete</button>)}
                 </>
             )}
         </div>

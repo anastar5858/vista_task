@@ -2,7 +2,6 @@ let sharedRegister;
 let dashboardView;
 const Navbar = (props) => {
     const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    console.log(windowWidth);
     // todo: check the user session by calling the controller to check the sign in state using the api /verify route
     const [registered, setregistered] = React.useState(props.loggedIn ? true : false);
     const [verify, setVerify] = React.useState(props.loggedIn ? true : false);
