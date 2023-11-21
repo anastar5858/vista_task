@@ -1,10 +1,213 @@
+const getAdjustedPosition = (element) => {
+    const rect = element.getBoundingClientRect();
+    const scrollX = window.scrollX || window.pageXOffset;
+    const scrollY = window.scrollY || window.pageYOffset;
+    return {
+        top: rect.top + scrollY,
+        left: rect.left + scrollX,
+        right: rect.right + scrollX,
+        bottom: rect.bottom + scrollY,
+        width: rect.width,
+        height: rect.height
+    };
+}
 const Footer = () => {
+    // instructionMsg hooks the span element which will appear dynamically in the middle of elements with the text altering between the messages inside of the instructions array
+    const instructionMsg = React.useRef(null);
+    // quizzDropDown hooks to the select element which is the drop down list
+    const quizDropDown = React.useRef(null);
+    // quizzMessage hooks to the span element which is correct or incorrect response based on the answer from the drop down list
+    const quizMessage = React.useRef(null);
     const [listOfDemos, setListOfDemo] = React.useState([]);
     const [demosVisualiser, setDemosVisualiser] = React.useState(false);
     const [activeDemo, setActiveDemo] = React.useState([]);
     React.useEffect(() => {
         fetchAllDemos(setListOfDemo);
     }, [])
+    // events for the demo
+    async function reviewRules(event, demoObj) {
+        // validate that the demo steps are not empty  
+        if (Object.keys(demoObj).length > 0) {
+            event.preventDefault()
+            document.getElementById('demosListContainer').style.display = 'none';
+            let counter = 0
+            // loop through each steps in demo steps array 
+            for (const step of demoObj.demoElements) {
+                // holds clicked element
+                const elementId = step.id;
+                // holds the event for each step
+                const event = step.event
+                // call the function responsible for handling the event based on rules (wait for it to finish)
+                await eventsHandler(elementId, event, step)
+                // the counter to acknowledge when the steps are done (start the quiz)
+                counter++
+                //  quizz handler is called after all steps completed
+                 // shows the quiz
+                if (counter === demoObj.demoElements.length) {
+                    quizHandler(demoObj.demoElements);
+                }
+            }
+        }
+     }
+     function eventsHandler(elementId, event, step) {
+        // target holds element 
+        const target = document.getElementById(elementId)
+        // oldtext holds the content of the target 
+        const oldText = target.value
+        // positioning the messages 
+        instructionMsg.current.classList.add('position-absolute', 'top-0', 'start-50', 'translate-middle', 'badge',  'bg-danger');
+        instructionMsg.current.style.zIndex = `5`;
+        target.appendChild(instructionMsg.current);
+        target.classList.add('position-relative');
+        target.style.border = 'solid red 0.2rem';
+        // scroll to the target smoothly
+        target.scrollIntoView({ behavior: "smooth" });
+        // this promise is for each specific step
+        return new Promise((resolve) => {
+            // if the event is input
+            if (event === 'input') {
+                // timeout callback  
+                setTimeout(() => {
+                    let prevType;
+                    if (document.getElementById(elementId).type === 'password') {
+                        prevType = document.getElementById(elementId).type;
+                        document.getElementById(elementId).type = 'text';
+                    }
+                    // display this mesage when demonstrating for the input element 
+                    document.getElementById(elementId).value = step.message;
+                    // timeout callback 
+                    setTimeout(() => {
+                        // back to normal  (resolve the promise)
+                        if (prevType) document.getElementById(elementId).type = 'password';
+                        document.getElementById(elementId).value = oldText;
+                        target.style.border = 'none';
+                        instructionMsg.current.style.display = 'none';
+                        target.parentElement.classList.remove('position-relative');
+                        resolve('step finished');
+                    }, 1500);
+                }, 1000);
+            }
+            // if it is click event 
+            if (event === 'click') {
+                // display the message in the 0 position (click on the element)
+                instructionMsg.current.textContent = step.message;
+                instructionMsg.current.style.display = 'block';
+                // timeout callback
+                setTimeout(() => {
+                    // change the color of button to green 
+                    document.getElementById(elementId).style.backgroundColor = 'green';
+                    // timeout callback 
+                    setTimeout(() => {
+                        // back to normal (resolve the promise)
+                        document.getElementById(elementId).style.backgroundColor = '';
+                        target.style.border = 'none';
+                        instructionMsg.current.style.display = 'none';
+                        target.parentElement.classList.remove('position-relative');
+                        resolve('step finished');
+                    }, 1500);
+                }, 1000);
+            }
+        });
+    }
+    // the quiz function
+    async function quizHandler(demoSteps) {
+        // step 2 loop through each event to initiate the quiz for each step
+        let counter = 0;
+        // loop through each steps in demo steps array
+        for (const step of demoSteps) {
+            // holds clicked elements
+            const elementId = step.id
+            // holds the event/action 
+            const event = step.event
+            await quizStep(elementId, event, step);
+            // return the drop down list to the default value (to be ready for the next quiz)
+            quizDropDown.current.value = 'select an option'
+            counter++;
+            // display add demo container and help demo container, add demo button , and help demo button when quiz is over to carry on with the desired actions 
+            // the end of the demonstarion
+            if (counter === demoSteps.length) {
+                if (document.getElementById('demosListContainer')) document.getElementById('demosListContainer').style.display = 'block';
+            }
+        }
+    }
+    // This funtion construct the quiz for each element in the steps
+    async function quizStep(elementId, event, step) {
+        // insert the drop down list and message in their correct places
+        // target holds the element id of the element
+        const target = document.getElementById(elementId);
+        //Display the drop down and message in middle
+        quizDropDown.current.style.display = 'block';
+        quizMessage.current.style.display = 'block';
+        target.parentElement.appendChild(quizDropDown.current);
+        target.parentElement.appendChild(quizMessage.current);
+        target.style.border = 'solid red 0.2rem';
+        target.classList.add('position-relative');
+        const targetDimensions = getAdjustedPosition(target);
+        const formDimensions = getAdjustedPosition(target.parentElement);
+        const topOffset = targetDimensions.top - formDimensions.top;
+        quizDropDown.current.classList.add('position-absolute', 'start-50', 'badge',  'bg-danger');
+        quizMessage.current.classList.add('position-absolute', 'start-50', 'badge',  'bg-danger');
+        quizDropDown.current.style.top = `${target.parentElement.tagName === 'FORM' ? topOffset : targetDimensions.top}px`;
+        quizDropDown.current.style.zIndex = `5`;
+        quizDropDown.current.style.left = `${targetDimensions.left}px`;
+        quizMessage.current.style.top = `${target.parentElement.tagName === 'FORM' ? topOffset : targetDimensions.top}px`;
+        quizMessage.current.style.zIndex = `5`;
+        console.log(targetDimensions.top, formDimensions.top, target.parentElement);
+        // the promise checks function is responsible for evaluating the user's answers 
+        return new Promise((resolve) => {
+            // check if the user answered correctly or not by an event listener on every change on the drop down list
+            // this event listener is removed after the correct answer and added again in the next step
+            const quizEvent = (e) => {
+                checkAnswer(e, event, resolve, elementId, target, quizEvent, step)
+            };
+            quizDropDown.current.addEventListener('change', quizEvent)
+        })
+
+    }
+    
+        async function checkAnswer(e, event, previousResolve, elementId, target, quizEvent, step) {
+            // check if the answer is correct
+            if (e.currentTarget.value === event) {
+            // right answer we can move on
+            quizMessage.current.textContent = 'Correct';
+            //set a timer for the quiz question for 1.5 sec
+            setTimeout(() => {
+                // position the quizz and hide message 
+                target.parentElement.classList.remove('position-relative')
+                quizMessage.current.textContent = '';
+                quizDropDown.current.style.display = 'none';
+                target.style.border = 'none';
+                quizMessage.current.style.display = 'none';
+                quizDropDown.current.removeEventListener('change', quizEvent)
+                // indicate that steps and quiz question have been completed for this event
+                previousResolve(true);
+            }, 1000 * 1.5);
+            } else {
+            // wrong answer repeat the only the step
+            quizMessage.current.textContent = 'Incorrect';
+            // after one second repeat the step 
+            setTimeout(async () => {
+                // hide any messages and the frop down list to prepare to demonstrate the single wrong answered step
+                quizMessage.current.style.textContent = '';
+                quizDropDown.current.style.display = 'none';
+                quizMessage.current.style.display = 'none';
+                let repeatStep;
+                // validate if the event is not hover then 
+                // hover requires the position object
+                // store the result of repeated step 
+                repeatStep = await eventsHandler(elementId, event, step)
+                // keep on repeating and display the drop down and messages
+                if (repeatStep === 'step finished') {
+                // step was demonstrated now repeat the quiz until the right answers is provided
+                quizMessage.current.textContent = '';
+                target.style.border = 'none';
+                quizDropDown.current.style.display = 'block';
+                quizMessage.current.style.display = 'block';
+                }
+                //timer for 1.5 sec
+            }, 1000 * 1.5)
+            }
+        }
     return (
         <>
             <button onClick={ () => setDemosVisualiser((prev) => !prev)} id={'demooLists'} style={{bottom: '0', position: 'fixed'}}> {!demosVisualiser ? 'Help demos' : 'Hide help demo'}</button>
@@ -15,33 +218,41 @@ const Footer = () => {
                                 <strong>This is the list of website features demonstrations</strong>
                                 {listOfDemos.map((demo) => {
                                     // extract the name
-                                    const name = demo.title
+                                    const name = demo.title;
                                     return (
                                         <li key={`${name}`}>
                                             <div  id={`${name}`} style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
                                                 <span>{name}</span>
                                                 <button onClick={(e) => {
+                                                    let demoObj;
                                                     for (const demo of listOfDemos) {
                                                         if (demo.title === e.currentTarget.parentElement.id) {
+                                                            demoObj = demo
                                                             e.currentTarget.style.backgroundColor = 'violet';
-                                                            setActiveDemo(demo);
+                                                            setActiveDemo(demo)
                                                         } else {
                                                             const demoCon = [...document.getElementById(demo.title).children]
-                                                            console.log(demoCon[1]);
                                                             demoCon[1].style.backgroundColor = 'buttonface';
                                                         }
                                                     }
-                                                }}>Prepare this demo</button>
+                                                    // execute the event
+                                                    reviewRules(e, demoObj);
+                                                }}>Review This Demo</button>
                                             </div>
-                                            {/* <ReviewDemo demoSteps={props.demoSteps} /> <FaTrafficLight style={{backgroundColor:equalityIndicator ? 'purple' : 'red'}} /> */}
+                                            <span ref={instructionMsg} style={{display: 'none'}}></span>
+                                            {/* quiz drop down list & message indicating correct or incorrect answers*/}
+                                            <select ref={quizDropDown} style={{display: 'none'}}>
+                                            <option value='select an option'>Select what action should you do to this element</option>
+                                            <option value='click'>Click</option>
+                                            <option value='input'>Input/Write</option>
+                                            </select>
+                                            <span ref={quizMessage} style={{display: 'none'}}></span>
                                         </li>
                                     )
                                 })}
                             </ul>
                         </div>
-
             )}
         </>
-
     )
 }

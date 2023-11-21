@@ -127,7 +127,7 @@ const ManageView = () => {
     {/* animation mode switchers */}
     <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
         <strong>Animation Options:</strong>
-        <label className="radio-container label" htmlFor='default'>
+        <label id='default-demo' className="radio-container label" htmlFor='default'>
             <strong>No Complex Animation</strong>
             <input  onClick={() => setCardMode('default')}  id='default' type='radio' value='default' name='animation'></input>
             <span className="radio-dot"></span>
@@ -146,7 +146,7 @@ const ManageView = () => {
     {/* navigation system */}
     <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
         <strong>Navigation:</strong>
-        <label className="radio-container label" htmlFor='prev'>
+        <label id='prev-demo' className="radio-container label" htmlFor='prev'>
             <strong>Previous</strong>
             <input onClick={(e) => {
                 resetPhotoFeature();
@@ -167,17 +167,17 @@ const ManageView = () => {
     {/* requests filter */}
     <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
         <strong>Filter:</strong>
-        <label className="radio-container label" htmlFor='all'>
+        <label id='all-demo' className="radio-container label" htmlFor='all'>
             <strong>All</strong>
             <input ref={allFilterRef} onClick={() => setFilter('all')}  id='all' type='radio' value='all' name='filter'></input>
             <span className="radio-dot"></span>
         </label>
-        <label className="radio-container label" htmlFor='mine'>
+        <label id='mine-demo' className="radio-container label" htmlFor='mine'>
             <strong>My Requests</strong>
             <input ref={userFilterRef} onClick={() => setFilter('mine')}  id='mine' type='radio' value='mine' name='filter'></input>
             <span className="radio-dot"></span>                 
         </label> 
-        <details id='status-filter' className='flex-column'>
+        <details id='status-filter-demo' className='flex-column'>
             <summary>Based On State:</summary>
             <label htmlFor='pen-check'>Pending</label>
             <input onClick={(e) => {
@@ -244,7 +244,7 @@ const ManageView = () => {
     {/* background photo mode */}
     <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
         <strong>Enable Photo Mode?</strong>
-        <label className="radio-container label" htmlFor='photo-mode'>
+        <label id='photo-mode-demo' className="radio-container label" htmlFor='photo-mode'>
             <input  onClick={(e) => e.currentTarget.checked ? setDisplayPhoto(true) : setDisplayPhoto(false)}  id='photo-mode' type='checkbox' name='photo-mode'></input>
         </label>
     </section>

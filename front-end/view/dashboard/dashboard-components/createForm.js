@@ -12,7 +12,7 @@ const CreateForm = () => {
                 <textarea id='request-desc' ref={descriptionRef} className='middle' placeholder='Description' rows='10' cols={windowWidth < 870 ? '40' : '100'}></textarea>
             </section>
             <section className='sec-flex w-center'>
-                <label onClick={() => setStatus('pending')} className="radio-container" htmlFor='pending'>
+                <label id='pending-demo' onClick={() => setStatus('pending')} className="radio-container" htmlFor='pending'>
                     <strong>Pending</strong>
                     <input id='pending' type='radio' value='pending' name='status'></input>
                     <span className="radio-dot"></span>
@@ -29,13 +29,13 @@ const CreateForm = () => {
                 </label>
             </section>
             <section className='sec-flex w-center'>
-                <label htmlFor='request-crawler'>
+                <label id='request-crawler-demo' htmlFor='request-crawler'>
                         <strong>Auto Background?</strong>
                         <input id='request-crawler' onClick={(e) => e.currentTarget.checked ? setChecked(true) : setChecked(false)} type='checkBox' value='request-crawler' name='img'></input>
                 </label>
             </section>
-            <section  id='request-btn' >
-                <button onClick={(e) => {
+            <section id='request-btn' >
+                <button id='request-btn-demo' onClick={(e) => {
                     e.preventDefault();
                     validateRequestInput(titleRef, descriptionRef, status, e.currentTarget, checked);
                 }} className='middle'>Add</button>

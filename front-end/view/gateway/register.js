@@ -29,8 +29,10 @@ const Register = (props) => {
         <button id='regsiter-btn'onAnimationStart={() => {
             const hamburgerMenu = document.getElementById('menu-toggle2');
             const hamburgerMenu2 = document.getElementById('menu-toggle');
-            hamburgerMenu.disabled = true;
-            hamburgerMenu2.disabled = true; 
+            if (hamburgerMenu && hamburgerMenu2) {
+                hamburgerMenu.disabled = true;
+                hamburgerMenu2.disabled = true; 
+            }
         }} onAnimationEnd={() => {
             const hamburgerMenu = document.getElementById('menu-toggle2');
             const hamburgerMenu2 = document.getElementById('menu-toggle');
