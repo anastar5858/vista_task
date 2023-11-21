@@ -15,6 +15,27 @@ const fetchUrlDemos = (url) => {
         }
     })
 }
+
+const fetchUrlDemosByDomain = (domain) => {
+    return new Promise( async (resolve, revoke) => {
+        try {
+            const results = await connect().then( async () => {
+                const allDemos = await demos.find();
+                return allDemos
+            });
+            const filteredByDomainArr = [];
+            for (const demoObj of results) {
+                if (demoObj.url.includes(domain)) {
+                    filteredByDomainArr.push(demoObj);
+                }
+            }
+            resolve(filteredByDomainArr);
+        } catch (e) {
+            resolve(false);
+        }
+    })
+}
 module.exports = {
-    fetchUrlDemos
+    fetchUrlDemos,
+    fetchUrlDemosByDomain
 }

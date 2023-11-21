@@ -7,7 +7,7 @@ const { validatePassword } = require('../../utilities/validation/passwordValidat
 // token modules
 const { generateToken } = require('../../utilities/auth/jwt-token/jwtGenerate');
 const { verifyToken } = require('../../utilities/auth/jwt-token/verifyToken');
-// hashing modules
+// hashing/decoding modules
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { encode } = require('../../utilities/auth/encryption/encode');
@@ -22,7 +22,8 @@ const { fetchStatusRecordsFromDB } = require('../../database/model/statusRecord'
 const { updateRecordStatus } = require('../../database/model/updateRecords');
 const { deleteRecord } = require('../../database/model/deleteRecord');
 const { createNewDemo } = require('../../database/model/createDemo');
-const { fetchUrlDemos } = require('../../database/model/fetchDemos');
+const { fetchUrlDemos, fetchUrlDemosByDomain } = require('../../database/model/fetchDemos');
+const { deleteDemo } = require('../../database/model/deleteDemo');
 // webcrawling
 const { backgroundFetch } = require('../../utilities/crawler/imgCrawler');
 const { model } = require('mongoose');
@@ -177,6 +178,15 @@ api.get('/fetch-demos/:url', async (req,res) => {
     const decodedUrl = decodeURIComponent(req.params.url);
     const modelProcess = await fetchUrlDemos(decodedUrl);
     res.json(modelProcess);
+})
+api.get('/fetch-demos-domain/:domain', async (req, res) => {
+    const modelProcess = await fetchUrlDemosByDomain(req.params.domain);
+    res.json(modelProcess);
+})
+api.delete('/delete-demo', bodyParser.json(), async (req, res) => {
+    const demoName = req.body.name;
+    const deleted = await deleteDemo(demoName);
+    deleted ? res.json('deleted') : res.json('failed');
 })
 module.exports = {
     api,

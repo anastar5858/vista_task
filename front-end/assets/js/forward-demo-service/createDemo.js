@@ -45,6 +45,7 @@ const sendToServerController = async (payload) => {
         if (demoResponse === 'invalid') return btnErrorHandler('Error Check Input', 'error');
         if (demoResponse === 'invalid event') return btnErrorHandler('Error Check events (click or input only)', 'error');
         if (demoResponse === 'invalid url') return btnErrorHandler('Error Check url', 'error');
+        sharedIndicator((prev) => !prev);
         return btnErrorHandler('Demo Added', 'success');
     } else {
         // todo: handle server error

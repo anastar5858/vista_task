@@ -26,10 +26,18 @@ const Footer = () => {
     }, [])
     // events for the demo
     async function reviewRules(event, demoObj) {
+        try {
         // validate that the demo steps are not empty  
         if (Object.keys(demoObj).length > 0) {
-            event.preventDefault()
+            event.preventDefault();
+            const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            const demoCanvas = document.getElementById('demo-display');
+            demoCanvas.width = windowWidth;
+            demoCanvas.height = windowHeight;
+            demoCanvas.style.display = 'block';
             document.getElementById('demosListContainer').style.display = 'none';
+            document.getElementById('demo-btn').style.display = 'none';
             let counter = 0
             // loop through each steps in demo steps array 
             for (const step of demoObj.demoElements) {
@@ -47,6 +55,12 @@ const Footer = () => {
                     quizHandler(demoObj.demoElements);
                 }
             }
+        }
+        } catch (e) {
+            if (document.getElementById('demosListContainer')) document.getElementById('demosListContainer').style.display = 'block';
+            document.getElementById('demo-btn').style.display = 'block';
+            const demoCanvas = document.getElementById('demo-display');
+            demoCanvas.style.display = 'none';
         }
      }
      function eventsHandler(elementId, event, step) {
@@ -135,6 +149,9 @@ const Footer = () => {
             // the end of the demonstarion
             if (counter === demoSteps.length) {
                 if (document.getElementById('demosListContainer')) document.getElementById('demosListContainer').style.display = 'block';
+                document.getElementById('demo-btn').style.display = 'block';
+                const demoCanvas = document.getElementById('demo-display');
+                demoCanvas.style.display = 'none';
             }
         }
     }
@@ -233,7 +250,7 @@ const Footer = () => {
         }
     return (
         <>
-            <button onClick={ () => setDemosVisualiser((prev) => !prev)} id={'demooLists'} style={{bottom: '0', position: 'fixed'}}> {!demosVisualiser ? 'Help demos' : 'Hide help demo'}</button>
+            <button id='demo-btn' onClick={ () => setDemosVisualiser((prev) => !prev)} style={{bottom: '0', position: 'fixed'}}> {!demosVisualiser ? 'Help demos' : 'Hide help demo'}</button>
             {demosVisualiser && (
                         <div id='demosListContainer' style={{ backgroundColor:'lightgray', bottom: '5%', zIndex: 1, display: 'flex', flexDirection: 'column', maxHeight: '50%', position: 'fixed', gap: '1rem' }}>
                             {/* ul holding a  list of all published demos of the application */}
