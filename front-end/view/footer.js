@@ -13,6 +13,7 @@ const getAdjustedPosition = (element) => {
 }
 let sharedLanFooter;
 const Footer = () => {
+    // Call the fetchData function
     const urlParamater = new URLSearchParams(window.location.search);
     const lan = urlParamater.get('lan');
     // instructionMsg hooks the span element which will appear dynamically in the middle of elements with the text altering between the messages inside of the instructions array
@@ -25,8 +26,9 @@ const Footer = () => {
     const [demosVisualiser, setDemosVisualiser] = React.useState(false);
     const [activeDemo, setActiveDemo] = React.useState([]);
     const [language, setLanguage] = React.useState(lan ? lan : 'en');
-    console.log(language)
+    const [languageData, setLanguageData] = React.useState({});
     React.useEffect(() => {
+        fetchLanguageData(setLanguageData);
         sharedLanFooter = setLanguage;
         fetchAllDemos(setListOfDemo);
     }, [])
@@ -256,12 +258,12 @@ const Footer = () => {
         }
     return (
         <>
-            <button id='demo-btn' onClick={ () => setDemosVisualiser((prev) => !prev)} style={{bottom: '0', position: 'fixed'}}> {!demosVisualiser ? 'Help demos' : 'Hide help demo'}</button>
+            <button id='demo-btn' onClick={ () => setDemosVisualiser((prev) => !prev)} style={{bottom: '0', position: 'fixed'}}> {!demosVisualiser ? Object.keys(languageData).length > 0 ? languageData.footer.helpBtbUnhide[language] : '' : Object.keys(languageData).length > 0 ? languageData.footer.helpBtbHide[language] : '' }</button>
             {demosVisualiser && (
                         <div id='demosListContainer' style={{ backgroundColor:'lightgray', bottom: '5%', zIndex: 1, display: 'flex', flexDirection: 'column', maxHeight: '50%', position: 'fixed', gap: '1rem' }}>
                             {/* ul holding a  list of all published demos of the application */}
                             <ul style={{fontWeight:'bold'}}>
-                                <strong>This is the list of website features demonstrations</strong>
+                                <strong>{Object.keys(languageData).length > 0 ? languageData.footer.listText[language] : '' }</strong>
                                 {listOfDemos.map((demo) => {
                                     // extract the name
                                     const name = demo.title;
@@ -283,15 +285,15 @@ const Footer = () => {
                                                     }
                                                     // execute the event
                                                     reviewRules(e, demoObj);
-                                                }}>Review This Demo</button>
+                                                }}>{Object.keys(languageData).length > 0 ? languageData.footer.reviewBtn[language] : '' }</button>
                                             </div>
                                             <span ref={instructionMsg} style={{display: 'none'}}></span>
                                             {/* quiz drop down list & message indicating correct or incorrect answers*/}
                                             <div className="custom-select" style={{display: 'none'}}>
                                                 <select ref={quizDropDown} style={{display: 'none'}}>
-                                                <option value='select an option'>Select what action should you do to this element</option>
-                                                <option value='click'>Click</option>
-                                                <option value='input'>Input/Write</option>
+                                                <option value='select an option'>{Object.keys(languageData).length > 0 ? languageData.footer.quizQuestion[language] : '' }</option>
+                                                <option value='click'>{Object.keys(languageData).length > 0 ? languageData.footer.quizClick[language] : ''}</option>
+                                                <option value='input'>{Object.keys(languageData).length > 0 ? languageData.footer.quizInput[language] : ''}</option>
                                                 </select>
                                             </div>
                                             <span ref={quizMessage} style={{display: 'none'}}></span>

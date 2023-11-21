@@ -8,6 +8,10 @@ const Navbar = (props) => {
     const [registered, setregistered] = React.useState(props.loggedIn ? true : false);
     const [verify, setVerify] = React.useState(props.loggedIn ? true : false);
     const [language, setLanguage] = React.useState(lan ? lan : 'en');
+    const [languageData, setLanguageData] = React.useState({});
+    React.useEffect(() => {
+        fetchLanguageData(setLanguageData);
+    }, []);
     // for hamburger menu displau
     const [hamburgerDisplay, setHamburgerDisplay] = React.useState(windowWidth < 630 ? true : false);
     React.useEffect(() => {
@@ -39,7 +43,7 @@ const Navbar = (props) => {
         <picture>
          <img width='50px' height='20px' src={props.loggedIn ? '../images/RMSLogo.svg' : 'assets/images/RMSLogo.svg'}/>
          <figcaption>
-          <i>Request Management System Challenge</i>
+          <i>{Object.keys(languageData).length > 0 ? languageData.navbar.logoText[language] : ''}</i>
          </figcaption>
         </picture>
         {/* hamburger menu */}
@@ -55,28 +59,28 @@ const Navbar = (props) => {
               <li>
                 <button onClick={() => {
                   logOut(setVerify, language);
-                }} className='primary-container'>Logout</button>
+                }} className='primary-container'>{Object.keys(languageData).length > 0 ? languageData.navbar.logout[language] : ''}</button>
               </li>
               <li>
-                <a onClick={() => sharedRouter('create')}>New Request</a>
+                <a onClick={() => sharedRouter('create')}>{Object.keys(languageData).length > 0 ? languageData.navbar.create[language] : ''}</a>
               </li>
               <li>
-                <a onClick={() => sharedRouter('manage')}>Manage Requests</a>
+                <a onClick={() => sharedRouter('manage')}>{Object.keys(languageData).length > 0 ? languageData.navbar.manage[language] : ''}</a>
               </li>
               </>
           )}
           {!verify && (
             <> 
             <li>
-              <a>Register</a>
+              <a>{Object.keys(languageData).length > 0 ? languageData.navbar.register[language] : ''}</a>
             </li>
             <li>
-              <a>Log in</a>
+              <a>{Object.keys(languageData).length > 0 ? languageData.navbar.login[language] : ''}</a>
             </li>
             </>
           )}
           <details id='change-language-mode' className='flex-column'>
-            <summary>Langueg:</summary>
+            <summary>{Object.keys(languageData).length > 0 ? languageData.navbar.language[language] : ''}</summary>
             <label htmlFor='ar'>عربي</label>
             <input onClick={() => setLanguage('ar')} type='radio' id='ar' name='lan'></input>
             <label htmlFor='en'>English</label>
@@ -93,28 +97,28 @@ const Navbar = (props) => {
           <li>
             <button onClick={() => {
                 logOut(setVerify, language);
-            }} className='primary-container'>Logout</button>
+            }} className='primary-container'>{Object.keys(languageData).length > 0 ? languageData.navbar.logout[language] : ''}</button>
           </li>
           <li>
-            <a onClick={() => sharedRouter('create')}>New Request</a>
+            <a onClick={() => sharedRouter('create')}>{Object.keys(languageData).length > 0 ? languageData.navbar.create[language] : ''}</a>
           </li>
           <li>
-            <a onClick={() => sharedRouter('manage')}>Manage Requests</a>
+            <a onClick={() => sharedRouter('manage')}>{Object.keys(languageData).length > 0 ? languageData.navbar.manage[language] : ''}</a>
           </li>
           </>
         )}
         {!verify && (
           <> 
           <li>
-            <a>Register</a>
+            <a>{Object.keys(languageData).length > 0 ? languageData.navbar.register[language] : ''}</a>
           </li>
           <li>
-            <a>Log in</a>
+            <a>{Object.keys(languageData).length > 0 ? languageData.navbar.login[language] : ''}</a>
           </li>
           </>
         )}
         <details id='change-language-mode' className='flex-column'>
-            <summary>Langueg:</summary>
+            <summary>{Object.keys(languageData).length > 0 ? languageData.navbar.language[language] : ''}</summary>
             <label htmlFor='ar'>عربي</label>
             <input onClick={() => setLanguage('ar')} type='radio' id='ar' name='lan'></input>
             <label htmlFor='en'>English</label>
