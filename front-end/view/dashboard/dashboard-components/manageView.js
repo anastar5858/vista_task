@@ -1,4 +1,6 @@
-const ManageView = () => {
+const ManageView = (props) => {
+    const language = props.language
+    console.log(language);
     const cardContainerRef = React.useRef(null);
     const [request, setRequests] = React.useState([]);
     const [cardMode, setCardMode] = React.useState('default');

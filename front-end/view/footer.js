@@ -11,7 +11,10 @@ const getAdjustedPosition = (element) => {
         height: rect.height
     };
 }
+let sharedLanFooter;
 const Footer = () => {
+    const urlParamater = new URLSearchParams(window.location.search);
+    const lan = urlParamater.get('lan');
     // instructionMsg hooks the span element which will appear dynamically in the middle of elements with the text altering between the messages inside of the instructions array
     const instructionMsg = React.useRef(null);
     // quizzDropDown hooks to the select element which is the drop down list
@@ -21,7 +24,10 @@ const Footer = () => {
     const [listOfDemos, setListOfDemo] = React.useState([]);
     const [demosVisualiser, setDemosVisualiser] = React.useState(false);
     const [activeDemo, setActiveDemo] = React.useState([]);
+    const [language, setLanguage] = React.useState(lan ? lan : 'en');
+    console.log(language)
     React.useEffect(() => {
+        sharedLanFooter = setLanguage;
         fetchAllDemos(setListOfDemo);
     }, [])
     // events for the demo

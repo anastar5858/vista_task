@@ -1,4 +1,6 @@
 const Login = (props) => {
+    const language = props.language
+    console.log(language)
     const emailRef = React.useRef(null);
     const passwordRef = React.useRef(null);
     const statusMark = React.useRef(null);
