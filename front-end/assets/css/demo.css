@@ -32,3 +32,15 @@
   .position-relative {
     position: relative !important;
   }
+
+.custom-select {
+    width: 10rem;
+    height: fit-content;
+}
+.custom-select select {
+    width: 100%;
+    font-size: 0.7rem;
+    box-sizing: border-box;
+    white-space: pre-wrap; 
+}
+

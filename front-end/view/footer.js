@@ -50,6 +50,7 @@ const Footer = () => {
         }
      }
      function eventsHandler(elementId, event, step) {
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         // target holds element 
         const target = document.getElementById(elementId)
         // oldtext holds the content of the target 
@@ -60,6 +61,7 @@ const Footer = () => {
         target.appendChild(instructionMsg.current);
         target.classList.add('position-relative');
         target.style.border = 'solid red 0.2rem';
+        
         // scroll to the target smoothly
         target.scrollIntoView({ behavior: "smooth" });
         // this promise is for each specific step
@@ -92,6 +94,10 @@ const Footer = () => {
                 // display the message in the 0 position (click on the element)
                 instructionMsg.current.textContent = step.message;
                 instructionMsg.current.style.display = 'block';
+                        // check if instruction msg is out of the page
+                if (windowWidth - getAdjustedPosition(instructionMsg.current).right < 0) {
+                    instructionMsg.current.style.whiteSpace = `pre-wrap`;
+                }
                 // timeout callback
                 setTimeout(() => {
                     // change the color of button to green 
@@ -101,8 +107,10 @@ const Footer = () => {
                         // back to normal (resolve the promise)
                         document.getElementById(elementId).style.backgroundColor = '';
                         target.style.border = 'none';
+                        instructionMsg.current.style.removeProperty('white-space');
                         instructionMsg.current.style.display = 'none';
                         target.parentElement.classList.remove('position-relative');
+                        console.log('ummmm', instructionMsg.current.style.display, instructionMsg.current);
                         resolve('step finished');
                     }, 1500);
                 }, 1000);
@@ -132,27 +140,39 @@ const Footer = () => {
     }
     // This funtion construct the quiz for each element in the steps
     async function quizStep(elementId, event, step) {
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         // insert the drop down list and message in their correct places
         // target holds the element id of the element
         const target = document.getElementById(elementId);
         //Display the drop down and message in middle
+        quizDropDown.current.parentElement.style.display = 'block';
         quizDropDown.current.style.display = 'block';
         quizMessage.current.style.display = 'block';
-        target.parentElement.appendChild(quizDropDown.current);
+        target.parentElement.appendChild(quizDropDown.current.parentElement);
         target.parentElement.appendChild(quizMessage.current);
         target.style.border = 'solid red 0.2rem';
         target.classList.add('position-relative');
         const targetDimensions = getAdjustedPosition(target);
         const formDimensions = getAdjustedPosition(target.parentElement);
         const topOffset = targetDimensions.top - formDimensions.top;
-        quizDropDown.current.classList.add('position-absolute', 'start-50', 'badge',  'bg-danger');
-        quizMessage.current.classList.add('position-absolute', 'start-50', 'badge',  'bg-danger');
-        quizDropDown.current.style.top = `${target.parentElement.tagName === 'FORM' ? topOffset : targetDimensions.top}px`;
+        quizDropDown.current.parentElement.classList.add('position-absolute', 'badge',  'bg-danger');
+        quizDropDown.current.classList.add('badge',  'bg-danger');
+        quizMessage.current.classList.add('position-absolute', 'badge',  'bg-danger');
+        quizDropDown.current.parentElement.style.top = `${target.parentElement.tagName === 'FORM' ? topOffset : targetDimensions.top}px`;
         quizDropDown.current.style.zIndex = `5`;
-        quizDropDown.current.style.left = `${targetDimensions.left}px`;
+        quizDropDown.current.parentElement.style.zIndex = `5`;
+        quizDropDown.current.parentElement.style.left = `${targetDimensions.left}px`;
         quizMessage.current.style.top = `${target.parentElement.tagName === 'FORM' ? topOffset : targetDimensions.top}px`;
         quizMessage.current.style.zIndex = `5`;
-        console.log(targetDimensions.top, formDimensions.top, target.parentElement);
+        quizMessage.current.style.left = `${targetDimensions.left}px`;
+            // check if quiz is out of place
+        // display the message in the 0 position (click on the element)
+        if (windowWidth - getAdjustedPosition(quizDropDown.current.parentElement).right < 0) {
+            const wrongRight = windowWidth - getAdjustedPosition(quizDropDown.current.parentElement).right;
+            quizDropDown.current.parentElement.style.left = `${Math.abs(wrongRight)}px`;
+            quizMessage.current.style.left = `${Math.abs(wrongRight)}px`;
+            quizDropDown.current.parentElement.classList.remove('start-50');
+        }
         // the promise checks function is responsible for evaluating the user's answers 
         return new Promise((resolve) => {
             // check if the user answered correctly or not by an event listener on every change on the drop down list
@@ -175,9 +195,10 @@ const Footer = () => {
                 // position the quizz and hide message 
                 target.parentElement.classList.remove('position-relative')
                 quizMessage.current.textContent = '';
+                quizDropDown.current.parentElement.style.display = 'none';
                 quizDropDown.current.style.display = 'none';
-                target.style.border = 'none';
                 quizMessage.current.style.display = 'none';
+                target.style.border = 'none';
                 quizDropDown.current.removeEventListener('change', quizEvent)
                 // indicate that steps and quiz question have been completed for this event
                 previousResolve(true);
@@ -189,6 +210,7 @@ const Footer = () => {
             setTimeout(async () => {
                 // hide any messages and the frop down list to prepare to demonstrate the single wrong answered step
                 quizMessage.current.style.textContent = '';
+                quizDropDown.current.parentElement.style.display = 'none';
                 quizDropDown.current.style.display = 'none';
                 quizMessage.current.style.display = 'none';
                 let repeatStep;
@@ -201,6 +223,7 @@ const Footer = () => {
                 // step was demonstrated now repeat the quiz until the right answers is provided
                 quizMessage.current.textContent = '';
                 target.style.border = 'none';
+                quizDropDown.current.parentElement.style.display = 'block';
                 quizDropDown.current.style.display = 'block';
                 quizMessage.current.style.display = 'block';
                 }
@@ -241,11 +264,13 @@ const Footer = () => {
                                             </div>
                                             <span ref={instructionMsg} style={{display: 'none'}}></span>
                                             {/* quiz drop down list & message indicating correct or incorrect answers*/}
-                                            <select ref={quizDropDown} style={{display: 'none'}}>
-                                            <option value='select an option'>Select what action should you do to this element</option>
-                                            <option value='click'>Click</option>
-                                            <option value='input'>Input/Write</option>
-                                            </select>
+                                            <div className="custom-select" style={{display: 'none'}}>
+                                                <select ref={quizDropDown} style={{display: 'none'}}>
+                                                <option value='select an option'>Select what action should you do to this element</option>
+                                                <option value='click'>Click</option>
+                                                <option value='input'>Input/Write</option>
+                                                </select>
+                                            </div>
                                             <span ref={quizMessage} style={{display: 'none'}}></span>
                                         </li>
                                     )

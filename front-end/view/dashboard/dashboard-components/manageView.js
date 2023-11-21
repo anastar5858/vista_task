@@ -123,7 +123,7 @@ const ManageView = () => {
     }, [currentRequestHasPhoto])
   return (
     <>
-    <div className='flex-row plain-surface' style={{margin: '1rem 0 1rem 0'}}>
+    <div className='flex-row plain-surface' style={{margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>
     {/* animation mode switchers */}
     <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
         <strong>Animation Options:</strong>
