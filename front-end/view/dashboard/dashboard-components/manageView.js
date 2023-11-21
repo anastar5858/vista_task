@@ -125,7 +125,7 @@ const ManageView = () => {
     <>
     <div className='flex-row plain-surface' style={{margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>
     {/* animation mode switchers */}
-    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
+    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem', marginBottom: '1rem'}}>
         <strong>Animation Options:</strong>
         <label id='default-demo' className="radio-container label" htmlFor='default'>
             <strong>No Complex Animation</strong>
@@ -165,7 +165,7 @@ const ManageView = () => {
         </label>  
     </section>
     {/* requests filter */}
-    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
+    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem', marginBottom: '1rem'}}>
         <strong>Filter:</strong>
         <label id='all-demo' className="radio-container label" htmlFor='all'>
             <strong>All</strong>
@@ -243,9 +243,9 @@ const ManageView = () => {
     </section>
     {/* background photo mode */}
     <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
-        <strong>Enable Photo Mode?</strong>
-        <label id='photo-mode-demo' className="radio-container label" htmlFor='photo-mode'>
-            <input  onClick={(e) => e.currentTarget.checked ? setDisplayPhoto(true) : setDisplayPhoto(false)}  id='photo-mode' type='checkbox' name='photo-mode'></input>
+        <label id='photo-mode-demo' className="label" htmlFor='photo-mode'>
+            <strong>Enable Photo Mode?</strong>
+            <input  onClick={(e) => e.currentTarget.checked ? setDisplayPhoto(true) : setDisplayPhoto(false)}  id='photo-mode' className='middle' type='checkbox' name='photo-mode'></input>
         </label>
     </section>
     {/* end of main div */}

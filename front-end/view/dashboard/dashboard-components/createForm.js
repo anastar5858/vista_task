@@ -14,24 +14,24 @@ const CreateForm = () => {
             <section className='sec-flex w-center'>
                 <label id='pending-demo' onClick={() => setStatus('pending')} className="radio-container" htmlFor='pending'>
                     <strong>Pending</strong>
-                    <input id='pending' type='radio' value='pending' name='status'></input>
+                    <input id='pending' type='radio' name='status'></input>
                     <span className="radio-dot"></span>
                 </label>
                 <label onClick={() => setStatus('in-progress')} className="radio-container" htmlFor='progress'>
                     <strong>In-progress</strong>
-                    <input id='progress' type='radio' value='In-progress' name='status'></input>
+                    <input id='progress' type='radio' name='status'></input>
                     <span className="radio-dot"></span>                 
                 </label>
                 <label onClick={() => setStatus('completed')} className="radio-container" htmlFor='completed'>
                     <strong>Completed</strong>
-                    <input id='completed' type='radio' value='Completed' name='status'></input>
+                    <input id='completed' type='radio' name='status'></input>
                     <span className="radio-dot"></span> 
                 </label>
             </section>
             <section className='sec-flex w-center'>
                 <label id='request-crawler-demo' htmlFor='request-crawler'>
                         <strong>Auto Background?</strong>
-                        <input id='request-crawler' onClick={(e) => e.currentTarget.checked ? setChecked(true) : setChecked(false)} type='checkBox' value='request-crawler' name='img'></input>
+                        <input onClick={(e) => e.currentTarget.checked ? setChecked(true) : setChecked(false)} id='request-crawler' className='middle' type='checkBox' name='img'></input>
                 </label>
             </section>
             <section id='request-btn' >
