@@ -1,9 +1,9 @@
-const validateRequestInput = async (titleInput, descriptionTextBox, initialStatus, button, checked) => {
+const validateRequestInput = async (titleInput, descriptionTextBox, initialStatus, button, checked, language, languageData) => {
     const title = titleInput.current.value.trim();
     const desc = descriptionTextBox.current.value.trim();
     // client-side validation
     // no empty data
-    if (title === '' || desc === '' || initialStatus === '') return btnErrorHandler('Missing Input', 'error', button);
+    if (title === '' || desc === '' || initialStatus === '') return btnErrorHandler(languageData.errors.missingInput[language], 'error', button);
     // forward to server after validations
     const payload = {
         title,
@@ -21,8 +21,8 @@ const validateRequestInput = async (titleInput, descriptionTextBox, initialStatu
     });
     if (createRequestRequest.ok) {
         const createRequestResponse = await createRequestRequest.json();
-        if (createRequestResponse === 'invalid') return btnErrorHandler('Could not process. Check input ot try re-logging!', 'error', button);
-        else return btnErrorHandler('Request Added', 'success', button);
+        if (createRequestResponse === 'invalid') return btnErrorHandler(languageData.errors.noProcess[language], 'error', button);
+        else return btnErrorHandler(languageData.success.requestCreated[language], 'success', button);
     } else {
         // todo: handle server error
     }

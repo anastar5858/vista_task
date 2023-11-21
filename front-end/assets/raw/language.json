@@ -42,6 +42,10 @@
             "ar": "الباس لحد يدري",
             "en": "Password"
         },
+        "compliance": {
+            "ar": "قواعد الباس",
+            "en": "Password Compliance Rules"
+        },
         "passwordRule1": {
             "ar": "أطول من 8 تكفى",
             "en": "Longer then 8 characters"
@@ -193,6 +197,42 @@
         "quizInput": {
             "ar": "أكتب",
             "en": "Input/Write"
+        }
+    }, 
+    "errors": {
+        "emailInvalid": {
+            "ar": "إيميلك خطأ يالغالي",
+            "en": "Invalid Email"
+        },
+        "emailEmpty": {
+            "ar": "ناسي الإيميل ياعسل",
+            "en": "Empty Email"
+        },
+        "alreadyRegistered": {
+            "ar": "مسجل من قبل",
+            "en": "Already Registered"
+        },
+        "invalidCredentials": {
+            "ar": "تأكد من معلوماتك", 
+            "en": "Invalid Credentials"
+        }, 
+        "missingInput": {
+            "ar": "بيانات مفقودة",
+            "en": "'Missing Input'"
+        }, 
+        "noProcess": {
+            "ar": "لم نستطع المعالجة. جرب تعيد التسجبل الله لا يهينك",
+            "en": "'Could not process. Check input ot try re-logging!'"
+        }
+    }, 
+    "success": {
+        "accountCreated": {
+            "ar": "تم",
+            "en": "Done"
+        }, 
+        "requestCreated": {
+            "ar": "تم الله يقويك",
+            "en": "success"
         }
     }
 }

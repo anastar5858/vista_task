@@ -17,8 +17,8 @@ const Register = (props) => {
     <form className='flex-column surface'>
         <input id='register-input' ref={emailRef} className='w-30 middle front media-wide' type='email' placeholder={Object.keys(languageData).length > 0 ? languageData.register.emailPlaceholder[language] : ''} />
         <input id='password-input' ref={passwordRef} onInput={(e) => setPassword(e.currentTarget.value)} className='w-30 middle front media-wide' type='password' placeholder={Object.keys(languageData).length > 0 ? languageData.register.passwordPlaceholder[language] : ''} />
-        <ul className='middle front bullet'>
-            <strong>Password Compliance Rules</strong>
+        <ul className='middle front bullet' dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
+            <strong>{Object.keys(languageData).length > 0 ? languageData.register.compliance[language] : ''}</strong>
             <li>
                 <mark id='pass-val-long'><strong>{Object.keys(languageData).length > 0 ? languageData.register.passwordRule1[language] : ''}</strong></mark>
                 <input type='checkbox' disabled checked={passwordValidator.long ? true : false}></input>
@@ -47,15 +47,15 @@ const Register = (props) => {
                 hamburgerMenu2.disabled = false; 
                 hamburgerMenu.checked = false
             } 
-        }} onClick={(e) => registerRequestForwarder(emailRef, passwordRef, e, passwordValidator)}
+        }} onClick={(e) => registerRequestForwarder(emailRef, passwordRef, e, passwordValidator, language, languageData)}
         onMouseEnter={(e) => e.currentTarget.style.animation = 'none'} 
         className='w-10 middle front primary-container' 
         style={{animation: `${props.animationIndicator === false ? 'btnTransition 3s 1 forwards' : 'default'}`}}>{Object.keys(languageData).length > 0 ? languageData.register.registerBtn[language] : ''}</button>
     </form>
     )
 }
-const registerRequestForwarder = (emailRef, passwordRef, event, passwordValidator) => {
+const registerRequestForwarder = (emailRef, passwordRef, event, passwordValidator, language, languageData) => {
     event.preventDefault();
     // forward to client-side controller
-    validateEmail(emailRef, passwordRef, passwordValidator);
+    validateEmail(emailRef, passwordRef, passwordValidator, language, languageData);
 }

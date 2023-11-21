@@ -256,11 +256,24 @@ const Footer = () => {
             }, 1000 * 1.5)
             }
         }
+        console.log()
     return (
         <>
-            <button id='demo-btn' onClick={ () => setDemosVisualiser((prev) => !prev)} style={{bottom: '0', position: 'fixed'}}> {!demosVisualiser ? Object.keys(languageData).length > 0 ? languageData.footer.helpBtbUnhide[language] : '' : Object.keys(languageData).length > 0 ? languageData.footer.helpBtbHide[language] : '' }</button>
+            <button id='demo-btn' onClick={ () => setDemosVisualiser((prev) => !prev)} style={{bottom: '0', position: 'fixed', left: `${language === 'en' ? 0 : ''}`, right: `${language === 'ar' ? 0 : ''}`,}}> {!demosVisualiser ? Object.keys(languageData).length > 0 ? languageData.footer.helpBtbUnhide[language] : '' : Object.keys(languageData).length > 0 ? languageData.footer.helpBtbHide[language] : '' }</button>
             {demosVisualiser && (
-                        <div id='demosListContainer' style={{ backgroundColor:'lightgray', bottom: '5%', zIndex: 1, display: 'flex', flexDirection: 'column', maxHeight: '50%', position: 'fixed', gap: '1rem' }}>
+                // dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}
+                        <div id='demosListContainer' style={{
+                            backgroundColor:'lightgray',
+                            bottom: '5%',
+                            zIndex: 1,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            maxHeight: '50%',
+                            position: 'fixed',
+                            gap: '1rem',
+                            left: `${language === 'en' ? 0 : ''}`,
+                            right: `${language === 'ar' ? 0 : ''}`
+                          }} >
                             {/* ul holding a  list of all published demos of the application */}
                             <ul style={{fontWeight:'bold'}}>
                                 <strong>{Object.keys(languageData).length > 0 ? languageData.footer.listText[language] : '' }</strong>

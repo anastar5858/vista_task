@@ -18,7 +18,7 @@ const CreateForm = (props) => {
                 <textarea id='request-desc' ref={descriptionRef} className='middle' placeholder={Object.keys(languageData).length > 0 ? languageData.create.descPlaceholder[language] : ''} rows='10' cols={windowWidth < 870 ? '40' : '100'}></textarea>
             </section>
             <section className='sec-flex w-center'>
-                <label id='pending-demo' onClick={() => setStatus('pending')} className="radio-container" htmlFor='pending'>
+                <label id='pending-demo' onClick={() => setStatus('pending')} className="radio-container" htmlFor='pending' >
                     <strong>{Object.keys(languageData).length > 0 ? languageData.create.pending[language] : ''}</strong>
                     <input id='pending' type='radio' name='status'></input>
                     <span className="radio-dot"></span>
@@ -43,7 +43,7 @@ const CreateForm = (props) => {
             <section id='request-btn' >
                 <button id='request-btn-demo' onClick={(e) => {
                     e.preventDefault();
-                    validateRequestInput(titleRef, descriptionRef, status, e.currentTarget, checked);
+                    validateRequestInput(titleRef, descriptionRef, status, e.currentTarget, checked, language, languageData);
                 }} className='middle'>{Object.keys(languageData).length > 0 ? languageData.create.addBtn[language] : ''}</button>
             </section>
         </form>

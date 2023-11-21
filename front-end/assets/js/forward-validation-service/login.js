@@ -1,4 +1,4 @@
-const loginForwarder = async (emailInput, passwordInput, markErrElem) => {
+const loginForwarder = async (emailInput, passwordInput, markErrElem, language, languageData) => {
     const payload = {
         email: emailInput.current.value,
         password: passwordInput.current.value,
@@ -13,7 +13,7 @@ const loginForwarder = async (emailInput, passwordInput, markErrElem) => {
     });
     if (loginRequest.ok) {
         const loginResponse = await loginRequest.json();
-        if (loginResponse === 'invalid') markErrElem.current.firstChild.textContent = 'Invalid Credentials';
+        if (loginResponse === 'invalid') markErrElem.current.firstChild.textContent = languageData.errors.invalidCredentials[language];
         else {
             sharedRegister(true);
         }

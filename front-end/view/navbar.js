@@ -39,7 +39,7 @@ const Navbar = (props) => {
       }  
     } , [language])
     return (
-      <div className='flex-row primary'>
+      <div className='flex-row primary' dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
         <picture>
          <img width='50px' height='20px' src={props.loggedIn ? '../images/RMSLogo.svg' : 'assets/images/RMSLogo.svg'}/>
          <figcaption>

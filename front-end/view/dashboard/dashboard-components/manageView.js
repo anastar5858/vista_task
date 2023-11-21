@@ -133,7 +133,7 @@ const ManageView = (props) => {
     <>
     <div className='flex-row plain-surface' style={{margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>
     {/* animation mode switchers */}
-    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem', marginBottom: '1rem'}}>
+    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem', marginBottom: '1rem'}} dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
         <strong>{Object.keys(languageData).length > 0 ? languageData.manage.animOptions[language] : ''}</strong>
         <label id='default-demo' className="radio-container label" htmlFor='default'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.noComplexAnim[language] : ''}</strong>
@@ -152,7 +152,7 @@ const ManageView = (props) => {
         </label>
     </section>
     {/* navigation system */}
-    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
+    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}} dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
         <strong>{Object.keys(languageData).length > 0 ? languageData.manage.navigation[language] : ''}</strong>
         <label id='prev-demo' className="radio-container label" htmlFor='prev'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.prev[language] : ''}</strong>
@@ -173,7 +173,7 @@ const ManageView = (props) => {
         </label>  
     </section>
     {/* requests filter */}
-    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem', marginBottom: '1rem'}}>
+    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem', marginBottom: '1rem'}} dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
         <strong>{Object.keys(languageData).length > 0 ? languageData.manage.filter[language] : ''}</strong>
         <label id='all-demo' className="radio-container label" htmlFor='all'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.all[language] : ''}</strong>
@@ -250,7 +250,7 @@ const ManageView = (props) => {
         </details>
     </section>
     {/* background photo mode */}
-    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}}>
+    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}} >
         <label id='photo-mode-demo' className="label" htmlFor='photo-mode'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.photoMode[language] : ''}</strong>
             <input  onClick={(e) => e.currentTarget.checked ? setDisplayPhoto(true) : setDisplayPhoto(false)}  id='photo-mode' className='middle' type='checkbox' name='photo-mode'></input>

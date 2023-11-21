@@ -8,7 +8,7 @@ const Home = (props) => {
     const [language, setLanguage] = React.useState(lan ? lan : 'en');
     const links = document.querySelectorAll('a');
     links.forEach((link) => link.addEventListener('click', (e) => {
-        e.currentTarget.textContent === 'Register' ? setRegister(true) : setRegister(false)
+        e.currentTarget.textContent === 'Register' ||  e.currentTarget.textContent === 'سوي حساب جديد' ? setRegister(true) : setRegister(false)
     }));
     React.useEffect(() => {
         sharedLan = setLanguage;

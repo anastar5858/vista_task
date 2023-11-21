@@ -1,12 +1,13 @@
 // email section
-const validateEmail = (emailInput, passwordInput, passwordValidator) => {
+const validateEmail = (emailInput, passwordInput, passwordValidator, language, languageData) => {
     const email = emailInput.current.value.trim().toLowerCase();
     // no empty emails
-    if (email === '') return uiEmailErrorHandler('Empty Email', emailInput);
+    // console.log(language, languageData, languageData.errors.emailEmpty[language])
+    if (email === '') return uiEmailErrorHandler(languageData.errors.emailEmpty[language], emailInput, 'Empty Email');
     // against regular expression
     const re =
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!email.match(re)) return uiEmailErrorHandler('Invalid Email', emailInput);
+    if (!email.match(re)) return uiEmailErrorHandler(languageData.errors.emailInvalid[language], emailInput, 'Invalid Email');
     // make sure password is complying to the rules of the system before sending a request to the backend app
     // if any do not add the animation
     if (!passwordValidator.long) passwordAnimationHandler('pass-val-long');
@@ -15,7 +16,7 @@ const validateEmail = (emailInput, passwordInput, passwordValidator) => {
     if (!passwordValidator.long || !passwordValidator.startEndNo || !passwordValidator.chacractersLimit) return
     // forward to server controller (api router)
     const password = passwordInput.current.value;
-    sendToServerController(emailInput, password);
+    sendToServerController(emailInput, password, language, languageData);
 }
 const passwordAnimationHandler = (id) => {
     const markElement = document.getElementById(id);
@@ -24,13 +25,13 @@ const passwordAnimationHandler = (id) => {
         markElement.style.animation = 'none';
     }, { once: true });
 }
-const uiEmailErrorHandler = (message, emailInput) => {
+const uiEmailErrorHandler = (lanMessage, emailInput, message) => {
     if (message === 'Empty Email') {
-        emailInput.current.placeholder = message;
+        emailInput.current.placeholder = lanMessage;
     } else if (message === 'Invalid Email') {
         const currentText = emailInput.current.value;
         emailInput.current.disabled = true;
-        emailInput.current.value = message;
+        emailInput.current.value = lanMessage;
         emailInput.current.style.color = 'red';
         setTimeout(() => {
             emailInput.current.disabled = false;
@@ -86,7 +87,7 @@ const btnErrorHandler = (message, type) => {
     }, 2000);
 }
 // controller communication (mvc)
-const sendToServerController = async (emailInput, password) => {
+const sendToServerController = async (emailInput, password, language, languageData) => {
     const payload = {email: emailInput.current.value, password};
     const controllerRequest = await fetch('http://localhost:8080/api/register', {
         method: 'POST',
@@ -99,12 +100,12 @@ const sendToServerController = async (emailInput, password) => {
     // check server for validation errors as well
     if (controllerRequest.ok) {
         const controllerResponse = await controllerRequest.json();
-        if (controllerResponse === 'Invalid Email') return uiEmailErrorHandler('Invalid Email', emailInput);
+        if (controllerResponse === 'Invalid Email') return uiEmailErrorHandler(languageData.errors.emailInvalid[language], emailInput, 'Invalid Email');
         if (controllerResponse.state === false) return passwordAnimationHandler(controllerResponse.id);
         // handle error and success case
-        if (controllerResponse === 'Invalid') return btnErrorHandler('Already registered?!', 'error');
+        if (controllerResponse === 'Invalid') return btnErrorHandler(languageData.errors.alreadyRegistered[language], 'error');
         // success here
-        btnErrorHandler('Registration complete. Welcome!', 'success');
+        btnErrorHandler(languageData.success.accountCreated[language], 'success');
         sharedRegister(true);
     } else {
         // todo: handle server error

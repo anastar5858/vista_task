@@ -30,7 +30,7 @@ const Login = (props) => {
             } 
         }} onClick={(e) => {
             e.preventDefault();
-            loginForwarder(emailRef, passwordRef, statusMark);
+            loginForwarder(emailRef, passwordRef, statusMark, language, languageData);
         }} onMouseEnter={(e) => e.currentTarget.style.animation = 'none'} 
         className='w-10 middle front primary-container'  
         style={{animation: `${props.animationIndicator === true ? 'btnTransition 3s 1 forwards' : 'default'}`}}>{Object.keys(languageData).length > 0 ? languageData.login.loginBtn[language] : ''}</button>
