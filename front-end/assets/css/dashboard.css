@@ -16,7 +16,7 @@
     flex-wrap: wrap;
     gap: 1rem;
 }
-#pen-check, #prog-check, #comp-check, #request-crawler, #photo-mode {
+#pen-check, #prog-check, #comp-check, #request-crawler, #photo-mode, #ar, #en {
     display: block;
 }
 textarea {

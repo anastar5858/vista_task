@@ -39,6 +39,17 @@ body {
     transform: scaleX(-1);
   }
 /* general rules */
+details > summary {
+  padding: 0.2px;
+  width: fit-content;
+  background-color: #eeeeee;
+  border: none;
+  box-shadow: 0.2rem 0.2rem 0.2rem #bbbbbb;
+  cursor: pointer;
+}
+details > label {
+  margin-top: 1rem;
+}
 a:hover, button:hover {
     transform: scale(1.1);
     cursor: pointer;
@@ -176,7 +187,7 @@ input[type="checkbox"] {
   /* animate the scroll in */
   #menu-toggle2:checked ~ .the-menu {
     position: fixed;
-    top: 0;
+    top: 6vh;
     right: 0;
     width: calc(100vw - 90vw);
     height: 100vh;
