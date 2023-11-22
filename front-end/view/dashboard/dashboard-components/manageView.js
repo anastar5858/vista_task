@@ -272,10 +272,10 @@ const ManageView = (props) => {
                     <span className="radio-dot"></span>
                     </label>
                     </em>
-                    <small id='creator-sign' className='p-1'>{Object.keys(languageData).length > 0 ? languageData.manage.createdBy[language] : ''}<br />{currentRequest.creator}</small>
-                    <small id='date-sign' className='p-1'>{Object.keys(languageData).length > 0 ? languageData.manage.createdOn[language] : ''}<br />{new Date(currentRequest.date).toLocaleDateString()}</small>
+                    <small id='creator-sign' dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''} className='p-1'>{Object.keys(languageData).length > 0 ? languageData.manage.createdBy[language] : ''}<br />{currentRequest.creator}</small>
+                    <small id='date-sign' dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''} className='p-1'>{Object.keys(languageData).length > 0 ? languageData.manage.createdOn[language] : ''}<br />{new Date(currentRequest.date).toLocaleDateString()}</small>
                     {/* live edit a request */}
-                    <strong id='live-edit-status' className='flex-column'>
+                    <strong id='live-edit-status' className='flex-column' dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
                         <p>{Object.keys(languageData).length > 0 ? languageData.manage.editStatus[language] : ''}</p>
                         <label className="radio-container" htmlFor='pending-manage'>
                             <strong>{Object.keys(languageData).length > 0 ? languageData.create.pending[language] : ''}</strong>

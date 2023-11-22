@@ -135,6 +135,9 @@ button:hover {
 input[type="checkbox"] {
     display: none;
   }
+#checkBoxBlock {
+  display: block;
+}
   .menu-icon {
     z-index: 2;
   }
