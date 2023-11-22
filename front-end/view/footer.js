@@ -284,7 +284,7 @@ const Footer = () => {
                                         <li key={`${name}`}>
                                             <div  id={`${name}`} style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
                                                 <span>{name}</span>
-                                                <button onClick={(e) => {
+                                                <button id={`${name}-demo`} onClick={(e) => {
                                                     let demoObj;
                                                     for (const demo of listOfDemos) {
                                                         if (demo.title === e.currentTarget.parentElement.id) {
@@ -302,14 +302,14 @@ const Footer = () => {
                                             </div>
                                             <span ref={instructionMsg} style={{display: 'none'}}></span>
                                             {/* quiz drop down list & message indicating correct or incorrect answers*/}
-                                            <div className="custom-select" style={{display: 'none'}}>
-                                                <select ref={quizDropDown} style={{display: 'none'}}>
-                                                <option value='select an option'>{Object.keys(languageData).length > 0 ? languageData.footer.quizQuestion[language] : '' }</option>
-                                                <option value='click'>{Object.keys(languageData).length > 0 ? languageData.footer.quizClick[language] : ''}</option>
-                                                <option value='input'>{Object.keys(languageData).length > 0 ? languageData.footer.quizInput[language] : ''}</option>
+                                            <div id='custom-select-quiz-container' className="custom-select" style={{display: 'none'}}>
+                                                <select id='custom-select-quiz-menu' ref={quizDropDown} style={{display: 'none'}}>
+                                                <option id='quiz-answer-select' value='select an option'>{Object.keys(languageData).length > 0 ? languageData.footer.quizQuestion[language] : '' }</option>
+                                                <option id='quiz-answer-click' value='click'>{Object.keys(languageData).length > 0 ? languageData.footer.quizClick[language] : ''}</option>
+                                                <option id='quiz-answer-input' value='input'>{Object.keys(languageData).length > 0 ? languageData.footer.quizInput[language] : ''}</option>
                                                 </select>
                                             </div>
-                                            <span ref={quizMessage} style={{display: 'none'}}></span>
+                                            <span id='quiz-answer-message' ref={quizMessage} style={{display: 'none'}}></span>
                                         </li>
                                     )
                                 })}

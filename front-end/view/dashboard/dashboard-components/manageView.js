@@ -133,26 +133,26 @@ const ManageView = (props) => {
     <>
     <div className='flex-row plain-surface' style={{margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>
     {/* animation mode switchers */}
-    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem', marginBottom: '1rem'}} dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
+    <section id='animation-section-container' className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem', marginBottom: '1rem'}} dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
         <strong>{Object.keys(languageData).length > 0 ? languageData.manage.animOptions[language] : ''}</strong>
         <label id='default-demo' className="radio-container label" htmlFor='default'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.noComplexAnim[language] : ''}</strong>
             <input  onClick={() => setCardMode('default')}  id='default' type='radio' value='default' name='animation'></input>
             <span className="radio-dot"></span>
         </label>
-        <label className="radio-container label" htmlFor='fly'>
+        <label id='fly-demo' className="radio-container label" htmlFor='fly'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.flyAnim[language] : ''}</strong>
             <input onClick={() => setCardMode('fly')}  id='fly' type='radio' value='fly' name='animation'></input>
             <span className="radio-dot"></span>                 
         </label>
-        <label className="radio-container label" htmlFor='rocket'>
+        <label id='rocket-demo' className="radio-container label" htmlFor='rocket'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.rocketAnim[language] : ''}</strong>
             <input onClick={() => setCardMode('rocket')}  id='rocket' type='radio' value='rocket' name='animation'></input>
             <span className="radio-dot"></span> 
         </label>
     </section>
     {/* navigation system */}
-    <section className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}} dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
+    <section id='navigation-section-container' className='flex-column w-center plain-surface p-1' style={{marginTop: '1rem'}} dir={Object.keys(languageData).length > 0 ? languageData.direction[language] : ''}>
         <strong>{Object.keys(languageData).length > 0 ? languageData.manage.navigation[language] : ''}</strong>
         <label id='prev-demo' className="radio-container label" htmlFor='prev'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.prev[language] : ''}</strong>
@@ -162,7 +162,7 @@ const ManageView = (props) => {
             }}  id='prev' type='radio' value='prev' name='navigation'></input>
             <span className="radio-dot"></span>
         </label>
-        <label className="radio-container label" htmlFor='next'>
+        <label id='next-demo' className="radio-container label" htmlFor='next'>
             <strong>{Object.keys(languageData).length > 0 ? languageData.manage.next[language] : ''}</strong>
             <input onClick={(e) => {
                 resetPhotoFeature();
@@ -187,7 +187,7 @@ const ManageView = (props) => {
         </label> 
         <details id='status-filter-demo' className='flex-column'>
             <summary>{Object.keys(languageData).length > 0 ? languageData.manage.basedOn[language] : ''}</summary>
-            <label htmlFor='pen-check'>{Object.keys(languageData).length > 0 ? languageData.create.pending[language] : ''}</label>
+            <label id='status-filter-demo-pending' htmlFor='pen-check'>{Object.keys(languageData).length > 0 ? languageData.create.pending[language] : ''}</label>
             <input onClick={(e) => {
                 const checkedIndicator = e.currentTarget.checked;
                 const status = e.currentTarget.value;
@@ -287,7 +287,7 @@ const ManageView = (props) => {
                             <input onClick={() => setStatus('in-progress')}  id='progress-manage' type='radio' value='In-progress' name='status'></input>
                             <span className="radio-dot"></span>                 
                         </label>
-                        <label className="radio-container" htmlFor='completed-manage'>
+                        <label id='live-edit-completed' className="radio-container" htmlFor='completed-manage'>
                             <strong>{Object.keys(languageData).length > 0 ? languageData.create.completed[language] : ''}</strong>
                             <input  onClick={() => setStatus('completed')} id='completed-manage' type='radio' value='Completed' name='status'></input>
                             <span className="radio-dot"></span> 

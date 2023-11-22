@@ -12,7 +12,7 @@ const Login = (props) => {
         <form className='flex-column surface'>
         <input id='email-input' ref={emailRef} className='w-30 middle front media-wide' type='email' placeholder={Object.keys(languageData).length > 0 ? languageData.login.emailPlaceholder[language] : ''} />
         <input id='password-login' ref={passwordRef} className='w-30 middle front media-wide' type='password' placeholder={Object.keys(languageData).length > 0 ? languageData.login.passwordPlaceholder[language] : ''} />
-        <mark ref={statusMark} style={{textAlign: 'center'}} className='front w-center'><strong>IDLE</strong></mark>
+        <mark id='login-status' ref={statusMark} style={{textAlign: 'center'}} className='front w-center'><strong>IDLE</strong></mark>
         <button id='login-btn' onAnimationStart={() => {
             const hamburgerMenu = document.getElementById('menu-toggle2');
             const hamburgerMenu2 = document.getElementById('menu-toggle');

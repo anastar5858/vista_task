@@ -57,15 +57,15 @@ const Navbar = (props) => {
           {verify && (
               <> 
               <li>
-                <button onClick={() => {
+                <button id='log-out-btn' onClick={() => {
                   logOut(setVerify, language);
                 }} className='primary-container'>{Object.keys(languageData).length > 0 ? languageData.navbar.logout[language] : ''}</button>
               </li>
               <li>
-                <a onClick={() => sharedRouter('create')}>{Object.keys(languageData).length > 0 ? languageData.navbar.create[language] : ''}</a>
+                <a id='create-new-request-link' onClick={() => sharedRouter('create')}>{Object.keys(languageData).length > 0 ? languageData.navbar.create[language] : ''}</a>
               </li>
               <li>
-                <a onClick={() => sharedRouter('manage')}>{Object.keys(languageData).length > 0 ? languageData.navbar.manage[language] : ''}</a>
+                <a id='manage-requests-link' onClick={() => sharedRouter('manage')}>{Object.keys(languageData).length > 0 ? languageData.navbar.manage[language] : ''}</a>
               </li>
               </>
           )}
@@ -75,7 +75,7 @@ const Navbar = (props) => {
               <a>{Object.keys(languageData).length > 0 ? languageData.navbar.register[language] : ''}</a>
             </li>
             <li>
-              <a>{Object.keys(languageData).length > 0 ? languageData.navbar.login[language] : ''}</a>
+              <a id='login-link'>{Object.keys(languageData).length > 0 ? languageData.navbar.login[language] : ''}</a>
             </li>
             </>
           )}
@@ -95,15 +95,15 @@ const Navbar = (props) => {
         {verify && (
           <> 
           <li>
-            <button onClick={() => {
+            <button id='log-out-btn' onClick={() => {
                 logOut(setVerify, language);
             }} className='primary-container'>{Object.keys(languageData).length > 0 ? languageData.navbar.logout[language] : ''}</button>
           </li>
           <li>
-            <a onClick={() => sharedRouter('create')}>{Object.keys(languageData).length > 0 ? languageData.navbar.create[language] : ''}</a>
+            <a id='create-new-request-link' onClick={() => sharedRouter('create')}>{Object.keys(languageData).length > 0 ? languageData.navbar.create[language] : ''}</a>
           </li>
           <li>
-            <a onClick={() => sharedRouter('manage')}>{Object.keys(languageData).length > 0 ? languageData.navbar.manage[language] : ''}</a>
+            <a id='manage-requests-link' onClick={() => sharedRouter('manage')}>{Object.keys(languageData).length > 0 ? languageData.navbar.manage[language] : ''}</a>
           </li>
           </>
         )}
@@ -113,7 +113,7 @@ const Navbar = (props) => {
             <a>{Object.keys(languageData).length > 0 ? languageData.navbar.register[language] : ''}</a>
           </li>
           <li>
-            <a>{Object.keys(languageData).length > 0 ? languageData.navbar.login[language] : ''}</a>
+            <a id='login-link'>{Object.keys(languageData).length > 0 ? languageData.navbar.login[language] : ''}</a>
           </li>
           </>
         )}
