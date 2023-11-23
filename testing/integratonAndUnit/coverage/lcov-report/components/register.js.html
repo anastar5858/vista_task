@@ -1,0 +1,628 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for components/register.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> register.js</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">30.84% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>33/107</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">37.68% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>26/69</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">29.16% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>7/24</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">33.67% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>33/98</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input oninput="onInput()" type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line low'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const React = require('react');
+const languageObj = require('../raw/language.json');
+const fetchLanguageData = require('../utilities/language/fetchData')
+const Register = (props) =&gt; {
+    const language = props.language
+    const [password, setPassword] = React.useState('');
+    const [passwordValidator, setPasswordValidator] = React.useState({long: false, chacractersLimit: false, startEndNo: false});
+    const emailRef = React.useRef(null);
+    const passwordRef = React.useRef(null);
+    const [languageData, setLanguageData] = React.useState({});
+    React.useEffect(() =&gt; {
+        setLanguageData(languageObj)
+    }, []);
+    // live validation of password here
+    React.useEffect(() =&gt; {
+        validatePassword(password, setPasswordValidator);
+    }, [password]);
+    return  (
+    &lt;form className='flex-column surface'&gt;
+        &lt;input id='register-input' ref={emailRef} className='w-30 middle front media-wide' type='email' placeholder={Object.keys(languageData).length &gt; 0 ? languageData.register.emailPlaceholder[language] : ''} /&gt;
+        &lt;input id='password-input' ref={passwordRef} onInput={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >setPassword(e.currentTarget.value)}</span> className='w-30 middle front media-wide' type='password' placeholder={Object.keys(languageData).length &gt; 0 ? languageData.register.passwordPlaceholder[language] : ''} /&gt;
+        &lt;ul className='middle front bullet' dir={Object.keys(languageData).length &gt; 0 ? languageData.direction[language] : ''}&gt;
+            &lt;strong&gt;{Object.keys(languageData).length &gt; 0 ? languageData.register.compliance[language] : ''}&lt;/strong&gt;
+            &lt;li&gt;
+                &lt;mark id='pass-val-long'&gt;&lt;strong&gt;{Object.keys(languageData).length &gt; 0 ? languageData.register.passwordRule1[language] : ''}&lt;/strong&gt;&lt;/mark&gt;
+                &lt;input id='checkBoxBlock' type='checkbox' disabled checked={passwordValidator.long ? <span class="branch-0 cbranch-no" title="branch not covered" >true </span>: false} style={{margin: '0.2rem auto 0 auto',}}&gt;&lt;/input&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;mark id='pass-val-limit'&gt;&lt;strong&gt;{Object.keys(languageData).length &gt; 0 ? languageData.register.passwordRule2[language] : ''}&lt;/strong&gt;&lt;/mark&gt;
+                &lt;input id='checkBoxBlock' type='checkbox' disabled checked={passwordValidator.chacractersLimit ? <span class="branch-0 cbranch-no" title="branch not covered" >true </span>: false} style={{margin: '0.2rem auto 0 auto',}}&gt;&lt;/input&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;mark id='pass-val-sten'&gt; &lt;strong&gt;{Object.keys(languageData).length &gt; 0 ? languageData.register.passwordRule3[language] : ''}&lt;/strong&gt;&lt;/mark&gt;
+                &lt;input id='checkBoxBlock' type='checkbox' disabled checked={passwordValidator.startEndNo ? true : false} style={{margin: '0.2rem auto 0 auto',}}&gt;&lt;/input&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;button id='regsiter-btn'onAnimationStart={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+            const hamburgerMenu = <span class="cstat-no" title="statement not covered" >document.getElementById('menu-toggle2');</span>
+            const hamburgerMenu2 = <span class="cstat-no" title="statement not covered" >document.getElementById('menu-toggle');</span>
+<span class="cstat-no" title="statement not covered" >            if (hamburgerMenu &amp;&amp; hamburgerMenu2) {</span>
+<span class="cstat-no" title="statement not covered" >                hamburgerMenu.disabled = true;</span>
+<span class="cstat-no" title="statement not covered" >                hamburgerMenu2.disabled = true; </span>
+            }
+        }} onAnimationEnd={<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+            const hamburgerMenu = <span class="cstat-no" title="statement not covered" >document.getElementById('menu-toggle2');</span>
+            const hamburgerMenu2 = <span class="cstat-no" title="statement not covered" >document.getElementById('menu-toggle');</span>
+<span class="cstat-no" title="statement not covered" >            if (hamburgerMenu &amp;&amp; hamburgerMenu2) {</span>
+<span class="cstat-no" title="statement not covered" >                hamburgerMenu.disabled = false;</span>
+<span class="cstat-no" title="statement not covered" >                hamburgerMenu2.disabled = false; </span>
+<span class="cstat-no" title="statement not covered" >                hamburgerMenu.checked = false</span>
+            } 
+        }} onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >registerRequestForwarder(emailRef, passwordRef, e, passwordValidator, language, languageData)}</span>
+        onMouseEnter={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >e.currentTarget.style.animation = 'none'} </span>
+        className='w-10 middle front primary-container' 
+        style={{animation: `${props.animationIndicator === false ? <span class="branch-0 cbranch-no" title="branch not covered" >'btnTransition 3s 1 forwards' </span>: 'default'}`}}&gt;{Object.keys(languageData).length &gt; 0 ? languageData.register.registerBtn[language] : ''}&lt;/button&gt;
+    &lt;/form&gt;
+    )
+}
+const registerRequestForwarder = <span class="fstat-no" title="function not covered" >(e</span>mailRef, passwordRef, event, passwordValidator, language, languageData) =&gt; {
+<span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
+    // forward to client-side controller
+<span class="cstat-no" title="statement not covered" >    validateEmail(emailRef, passwordRef, passwordValidator, language, languageData);</span>
+}
+&nbsp;
+&nbsp;
+// email section
+const validateEmail = <span class="fstat-no" title="function not covered" >(e</span>mailInput, passwordInput, passwordValidator, language, languageData) =&gt; {
+    const email = <span class="cstat-no" title="statement not covered" >emailInput.current.value.trim().toLowerCase();</span>
+    // no empty emails
+    // console.log(language, languageData, languageData.errors.emailEmpty[language])
+<span class="cstat-no" title="statement not covered" >    if (email === '') <span class="cstat-no" title="statement not covered" >return uiEmailErrorHandler(languageData.errors.emailEmpty[language], emailInput, 'Empty Email');</span></span>
+    // against regular expression
+    const re =
+<span class="cstat-no" title="statement not covered" >    /^(([^&lt;&gt;()[\]\.,;:\s@\"]+(\.[^&lt;&gt;()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^&lt;&gt;()[\]\.,;:\s@\"]+\.)+[^&lt;&gt;()[\]\.,;:\s@\"]{2,})$/i;</span>
+<span class="cstat-no" title="statement not covered" >    if (!email.match(re)) <span class="cstat-no" title="statement not covered" >return uiEmailErrorHandler(languageData.errors.emailInvalid[language], emailInput, 'Invalid Email');</span></span>
+    // make sure password is complying to the rules of the system before sending a request to the backend app
+    // if any do not add the animation
+<span class="cstat-no" title="statement not covered" >    if (!passwordValidator.long) <span class="cstat-no" title="statement not covered" >passwordAnimationHandler('pass-val-long');</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!passwordValidator.startEndNo) <span class="cstat-no" title="statement not covered" >passwordAnimationHandler('pass-val-sten');</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!passwordValidator.chacractersLimit) <span class="cstat-no" title="statement not covered" >passwordAnimationHandler('pass-val-limit');</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!passwordValidator.long || !passwordValidator.startEndNo || !passwordValidator.chacractersLimit) <span class="cstat-no" title="statement not covered" >return</span></span>
+    // forward to server controller (api router)
+    const password = <span class="cstat-no" title="statement not covered" >passwordInput.current.value;</span>
+<span class="cstat-no" title="statement not covered" >    sendToServerController(emailInput, password, language, languageData);</span>
+}
+const passwordAnimationHandler = <span class="fstat-no" title="function not covered" >(i</span>d) =&gt; {
+    const markElement = <span class="cstat-no" title="statement not covered" >document.getElementById(id);</span>
+<span class="cstat-no" title="statement not covered" >    markElement.style.animation = `validationY 2s 1`;</span>
+<span class="cstat-no" title="statement not covered" >    markElement.addEventListener('animationend', <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        markElement.style.animation = 'none';</span>
+    }, { once: true });
+}
+const uiEmailErrorHandler = <span class="fstat-no" title="function not covered" >(l</span>anMessage, emailInput, message) =&gt; {
+<span class="cstat-no" title="statement not covered" >    if (message === 'Empty Email') {</span>
+<span class="cstat-no" title="statement not covered" >        emailInput.current.placeholder = lanMessage;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (message === 'Invalid Email') {</span>
+        const currentText = <span class="cstat-no" title="statement not covered" >emailInput.current.value;</span>
+<span class="cstat-no" title="statement not covered" >        emailInput.current.disabled = true;</span>
+<span class="cstat-no" title="statement not covered" >        emailInput.current.value = lanMessage;</span>
+<span class="cstat-no" title="statement not covered" >        emailInput.current.style.color = 'red';</span>
+<span class="cstat-no" title="statement not covered" >        setTimeout(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            emailInput.current.disabled = false;</span>
+<span class="cstat-no" title="statement not covered" >            emailInput.current.value = currentText;</span>
+<span class="cstat-no" title="statement not covered" >            emailInput.current.style.color = 'black';</span>
+        }, 1000);
+    }
+}
+// password section
+const validatePassword = (passwordInput, setPasswordValidator) =&gt; {
+    // longer than 8 characters
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (passwordInput.length &gt; 8) {
+<span class="cstat-no" title="statement not covered" >        setPasswordValidator(<span class="fstat-no" title="function not covered" >(p</span>rev) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            return {...prev, long: true};</span>
+        })
+    } else {
+        setPasswordValidator((prev) =&gt; {
+            return {...prev, long: false};
+        }) 
+    }
+    // does not start or end with a number
+    if (isNaN(passwordInput[0]) &amp;&amp; isNaN(passwordInput[passwordInput.length - 1])) {
+        setPasswordValidator((prev) =&gt; {
+            return {...prev, startEndNo: true};
+        }) 
+    } else <span class="missing-if-branch" title="else path not taken" >E</span>{
+<span class="cstat-no" title="statement not covered" >        setPasswordValidator(<span class="fstat-no" title="function not covered" >(p</span>rev) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            return {...prev, startEndNo: false};</span>
+        }) 
+    }
+    // has at least one symbol, one capita and one number
+    let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (passwordInput.match(re)) {
+<span class="cstat-no" title="statement not covered" >        setPasswordValidator(<span class="fstat-no" title="function not covered" >(p</span>rev) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            return {...prev, chacractersLimit: true};</span>
+        }) 
+    } else {
+        setPasswordValidator((prev) =&gt; {
+            return {...prev, chacractersLimit: false};
+        }) 
+    }
+}
+const btnErrorHandler = <span class="fstat-no" title="function not covered" >(m</span>essage, type) =&gt; {
+    const registerBtn = <span class="cstat-no" title="statement not covered" >document.getElementById('regsiter-btn');</span>
+    const currentText = <span class="cstat-no" title="statement not covered" >registerBtn.textContent;</span>
+<span class="cstat-no" title="statement not covered" >    registerBtn.disabled = true;</span>
+<span class="cstat-no" title="statement not covered" >    registerBtn.textContent = message;</span>
+<span class="cstat-no" title="statement not covered" >    registerBtn.style.color = type === 'error' ? 'red' : 'green';</span>
+<span class="cstat-no" title="statement not covered" >    setTimeout(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        registerBtn.disabled = false;</span>
+<span class="cstat-no" title="statement not covered" >        registerBtn.textContent = currentText;</span>
+<span class="cstat-no" title="statement not covered" >        registerBtn.style.color = 'black';</span>
+    }, 2000);
+}
+// controller communication (mvc)
+const sendToServerController = <span class="fstat-no" title="function not covered" >as</span>ync (emailInput, password, language, languageData) =&gt; {
+    const payload = <span class="cstat-no" title="statement not covered" >{email: emailInput.current.value, password};</span>
+    const controllerRequest = <span class="cstat-no" title="statement not covered" >await fetch('http://localhost:8080/api/register', {</span>
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+    })
+    // check server for validation errors as well
+<span class="cstat-no" title="statement not covered" >    if (controllerRequest.ok) {</span>
+        const controllerResponse = <span class="cstat-no" title="statement not covered" >await controllerRequest.json();</span>
+<span class="cstat-no" title="statement not covered" >        if (controllerResponse === 'Invalid Email') <span class="cstat-no" title="statement not covered" >return uiEmailErrorHandler(languageData.errors.emailInvalid[language], emailInput, 'Invalid Email');</span></span>
+<span class="cstat-no" title="statement not covered" >        if (controllerResponse.state === false) <span class="cstat-no" title="statement not covered" >return passwordAnimationHandler(controllerResponse.id);</span></span>
+        // handle error and success case
+<span class="cstat-no" title="statement not covered" >        if (controllerResponse === 'Invalid') <span class="cstat-no" title="statement not covered" >return btnErrorHandler(languageData.errors.alreadyRegistered[language], 'error');</span></span>
+        // success here
+<span class="cstat-no" title="statement not covered" >        btnErrorHandler(languageData.success.accountCreated[language], 'success');</span>
+<span class="cstat-no" title="statement not covered" >        sharedRegister(true);</span>
+    } else {
+        // todo: handle server error
+    }
+}
+&nbsp;
+module.exports = {
+    Register,
+}</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2023-11-23T12:47:43.194Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    

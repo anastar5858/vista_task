@@ -1,3 +1,6 @@
+const React = require('react');
+const languageObj = require('../raw/language.json');
+
 const getAdjustedPosition = (element) => {
     const rect = element.getBoundingClientRect();
     const scrollX = window.scrollX || window.pageXOffset;
@@ -28,7 +31,7 @@ const Footer = () => {
     const [language, setLanguage] = React.useState(lan ? lan : 'en');
     const [languageData, setLanguageData] = React.useState({});
     React.useEffect(() => {
-        fetchLanguageData(setLanguageData);
+        setLanguageData(languageObj)
         sharedLanFooter = setLanguage;
         fetchAllDemos(setListOfDemo);
     }, [])

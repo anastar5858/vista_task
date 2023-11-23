@@ -1,3 +1,6 @@
+const React = ('react');
+const languageObj = require('../raw/language.json');
+
 const CreateForm = (props) => {
     const language = props.language
     console.log(language);
@@ -8,7 +11,7 @@ const CreateForm = (props) => {
     const [checked, setChecked] = React.useState(false);
     const [languageData, setLanguageData] = React.useState({});
     React.useEffect(() => {
-        fetchLanguageData(setLanguageData);
+        setLanguageData(languageObj)
     }, []);
    return (
     <>

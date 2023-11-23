@@ -1,3 +1,6 @@
+const React = require('react');
+const languageObj = require('../raw/language.json');
+
 const ManageView = (props) => {
     //Object.keys(languageData).length > 0 ? languageData.manage.quizQuestion[language] : ''
     const language = props.language
@@ -127,8 +130,8 @@ const ManageView = (props) => {
         }
     }, [currentRequestHasPhoto])
     React.useEffect(() => {
-        fetchLanguageData(setLanguageData);
-    }, [])
+        setLanguageData(languageObj)
+    }, []);
   return (
     <>
     <div className='flex-row plain-surface' style={{margin: '1rem 0 1rem 0', flexWrap: 'wrap'}}>

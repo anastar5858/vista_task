@@ -1,3 +1,6 @@
+const React = require('react');
+const languageObj = require('../raw/language.json');
+
 const Login = (props) => {
     const language = props.language
     console.log(language)
@@ -6,7 +9,7 @@ const Login = (props) => {
     const statusMark = React.useRef(null);
     const [languageData, setLanguageData] = React.useState({});
     React.useEffect(() => {
-        fetchLanguageData(setLanguageData);
+        setLanguageData(languageObj)
     }, []);
     return (
         <form className='flex-column surface'>
