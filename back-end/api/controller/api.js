@@ -164,7 +164,7 @@ api.delete('/delete-record', bodyParser.json(), async (req, res) => {
 // demo routes
 api.post('/create-demo', bodyParser.json(), async (req,res) => {
     const { title, url, demoElements} = req.body;
-    if (title === '' || url === '') res.json('invalid');
+    if (title === '' || url === '') return res.json('invalid');
     const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
     if (!url.match(urlRegex)) return res.json('invalid url');
     for (const demoElement of demoElements) {
