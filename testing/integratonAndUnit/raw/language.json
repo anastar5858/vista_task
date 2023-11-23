@@ -222,7 +222,7 @@
         }, 
         "noProcess": {
             "ar": "لم نستطع المعالجة. جرب تعيد التسجبل الله لا يهينك",
-            "en": "'Could not process. Check input ot try re-logging!'"
+            "en": "Could not process. Check input ot try re-logging!"
         }
     }, 
     "success": {
