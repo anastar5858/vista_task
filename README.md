@@ -23,6 +23,7 @@ Building such a project in a week's time was rough, especially as some tools use
 
 ## Running Locally?
 - Clone the repo.
+
 **Front-End:**
 Host using your favorite server (Apache) or simply use the Live Server Extension of Visual Studio Code.
 
