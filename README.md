@@ -68,6 +68,7 @@ Go to the directory e2e/integration tests, execute `npm i` & then `npm start`.
 
 ## استضافة التطبيق محليًا؟
 - .انسح المشروع
+
 **الواجهة الأمامية:**
 استعمل خدمة الاستضافة للسيرفر المفضلة لديك مثل أباتشي أو استخدام إضافة Live Server في برنامج VSCode.
 
