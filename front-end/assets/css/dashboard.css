@@ -121,6 +121,8 @@ details > label {
 }
 /* card design starts here */
 #request-title {
+    border-radius: 10%;
+    border: 0.2rem black solid;
     text-align: center;
     max-width: 50%;
     word-break: break-all;

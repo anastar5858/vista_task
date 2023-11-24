@@ -74,20 +74,22 @@ const validatePassword = (passwordInput, setPasswordValidator) => {
         }) 
     }
 }
-const btnErrorHandler = (message, type) => {
+const btnErrorHandler = (message, type,languageData, language) => {
     const registerBtn = document.getElementById('regsiter-btn');
-    const currentText = registerBtn.textContent;
     registerBtn.disabled = true;
     registerBtn.textContent = message;
     registerBtn.style.color = type === 'error' ? 'red' : 'green';
     setTimeout(() => {
         registerBtn.disabled = false;
-        registerBtn.textContent = currentText;
+        registerBtn.textContent = Object.keys(languageData).length > 0 ? languageData.register.registerBtn[language] : '';
         registerBtn.style.color = 'black';
     }, 2000);
 }
 // controller communication (mvc)
 const sendToServerController = async (emailInput, password, language, languageData) => {
+    const registerBtn = document.getElementById('regsiter-btn');
+    registerBtn.textContent = Object.keys(languageData).length > 0 ? languageData.states.loading[language] : ''
+
     const payload = {email: emailInput.current.value, password};
     const controllerRequest = await fetch('http://localhost:8080/api/register', {
         method: 'POST',
@@ -103,11 +105,11 @@ const sendToServerController = async (emailInput, password, language, languageDa
         if (controllerResponse === 'Invalid Email') return uiEmailErrorHandler(languageData.errors.emailInvalid[language], emailInput, 'Invalid Email');
         if (controllerResponse.state === false) return passwordAnimationHandler(controllerResponse.id);
         // handle error and success case
-        if (controllerResponse === 'Invalid') return btnErrorHandler(languageData.errors.alreadyRegistered[language], 'error');
+        if (controllerResponse === 'Invalid') return btnErrorHandler(languageData.errors.alreadyRegistered[language], 'error', languageData, language);
         // success here
         btnErrorHandler(languageData.success.accountCreated[language], 'success');
         sharedRegister(true);
     } else {
-        // todo: handle server error
+        btnErrorHandler(languageData.states.serverError[language], 'error');
     }
 }

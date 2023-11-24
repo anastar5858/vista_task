@@ -4,7 +4,6 @@ const Navbar = (props) => {
     const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     const urlParamater = new URLSearchParams(window.location.search);
     const lan = urlParamater.get('lan')
-    // todo: check the user session by calling the controller to check the sign in state using the api /verify route
     const [registered, setregistered] = React.useState(props.loggedIn ? true : false);
     const [verify, setVerify] = React.useState(props.loggedIn ? true : false);
     const [language, setLanguage] = React.useState(lan ? lan : 'en');

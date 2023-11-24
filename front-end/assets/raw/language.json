@@ -234,5 +234,15 @@
             "ar": "تم الله يقويك",
             "en": "success"
         }
+    },
+    "states": {
+        "loading": {
+            "ar": "جار المعالجة",
+            "en": "Processing"
+        },
+        "serverError": {
+            "ar": "خطأ في السيرفر",
+            "en": "Server Error"
+        }
     }
 }

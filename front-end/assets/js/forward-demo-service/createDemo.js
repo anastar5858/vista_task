@@ -48,7 +48,7 @@ const sendToServerController = async (payload) => {
         sharedIndicator((prev) => !prev);
         return btnErrorHandler('Demo Added', 'success');
     } else {
-        // todo: handle server error
+        return btnErrorHandler('Server Error', 'success');
     }
 }
 

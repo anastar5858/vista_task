@@ -14,7 +14,7 @@ const deleteDemo = async (demoName, btn, setDeleteIndicator) => {
             btnErrorHandlerDemos('deleted', 'success', btn, setDeleteIndicator)
         } 
     } else {
-        // todo: handle server error
+        return btnErrorHandler('Server Error', 'success');
     }
 }
 

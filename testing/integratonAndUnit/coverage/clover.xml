@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700761128323" clover="3.2.0">
-  <project timestamp="1700761128323" name="All files">
+<coverage generated="1700842790467" clover="3.2.0">
+  <project timestamp="1700842790467" name="All files">
     <metrics statements="372" coveredstatements="295" conditionals="277" coveredconditionals="206" methods="85" coveredmethods="65" elements="734" coveredelements="566" complexity="0" loc="372" ncloc="372" packages="1" files="4" classes="4"/>
     <file name="createForm.js" path="C:\Users\addgg\Desktop\Work\GitHub Projects\vista_task\testing\integratonAndUnit\components\createForm.js">
       <metrics statements="39" coveredstatements="36" conditionals="32" coveredconditionals="26" methods="10" coveredmethods="7"/>

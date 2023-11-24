@@ -1,5 +1,4 @@
 const logOut = async (setVerify, language) => {
-    console.log(language, 'ummmmm')
     const logOutRequest = await fetch('http://localhost:8080/api/logout', {
         method: 'GET',
         credentials: 'include',
@@ -16,6 +15,7 @@ const logOut = async (setVerify, language) => {
             window.location.replace(`http://localhost:5500/index.html?lan=${language}`);
         }
     } else {
-        // todo: handle server error
+        setVerify(false);
+        window.location.replace(`http://localhost:5500/index.html?lan=${language}`);
     }
 }

@@ -14,6 +14,7 @@ For the front-end application, the React framework was used to facilitate and es
 - Ability to fetch a unique background based on the user-inputted topic of a request (web crawling) (additional).
 - Some fun animations for enhancing the vibrancy of the application (additional).
 - The ability for site developers to publish demonstrations to help users walkthrough the features (additional).
+- To add a demo add /assets/html/demo.html (experimental) to the URL, and it requires technical knowledge about the DOM.
 - Instantaneous switching between Arabic (Saudi dialect) and English (localization) (additional).
 
 ## Challenge:
@@ -21,7 +22,7 @@ For the front-end application, the React framework was used to facilitate and es
 Building such a project in a week's time was rough, especially as some tools used were new to the developer, such as Cypress for testing. Docs Helped!!!
 
 ## Running Locally?
-
+- Clone the repo.
 **Front-End:**
 Host using your favorite server (Apache) or simply use the Live Server Extension of Visual Studio Code.
 
@@ -30,10 +31,14 @@ Host using your favorite server (Apache) or simply use the Live Server Extension
 2. Run `npm start` to host on port 8080.
    *Make sure the port is not used by your front-end application or any other service.*
 
+**Tests:**
+Go to the directory e2e/integration tests, execute `npm i` & then `npm start`. 
+
 ## Future Work:
 
-- A more compact process for handling types of errors.
+- A more compact & comprehensive process for handling server status and unavailability errors.
 - Settle on an even more modern design driven by client desires.
+- Involving DevOps pipeline to automate tests upon every build (CI/CD).
 
 ---
 
@@ -53,6 +58,7 @@ Host using your favorite server (Apache) or simply use the Live Server Extension
 - إمكانية جعل النظام يعمل من أجل البحث عن صورة خلفية بناء على عنوان الطلب (زاحف الويب) (ميزة إضافية).
 - العمل على رسومات متحركة لزيادة حيوية النظام حسب رغبة المستخدم (ميزة إضافية).
 - ميزة تتيح للمبرمج تشكيل عروض تقديمية لمساعدة المستخدمين على استخدام الموقع (ميزة إضافية).
+- لإضافة عرض تقديمي قم بإضافة /assets/html/demo.html لعنوان الصفحة (خاصية تجريبية) و يتطلب الأمر معرفة تقنية عن الDOM
 - السرعة في التبديل بين لغات ولهجات الموقع (ميزة إضافية).
 
 ## التحدي:
@@ -60,7 +66,7 @@ Host using your favorite server (Apache) or simply use the Live Server Extension
 العمل على المشروع مع محاولة إضافة أفكار ولمسات خاصة خلال أسبوع ونصف على الأقل، بالتزامن مع تعلم إطارات جديدة على المطور مثل Cypress.
 
 ## استضافة التطبيق محليًا؟
-
+- .انسح المشروع
 **الواجهة الأمامية:**
 استعمل خدمة الاستضافة للسيرفر المفضلة لديك مثل أباتشي أو استخدام إضافة Live Server في برنامج VSCode.
 
@@ -69,7 +75,11 @@ Host using your favorite server (Apache) or simply use the Live Server Extension
 2. قم بكتابة الأمر `npm start` للاستضافة على المنفذ 8080.
    *تأكد من عدم استخدام المنفذ من قبل تطبيق الواجهة الأمامية أو أي خدمة أخرى.*
 
+**الإختبارات**
+ادخل على المجلد لنوع الإختبارات المرغوب فيها، قم بكتابة الأمر `npm i`، ثم قم بكتابة الأمر `npm start`.
+
 ## أعمال مستقبلية:
 
-- العمل على التعامل مع الأخطاء بصورة أكثر نظامية.
+- العمل على التعامل مع أخطاء السيرفر و عدم توفره بصورة شاملة و أكثر نظامية.
 - التعديل على التصميم حتى يتناسب مع رغبات العميل.
+- إخضاع المشروع لمبادئ DevOps من أجل أتمتة الإختبارات قبل كل بناء للبرامج (CI/CD).

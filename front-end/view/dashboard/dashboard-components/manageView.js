@@ -86,7 +86,6 @@ const ManageView = (props) => {
             updateRecordStatus(currentRequest, status, setRequests, setCurrentRequest);
         }
     }, [status])
-    // todo: every time current request changes check if the current user is the creator to add the edit and delete functionality
     React.useEffect(() => {
         if (Object.keys(currentRequest).length > 0) {
             checkOwnership(currentRequest, setIsOwner)

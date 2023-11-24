@@ -24,7 +24,7 @@ const validateRequestInput = async (titleInput, descriptionTextBox, initialStatu
         if (createRequestResponse === 'invalid') return btnErrorHandler(languageData.errors.noProcess[language], 'error', button);
         else return btnErrorHandler(languageData.success.requestCreated[language], 'success', button);
     } else {
-        // todo: handle server error
+        return btnErrorHandler(languageData.states.serverError[language], 'error', button);
     }
 }
 const btnErrorHandler = (message, type, button) => {
