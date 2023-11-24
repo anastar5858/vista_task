@@ -40,6 +40,7 @@ Go to the directory e2e/integration tests, execute `npm i` & then `npm start`.
 - A more compact & comprehensive process for handling server status and unavailability errors.
 - Settle on an even more modern design driven by client desires.
 - Involving DevOps pipeline to automate tests upon every build (CI/CD).
+- User INput Sanitation against XSS attacks
 
 ---
 
@@ -85,3 +86,4 @@ Go to the directory e2e/integration tests, execute `npm i` & then `npm start`.
 - العمل على التعامل مع أخطاء السيرفر و عدم توفره بصورة شاملة و أكثر نظامية.
 - التعديل على التصميم حتى يتناسب مع رغبات العميل.
 - إخضاع المشروع لمبادئ DevOps من أجل أتمتة الإختبارات قبل كل بناء للبرامج (CI/CD).
+- تنقيح مدخلات المستخدم لصد هجمات XSS
