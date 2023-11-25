@@ -2,6 +2,11 @@
 
 A system encompassed by a back-end and front-end in two separated ecosystems, which a company could benefit from for managing their client requests, and shared between their employees.
 
+## Link To Hosted App:
+
+https://anastar5858.github.io/RMS-front/
+
+
 ## Brief Implementation Technologies:
 
 For the front-end application, the React framework was used to facilitate and escalate the development of the UI. As for the back-end, Node.js was used along with the Express.js middleware framework for implementing the system Rest API. The storage solution used is the cloud-based MongoDB database, with a crawling aspect built via Puppeteer. End-to-end tests using Cypress & Integration tests via the testing library are available on the GitHub repo.
@@ -87,3 +92,8 @@ Go to the directory e2e/integration tests, execute `npm i` & then `npm start`.
 - التعديل على التصميم حتى يتناسب مع رغبات العميل.
 - إخضاع المشروع لمبادئ DevOps من أجل أتمتة الإختبارات قبل كل بناء للبرامج (CI/CD).
 - تنقيح مدخلات المستخدم لصد هجمات XSS
+
+
+## :رابط البرنامج المستضاف
+
+https://anastar5858.github.io/RMS-front/
